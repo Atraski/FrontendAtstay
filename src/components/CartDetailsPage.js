@@ -8,6 +8,7 @@ import Footer from "./Footer";
 
 import { useNavigate } from "react-router-dom";
 import "./CartDetailspage.css";
+import { API_3, API_4, API_5, API_6 } from "../api/api";
 
 export default function CartDetailsPage() {
   const [mm, setMM] = useState(productData6);
@@ -72,7 +73,7 @@ export default function CartDetailsPage() {
     localStorage.setItem("amount", amount); // Set the 'amount' in localStorage\
     try {
       if (phone.length === 10) {
-        var data1 = await fetch("http://localhost:5000/Order", {
+        var data1 = await fetch(API_3, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ amount }),
@@ -84,7 +85,7 @@ export default function CartDetailsPage() {
         }
         // const orderid=responseData.order.id;
 
-        var keys = await fetch("http://localhost:5000/key", {
+        var keys = await fetch(API_4, {
           method: "GET",
         });
         keys = await keys.json();
@@ -108,7 +109,7 @@ export default function CartDetailsPage() {
           description: "Test Transaction",
           // image: "https://example.com/your_logo",
           order_id: data1.order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
-          callback_url: "http://localhost:5000/verification",
+          callback_url: API_5,
           handler: function (response) {
             // Handle the payment success callback here
             console.log("Payment successful: ", response);
@@ -161,31 +162,28 @@ export default function CartDetailsPage() {
       const paisa = localStorage.getItem("amunt2");
 
       // Send a request to your server to save data to the databases
-      const response = await fetch(
-        "http://localhost:5000/saveDataToDatabase1",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            name,
-            mail,
-            phone,
-            street,
-            add,
-            pin,
-            rooms,
-            country,
-            amount,
-            adult1,
-            checkin,
-            checkoutDate,
-            children,
-            tripname,
-          }),
-        }
-      );
+      const response = await fetch(API_6, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name,
+          mail,
+          phone,
+          street,
+          add,
+          pin,
+          rooms,
+          country,
+          amount,
+          adult1,
+          checkin,
+          checkoutDate,
+          children,
+          tripname,
+        }),
+      });
 
       const data = await response.json();
 
@@ -241,12 +239,12 @@ export default function CartDetailsPage() {
                       {elm.roomtype}
                     </h6>
 
-                    <div className="locationtrip my-3" style={{display:'flex', gap:'10px'}}>
-                      <i className="fa-solid fa-location-dot" /> 
-                      <span>
-                      
-                      {elm.place}
-                      </span>
+                    <div
+                      className="locationtrip my-3"
+                      style={{ display: "flex", gap: "10px" }}
+                    >
+                      <i className="fa-solid fa-location-dot" />
+                      <span>{elm.place}</span>
                     </div>
 
                     {/* <div className="tourtype">
@@ -254,9 +252,8 @@ export default function CartDetailsPage() {
                             </div> */}
 
                     <div className="departurDate">
-                      <p>Checkin : <span>
-                      {checkinn}
-                      </span>
+                      <p>
+                        Checkin : <span>{checkinn}</span>
                       </p>
                     </div>
 
@@ -265,15 +262,16 @@ export default function CartDetailsPage() {
                     </div>
 
                     <div className="numberofdaysss">
-                      {diff} Days to Stay = {diff} x {elm.price} = {diff * elm.price}
+                      {diff} Days to Stay = {diff} x {elm.price} ={" "}
+                      {diff * elm.price}
                     </div>
 
                     <div className="bookingDetails my-3">
                       <p>Adult : {adult} </p>
                       <p>Children : {child}</p>
                       <p>
-                        Number of Room : {room} = {room} x {diff * elm.price} = {room * diff * elm.price}
-                        
+                        Number of Room : {room} = {room} x {diff * elm.price} ={" "}
+                        {room * diff * elm.price}
                       </p>
                       <div className="total">
                         Total amount : ₹ {room * diff * elm.price}

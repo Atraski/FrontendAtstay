@@ -22,6 +22,7 @@ import "./room.css";
 
 import Footer from "./Footer.js";
 import { useLocation } from "react-router-dom";
+import { API_2 } from "../api/api.js";
 // import ExampleCarouselImage from 'components/ExampleCarouselImage';
 
 // import React from 'https://cdn.skypack.dev/react@17.0.1';
@@ -136,9 +137,7 @@ function Rooms() {
 
   const fetchDataFromServer = async () => {
     try {
-      const response = await fetch(
-        `http://localhost:5000/api/rooms/${params.id}`
-      );
+      const response = await fetch(`${API_2}${params.id}`);
       const data = await response.json();
       console.log(data);
 
@@ -184,11 +183,8 @@ function Rooms() {
     }
   };
   const inc2 = () => {
-    if (numss < num) {
+    if (numss >= num) {
       setnumss(parseInt(numss) + 1);
-    }
-    else{
-      alert("No More Children Allowed")
     }
   };
   const dec = () => {
@@ -211,10 +207,10 @@ function Rooms() {
   };
 
   const showbox = () => {
-    // if (checkin === checkout) {
-    //   alert("Please select valid and different check-in and check-out dates.");
-    //   return 1;
-    // }
+    if (checkin === checkout) {
+      alert("Please select valid and different check-in and check-out dates.");
+      return 1;
+    }
 
     const box = document.querySelector(".hide");
     const classss = document.querySelector(".nonflex");
@@ -298,7 +294,6 @@ function Rooms() {
       <div className="flexs" id="short-img">
         {mm4.map((data, index) =>
           data.images.map((mmcs, i) => (
-            
             <img
               key={index}
               src={mmcs.image1}
@@ -329,7 +324,7 @@ function Rooms() {
         </div>
 
         <h2 className="ps-4 colorss">Traditional Huts</h2>
-        
+
         {mm4.map((nextm) => {
           return (
             <>
@@ -368,8 +363,9 @@ function Rooms() {
                 {/* </Carousel> */}
               </div>
               <div
-                className="container nonflex" id="outerdiv"
-                style={{ height: "auto", display: "flex"}}
+                className="container nonflex"
+                id="outerdiv"
+                style={{ height: "auto", display: "flex" }}
               >
                 <div
                   style={{
@@ -459,7 +455,8 @@ function Rooms() {
                     >
                       <h4 className="colorss">Room facilities</h4>
                     </div>
-                    <div className="facility"
+                    <div
+                      className="facility"
                       style={{
                         display: "flex",
                         justifyContent: "space-between",
@@ -528,7 +525,7 @@ function Rooms() {
                       &nbsp;&nbsp;<span>></span>
                     </div>
                   </div>
-                  
+
                   {/* 3D Modal */}
                   {isModalOpen && (
                     <div className="modal-3d-overlay">
@@ -553,12 +550,12 @@ function Rooms() {
                   )}
                 </div>
 
-                <div className="bg-white boxmodal hide" style={{ width: "350px" }}>
+                <div className="bg-white hide" style={{ width: "350px" }}>
                   <div
-                    className=" my-5 "
+                    className=" my-5"
                     style={{ height: "470px", backgroundColor: "#66cccc" }}
                   >
-                    {/* <i
+                    <i
                       class="fa-solid fa-xmark"
                       onClick={closebox}
                       style={{
@@ -566,7 +563,7 @@ function Rooms() {
                         display: "none",
                         cursor: "pointer",
                       }}
-                    ></i> */}
+                    ></i>
 
                     {/* {mm2.map((rm, rmid) => (
   <div key={rmid}>
@@ -830,7 +827,7 @@ function Rooms() {
       </div>
 
       <Footer></Footer>
-{/* 
+
       <div
         className="whitebox w-100 bg-white d-none container1"
         style={{
@@ -870,7 +867,7 @@ function Rooms() {
             Book Now
           </button>
         </div>
-      </div> */}
+      </div>
     </>
   );
 }

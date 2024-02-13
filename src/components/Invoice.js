@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import html2pdf from "html2pdf.js";
 import logo from "../images/atstaylogo.webp";
 import "./invoice.css";
+import { API_8 } from "../api/api";
 
 function Invoice() {
   const name = localStorage.getItem("NAME");
@@ -27,7 +28,7 @@ function Invoice() {
   });
   const sendInvoiceByEmail = async (invoiceHTML) => {
     try {
-      const response = await fetch("http://localhost:5000/sendInvoiceByEmail", {
+      const response = await fetch(API_8, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

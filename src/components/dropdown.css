@@ -94,6 +94,15 @@ input::placeholder{
   }
 
 }
+#anywhere-containers{
+  display: none !important;
+}
+
+@media (max-width: 768px) {
+  #anywhere-containers {
+    display: block !important; 
+  }
+}
 
 @media(max-width:930px){
   .falja{
