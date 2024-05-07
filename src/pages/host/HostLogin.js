@@ -4,10 +4,23 @@ import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { setHostLogin } from "../../redux/state";
 import { API_6 } from "../../api/api";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-regular-svg-icons";
 
 const HostLogin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const [passwordIsVisible, setPasswordIsVisible] = useState(false);
+  const [passwordIsFocused, setPasswordIsFocused] = useState(false);
+
+  const passwordVisibilityHandler = () => {
+    setPasswordIsVisible((passwordIsVisible) => !passwordIsVisible);
+  };
+
+  const passwordFocusHandler = () => {
+    setPasswordIsFocused(true);
+  };
 
   const dispatch = useDispatch();
 
@@ -55,13 +68,32 @@ const HostLogin = () => {
             onChange={(e) => setEmail(e.target.value)}
             required
           />
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
+          <div className="password-input">
+            <input
+              type={!passwordIsVisible ? "password" : "text"}
+              placeholder="Password"
+              value={password}
+              onFocus={passwordFocusHandler}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+            {passwordIsFocused && (
+              <button
+                type="button"
+                onClick={passwordVisibilityHandler}
+                style={{
+                  color: "#E5E5E5",
+                  opacity: passwordIsVisible ? 1 : 0.5,
+                }}
+              >
+                {passwordIsVisible ? (
+                  <FontAwesomeIcon icon={faEye} />
+                ) : (
+                  <FontAwesomeIcon icon={faEyeSlash} />
+                )}
+              </button>
+            )}
+          </div>
           <button type="submit">LOG IN</button>
         </form>
         <Link to="/hostRegister">Don't have an account? Sign In Here</Link>
