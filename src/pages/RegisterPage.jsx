@@ -2,8 +2,17 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/Register.scss";
 import { API_2 } from "../api/api";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-regular-svg-icons";
 
 const RegisterPage = () => {
+  const [passwordIsVisible, setPasswordIsVisible] = useState(false);
+  const [passwordIsFocused, setPasswordIsFocused] = useState(false);
+  const [confirmPasswordIsVisible, setConfirmPasswordIsVisible] =
+    useState(false);
+  const [confirmPasswordIsFocused, setConfirmPasswordIsFocused] =
+    useState(false);
+
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -68,6 +77,22 @@ const RegisterPage = () => {
     }
   };
 
+  const passwordVisibilityHandler = () => {
+    setPasswordIsVisible((passwordIsVisible) => !passwordIsVisible);
+  };
+  const confirmPasswordVisibilityHandler = () => {
+    setConfirmPasswordIsVisible(
+      (confirmPasswordIsVisible) => !confirmPasswordIsVisible
+    );
+  };
+
+  const passwordFocusHandler = () => {
+    setPasswordIsFocused(true);
+  };
+  const confirmPasswordFocusHandler = () => {
+    setConfirmPasswordIsFocused(true);
+  };
+
   return (
     <div className="register">
       <div className="register_content">
@@ -105,22 +130,62 @@ const RegisterPage = () => {
             minLength={10}
             maxLength={10}
           />
-          <input
-            placeholder="Password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-            type="password"
-            required
-          />
-          <input
-            placeholder="Confirm Password"
-            name="confirmPassword"
-            value={formData.confirmPassword}
-            onChange={handleChange}
-            type="password"
-            required
-          />
+          <div className="password-input">
+            <input
+              placeholder="Password"
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+              onFocus={passwordFocusHandler}
+              type={!passwordIsVisible ? "password" : "text"}
+              required
+            />
+
+            {passwordIsFocused && (
+              <button
+                type="button"
+                onClick={passwordVisibilityHandler}
+                style={{
+                  color: "#E5E5E5",
+                  opacity: passwordIsVisible ? 1 : 0.5,
+                }}
+              >
+                {passwordIsVisible ? (
+                  <FontAwesomeIcon icon={faEye} />
+                ) : (
+                  <FontAwesomeIcon icon={faEyeSlash} />
+                )}
+              </button>
+            )}
+          </div>
+          <div className="password-input">
+            <input
+              placeholder="Confirm Password"
+              name="confirmPassword"
+              value={formData.confirmPassword}
+              onChange={handleChange}
+              onFocus={confirmPasswordFocusHandler}
+              type={!confirmPasswordIsVisible ? "password" : "text"}
+              required
+            />
+
+            {confirmPasswordIsFocused && (
+              <button
+                type="button"
+                onClick={confirmPasswordVisibilityHandler}
+                style={{
+                  color: "#E5E5E5",
+                  opacity: confirmPasswordIsVisible ? 1 : 0.5,
+                }}
+              >
+                {confirmPasswordIsVisible ? (
+                  <FontAwesomeIcon icon={faEye} />
+                ) : (
+                  <FontAwesomeIcon icon={faEyeSlash} />
+                )}
+              </button>
+            )}
+          </div>
 
           {!passwordMatch && (
             <p style={{ color: "red" }}>Passwords are not matched!</p>
