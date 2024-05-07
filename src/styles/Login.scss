@@ -52,6 +52,24 @@
           color: white;
         }
       }
+      .password-input {
+        width: 100%;
+        position: relative;
+
+        button {
+          background-color: transparent;
+          box-shadow: none;
+          width: fit-content;
+          position: absolute;
+          top: -1.4rem;
+          right: -10px;
+
+          &:hover {
+            background: none;
+            box-shadow: none;
+          }
+        }
+      }
 
       button {
         margin-top: 15px;

@@ -79,8 +79,8 @@ const Navbar = ({ dropdownMenu, setDropdownMenu }) => {
                 />
               </div>
             </div>
-            <div className="check-out">
-              <div className="label">CheckOut</div>
+            <div className="check-out" style={{ background: "black" }}>
+              <div className="label">CheckOutsasas</div>
               <div>
                 <input
                   type="date"
