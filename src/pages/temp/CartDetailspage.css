@@ -1,0 +1,111 @@
+@media (max-width: 430px) {
+  .cartDetails {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  .Details {
+    margin: 15px 0;
+  }
+
+  .msm {
+    text-align: center;
+  }
+}
+
+.showsss {
+  position: absolute;
+  top: 0;
+  width: 100vw;
+  display: none;
+  overflow-y: hidden;
+}
+@media (max-width: 768px) {
+  #form-container {
+    padding: 1rem;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+  }
+  #form-container div {
+    height: 100%;
+    /* position: fixed; */
+  }
+  #form-container div form {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+  }
+  #form-container div form div {
+    width: 100%;
+  }
+  #form-container div form div button,
+  #form-container div form div span {
+    min-width: 5rem;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .col-md-7 {
+    width: 70%;
+    margin-right: 2%;
+  }
+
+  .col-md-4 {
+    width: 28%;
+    margin-left: 2%;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .Duration p {
+    width: 100%;
+  }
+
+  .bookingDetails p:nth-child(3) {
+    width: 120%;
+  }
+
+  .Pricesss {
+    margin: auto;
+  }
+  .Details div {
+    text-align: left;
+  }
+  .locationtrip i {
+    margin-right: -5px;
+  }
+}
+.container {
+  margin-bottom: 10%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding-bottom: 2rem;
+  border-radius: 50px;
+}
+
+.box3 {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  /* border-radius: 50px; */
+}
+.cartDetails {
+  display: flex;
+  gap: 2rem;
+}
+.checkoutmainbox {
+  box-shadow: 0 3px 10px 2px rgba(0, 0, 0, 0.2);
+  margin: 20px;
+  height: "fit-content";
+  padding: "20px";
+  margin-top: "50px";
+}
+.formrow{
+ display: flex;
+    flex-wrap: wrap;
+}
+.coloumn{
+  margin: 10px;
+}

@@ -1,0 +1,128 @@
+/* Form container */
+#form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Form wrapper */
+.showsss {
+  background: rgba(0, 0, 0, 0.8);
+  min-height: 100vh;
+}
+
+/* Form styles */
+form {
+  padding: 2em;
+}
+
+/* Heading styles */
+.heading {
+  font-size: 24px;
+  text-align: center;
+  color: #fff;
+  margin-bottom: 20px;
+}
+
+/* Form group styles */
+.form-group {
+  margin-bottom: 20px;
+}
+
+/* Input styles */
+.controls input[type="text"],
+.controls input[type="email"],
+.controls input[type="tel"] {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #000;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+/* Label styles */
+.controls label {
+  position: absolute;
+  top: 12px;
+  left: 10px;
+  color: #999;
+  font-size: 16px;
+  transition: all 0.3s;
+}
+
+/* Label active state */
+.controls input:focus + label,
+.controls input:valid + label {
+  top: -15px;
+  font-size: 14px;
+  color: #555;
+}
+
+/* Grid styles */
+.grid {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+/* Column styles */
+.col-2-3 {
+  width: 99.666%;
+}
+
+.col-1-3 {
+  width: 99.666%;
+}
+
+/* Button styles */
+button {
+  cursor: pointer;
+  background-color: #66cccc;
+  border: none;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #4cabc5;
+}
+
+/* Close button styles */
+.closebtn {
+  cursor: pointer;
+  background: red;
+  border: none;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+.closebtn:hover {
+  background: darkred;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .controls input[type="text"],
+  .controls input[type="email"],
+  .controls input[type="tel"] {
+    width: 100%;
+  }
+}
+
+#form-container {
+  z-index: 2000;
+  align-items: center;
+  justify-content: center;
+}
+#form-container .inner-div {
+  display: flex;
+  align-items: center;
+}
+#form-container .inner-div form {
+  padding: 1rem;
+}

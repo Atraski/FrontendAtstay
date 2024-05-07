@@ -1,0 +1,510 @@
+@import "./variables.scss";
+@import "./breakpoints.scss";
+
+.details{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 50px;
+}
+
+.stickyBookNow{
+  display: none;
+}
+
+.listing-details {
+  padding: 40px 130px 120px;
+
+  @include xl {
+    padding: 40px 80px 120px;
+  }
+
+  @include lg {
+    padding: 40px 50px 120px;
+  }
+
+  @include sm {
+    padding: 40px 20px 120px;
+  }
+
+  .title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    @include sm {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 15px;
+    }
+
+    h1 {
+      @include sm {
+        font-size: 26px;
+      }
+    }
+
+    .save {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+
+      p {
+        font-size: 20px;
+        font-weight: 700;
+        margin: 0;
+      }
+    }
+  }
+
+  .photos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 20px 0;
+
+    img {
+      max-width: 280px;
+    }
+  }
+
+  hr {
+    margin: 20px 0;
+  }
+
+  .profile {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+
+    img {
+      width: 60px;
+      height: 60px;
+      margin: 0;
+    }
+  }
+
+  p {
+    max-width: 800px;
+    margin-top: 20px;
+  }
+
+  .booking {
+    display: flex;
+    justify-content: space-between;
+
+    @include lg {
+      flex-direction: column;
+      gap: 50px;
+    }
+
+    .amenities {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-column-gap: 100px;
+      margin: 30px 0;
+      max-width: 700px;
+
+      @include sm {
+        grid-column-gap: 20px;
+      }
+
+      .facility {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 20px;
+
+        &_icon {
+          font-size: 30px;
+        }
+
+        p {
+          margin: 0;
+        }
+      }
+    }
+
+    .date-range-calendar {
+      margin: 30px 0;
+
+      h2 {
+        margin-bottom: 10px;
+      }
+
+      .button {
+        @include buttonStyle;
+        width: 100%;
+        margin-top: 30px;
+
+        @include lg {
+          max-width: 300px;
+        }
+      }
+    }
+  }
+}
+
+.room-type {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  .rooms-type {
+    display: flex;
+    gap: 1rem;
+  }
+  .rooms-count {
+    display: flex;
+    gap: 1rem;
+    .text {
+      align-items: center;
+      display: flex;
+    }
+
+    .value {
+      display: flex;
+      gap: 1rem;
+      .increment,
+      .decrement {
+        align-items: center;
+        font-size: 2rem;
+        cursor: pointer;
+        padding: 0 0.5rem;
+      }
+      input {
+        width: 4rem;
+
+        padding: 0.5rem;
+      }
+      .input {
+        align-items: center;
+        display: flex;
+      }
+    }
+  }
+}
+
+/* Responsive Imageset Styles */
+.imageset {
+  height: 530px;
+  gap: 15px;
+  justify-content: center;
+  width: 90%;
+  border-radius: 50px;
+  margin: auto;
+  margin-bottom: 20px;
+}
+
+/* Flex Container Styles */
+.flex2s,
+.outerimage,
+.innerimage,
+.innerimage2 {
+  width: 100%;
+  margin: auto;
+  object-fit: contain;
+}
+
+/* Outer Image Styles */
+.outerimage {
+  height: 100%;
+}
+
+.outerimage img {
+  height: 100%;
+  border-top-left-radius: 15px;
+  border-bottom-left-radius: 15px;
+  width: 100%; /* Adjusted for responsiveness */
+}
+
+/* Inner Image Styles */
+.innerimage,
+.innerimage2 {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.innerimage img,
+.innerimage2 img {
+  height: 48%;
+  width: 100%; /* Adjusted for responsiveness */
+}
+
+/* Inner Image2 Styles */
+.innerimage2 img:nth-child(1) {
+  border-top-right-radius: 20px;
+}
+
+.innerimage2 img:nth-child(2) {
+  border-bottom-right-radius: 20px;
+}
+
+/* Mobile Styles */
+#mob {
+  display: none !important;
+}
+
+/* Additional Styles */
+.tt {
+  padding: 0px;
+  max-height: 20px;
+  max-width: 43px;
+}
+
+.hidecontent {
+  display: none;
+}
+
+#pc {
+  width: 100%;
+}
+/* Media Queries */
+@media (max-width: 1100px) {
+  #pc {
+    overflow: hidden !important;
+    width: 100%;
+    display: flex;
+    gap: 1rem;
+  }
+
+  #pc .outerimage {
+    width: 48% !important;
+  }
+  #pc .innerimage,
+  #pc .innerimage2 {
+    width: 24%;
+  }
+}
+
+@media (max-width: 1000px) {
+  .hideing {
+    display: none !important;
+    position: fixed;
+    width: 100%;
+    z-index: 100;
+    height: 100vh !important;
+    top: 0;
+  }
+
+  .whitebox {
+    display: flex !important;
+  }
+
+  .nonflex {
+    display: block !important;
+    padding: 0;
+  }
+
+  .fa-solid {
+    display: block !important;
+    margin-right: 15px;
+  }
+
+  #carouselExampleFade {
+    width: auto !important;
+  }
+}
+
+@media (max-width: 770px) {
+  .direct {
+    display: flex !important;
+    flex-direction: column;
+  }
+
+  .fixsize {
+    margin: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  #pc {
+    display: none !important;
+  }
+
+  #mob {
+    display: flex !important;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  #mob .main-img {
+    display: flex;
+    height: 22rem;
+    border-radius: 15px;
+    overflow: hidden;
+    justify-content: center;
+  }
+
+  #mob .main-img img {
+    height: 100%;
+    width: 85%;
+    object-fit: fill;
+    border-radius: 15px;
+  }
+
+  #mob .short-img-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    height: 3.5rem;
+  }
+
+  #mob .short-img-container .img {
+    height: 100%;
+    width: 3.5rem;
+  }
+
+  #mob .short-img-container img {
+    height: 100%;
+    width: 100%;
+    object-fit: fill;
+  }
+
+  #bottom-img {
+    height: 7rem !important;
+  }
+}
+
+@media (max-width: 650px) {
+  #mob .main-img {
+    height: 18rem;
+  }
+  #mob .main-img .img {
+    width: 100%;
+  }
+}
+
+@media (max-width: 500px) {
+  .carousel-item img {
+    width: 100% !important;
+  }
+  #rules-container {
+    width: 100%;
+  }
+  #rules-container div {
+    min-width: 10rem;
+  }
+}
+
+@media (max-width: 430px) {
+  .msx {
+    margin-left: none !important;
+    margin-right: none;
+  }
+}
+
+@media (max-width: 400px) {
+  .msx {
+    line-height: 22px;
+  }
+
+  .fixsize img {
+    width: 100%;
+  }
+}
+
+@media (min-width: 1000px) {
+  #pc .outerimage {
+    width: 180%;
+  }
+}
+
+@media (min-width: 768px) {
+  #mob {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1000px) {
+  #pc {
+    height: 25rem;
+    border-radius: 15px;
+  }
+}
+
+@media (max-width: 768px) {
+  .details {
+    display: flex;
+    gap: 0px;
+    .property-details {
+      width: 100%;
+    }
+  }
+  .stickyBookNow{
+    display: flex;
+    justify-content: space-around ;
+    background-color: #c0bfbf;
+    position: fixed;
+    bottom: 0;
+    padding: 7px;
+    width: 88vw;
+
+    button{
+      background-color: #F8395A;
+    }
+  }
+}
+
+@media (min-width: 769px) {
+  .property-details {
+    width: 60%;
+  } 
+}
+@media (max-width:768px) {
+  
+  .date-box-container{
+  
+    .rdrCalendarWrapper{
+      font-size: 11px;
+    }
+  }
+}
+
+.date-range-calendar {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  /* Add more styles as needed */
+  max-width: 90vw;
+}
+
+.error-container {
+  margin-top: 10px;
+}
+
+.rooms-type {
+  margin-top: 10px;
+}
+
+.rooms-type button {
+  margin-right: 10px;
+}
+
+.rooms-count {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.rooms-count .input {
+  margin: 0 10px;
+}
+
+.availability-container {
+  margin-top: 10px;
+}
+
+.button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+}

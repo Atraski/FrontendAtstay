@@ -1,0 +1,65 @@
+:export {
+  pinkred: #F8395A;
+  blue: #24355A;
+  lightgrey: #F7F8F8;
+  grey: #bdb9b9;
+  darkgrey: #969393;
+}
+
+/* Define common styles */
+.booking-data-container {
+  display: flex;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin: 10px;
+  overflow: hidden; /* Ensures child elements don't overflow */
+}
+
+.booking-data {
+  flex: 1;
+  padding: 20px;
+  background-color: #fff;
+}
+
+.image-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.image-container img {
+  width: 100%; /* Ensure image fills its container */
+  display: block;
+  max-width: 70%;
+  object-fit: contain;
+}
+
+/* Title styles */
+.item {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+/* Text styles */
+.hotel-id,
+.check-in,
+.check-out,
+.place-type,
+.room-count {
+  font-size: 0.9rem;
+  margin-bottom: 5px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+  .booking-data-container {
+    flex-direction: column;
+  }
+  .booking-data,
+  .image-container {
+    width: 100%;
+    padding: 1rem;
+  }
+}
