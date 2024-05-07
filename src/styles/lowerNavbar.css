@@ -1,124 +1,61 @@
-@media (min-width: 350px) {
-  #anywhere-container {
-    /* display: none; */
-  }
+ .carousel {
+   width: 80rem;
+   margin: auto;
+   /* position: sticky; */
+ }
 
-  .product-carousel-1 {
-    height: 4.5rem;
-    max-width: 70rem;
-    width: 100%;
-    /* background-color: blue; */
-    margin: 0 auto;
-    display: flex;
-    padding: 0;
-  }
+ .carousel-button-group {
+   position: absolute
+ }
 
-  .product-carousel-1 .pre-btn-1,
-  .product-carousel-1 .next-btn-1 {
-    /* background-color: blueviolet; */
-    height: 100%;
-    width: 3rem;
-    background-color: white;
-    display: grid;
-    place-content: center;
-  }
+ .carousel-item {
+   /* border: 1px solid blue; */
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   cursor: pointer;
+ }
 
-  .product-carousel-1 .pre-btn-1,
-  .product-carousel-1 .next-btn-1 {
-    cursor: pointer;
-  }
+ .carousel-item:hover p {
+   color: #67c7b9;
+   transition: color 0.3s ease-in-out;
+ }
 
-  #carousel-prod-container {
-    width: 100%;
-    gap: 0;
-    height: 100%;
-    padding: 0;
-    margin: 0;
-    /* overflow-x: hidden; */
-    overflow: hidden;
-    display: flex;
-    justify-content: flex-start;
-  }
-  #carousel-prod-container .carousel-1 {
-    min-width: 95px;
-    /* width: auto; */
-    /* background-color: red !important; */
-    height: 100%;
-    margin: 0;
-    /* display: flex;
-    flex-direction: column; */
-  }
-  #carousel-prod-container .carousel-1:hover {
-    cursor: pointer;
-    color: #67c7b9;
-    font-weight: bold;
-  }
-  #carousel-prod-container .carousel-1 .img-container {
-    height: 70%;
-    display: flex;
-    justify-content: center;
-    padding: 10px;
-    /* align-items: center; */
-  }
+ .carousel-item img {
+   width: 30px;
+   height: 30px;
+   margin-bottom: 5px;
+ }
 
-  #carousel-prod-container .carousel-1 .img-container img {
-    height: 100%;
-  }
-  #carousel-prod-container .carousel-1 .img-container img:hover {
-    border: 1px solid white;
-    cursor: pointer;
-  }
-  #carousel-prod-container .carousel-1 .text-container {
-    height: 30%;
-    font-size: 10px;
-  }
-  #carousel-prod-container .carousel-1 .text-container p {
-    text-wrap: nowrap;
-    text-align: center;
-  }
+ @media (min-width: 350px) {
 
-  #carousel-prod-container .carousel-1 .text-container p:hover {
-    cursor: pointer;
-    color: #67c7b9;
-    font-weight: bold;
-  }
-}
 
-.carousel-1 {
-  transition: all 5s;
-}
+   /* Container for the next and previous buttons */
+   .product-carousel-1 {
+     display: flex;
+     /* Display buttons in a row */
+     align-items: center;
+     /* Center buttons vertically */
+   }
 
-/* lowerNavbar.css */
+   /* Styles for previous button */
+   #pre-btn-1,
+   #next-btn-1 {
+     cursor: pointer;
+     background: none;
+     background-color: transparent;
+     border: none;
+     outline: none;
+     width: fit-content;
+     /* Change cursor to pointer on hover */
+   }
 
-/* Container for carousel items */
-.product-container {
-  display: flex; /* Display carousel items in a row */
-  overflow-x: auto; /* Enable horizontal scrolling */
-  scroll-behavior: smooth; /* Smooth scrolling behavior */
-  -webkit-overflow-scrolling: touch; /* Enable smooth scrolling on iOS devices */
-}
-
-/* Individual carousel item */
-.carousel-1 {
-  flex-shrink: 0; /* Prevent items from shrinking */
-  margin-right: 10px; /* Add space between items */
-}
-
-/* Container for the next and previous buttons */
-.product-carousel-1 {
-  display: flex; /* Display buttons in a row */
-  align-items: center; /* Center buttons vertically */
-}
-
-/* Styles for previous button */
-.pre-btn-1,
-.next-btn-1 {
-  cursor: pointer; /* Change cursor to pointer on hover */
-}
-
-/* Styles for the button icon */
-.pre-btn-1 img,
-.next-btn-1 img {
-  width: 22px; /* Set width of the icon */
-  transform: scaleX(-1); /* Flip icon horizontally for previous button */
-}
+   /* Styles for the button icon */
+   #pre-btn-1 img,
+   #next-btn-1 img {
+     width: 22px;
+     /* Set width of the icon */
+     transform: scaleX(-1);
+     /* Flip icon horizontally for previous button */
+   }
+ }
