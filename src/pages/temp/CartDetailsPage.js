@@ -1,32 +1,21 @@
 import React, { useEffect, useState } from "react";
-// import Navbar from "./Navbar";
-import { useParams } from "react-router-dom";
-// import { productData1 } from "./Atstaynextdata";
-// import { productData6 } from "./Atstaynextprice";
-// import Footers from "./Footer";
-import { setBookingData, setShowPopup } from "../../redux/state";
-// import Footer from "./Footer";
-
+import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import "./CartDetailspage.css";
-import { API_15, API_16, API_17, API_18, API_22, API_3 } from "../../api/api";
-import { useSelector } from "react-redux";
-import "../../styles/form.css";
-import { useDispatch } from "react-redux";
 import axios from "axios";
-import Footer from "../../components/Footer";
+
 import LoginPopup from "../../components/LoginPopup";
+import Footer from "../../components/Footer";
+import { setBookingData, setShowPopup } from "../../redux/state";
+import { API_15, API_16, API_17, API_18, API_22, API_3 } from "../../api/api";
+import "./CartDetailspage.css";
+import "../../styles/form.css";
 
 export default function CartDetailsPage() {
   const bookingData = useSelector((state) => state.bookingData);
   const user = useSelector((state) => state?.user);
   const dispatch = useDispatch();
   const [paymentResp, setPaymentResp] = useState();
-  // console.log(user);
-  // console.log(bookingData);
-  const [mm, setMM] = useState(bookingData);
-  const params = useParams();
-  //   const mm1 = mm.filter((datas) => datas.id == params.id);
+
   const mm1 = bookingData;
 
   const adult = localStorage.getItem("adult");
@@ -45,8 +34,6 @@ export default function CartDetailsPage() {
     (bookingData.type === "Rooms"
       ? bookingData.totalRoomPrice
       : bookingData.totalPrice);
-  // console.log(amunt2);
-  //   console.log(mm1[0].price);
 
   localStorage.setItem("amunt", amunt2);
 
@@ -74,10 +61,6 @@ export default function CartDetailsPage() {
   const checkoutDate = localStorage.getItem("checkout");
   const checkin = localStorage.getItem("checkin");
   const rooms = localStorage.getItem("room");
-  // console.log(adds);
-  // console.log(selectedDate, "ll");
-
-  // const navigate = useNavigate()
 
   useEffect(() => {
     const show = document.querySelector(".showsss");
@@ -93,7 +76,8 @@ export default function CartDetailsPage() {
     }
   };
 
-  const closeee = () => {
+  const closeee = (e) => {
+    e.preventDefault();
     const show = document.querySelector(".showsss");
     show.style.display = "none";
   };
@@ -125,10 +109,8 @@ export default function CartDetailsPage() {
         });
         if (data1.success) {
           const responseData = await data1.json();
-          // console.log('yyyy',responseData.order.id)
-          const orderrr = localStorage.setItem("orderr", responseData.order.id);
+          console.log("ResDATA!!!", responseData);
         }
-        // const orderid=responseData.order.id;
 
         var keys = await fetch(API_16, {
           method: "GET",
@@ -136,12 +118,6 @@ export default function CartDetailsPage() {
         keys = await keys.json();
         console.log(keys, "yes");
         data1 = await data1.json();
-
-        // const keys='rzp_test_OmCfFJhnp3Fztn'
-        // console.log(keys);
-        // console.log(data1.amount);
-        // console.log(data1.id);
-        // console.log(data1);
       } else {
         alert("Please Enter Valid Number");
       }
@@ -152,42 +128,18 @@ export default function CartDetailsPage() {
           currency: "INR",
           name: "Atstay", //your business name
           description: "Test Transaction",
-          // image: "https://example.com/your_logo",
-          order_id: data1.order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+          order_id: data1.order.id,
           callback_url: API_17,
           handler: function (response) {
             // Handle the payment success callback here
             console.log("Payment successful: ", response);
             try {
-              // dispatch(
-              //   setBookingData({
-              //     bookingData: {
-              //       ...bookingData,
-              //       response: response,
-              //       email,
-              //       phone,
-              //       add,
-              //       pin,
-              //       country,
-              //       clientName,
-              //     },
-              //   })
-              // );
               saveDataToDatabase(response);
               navigate("/invoice");
             } catch (error) {
               console.error("Navigation error:", error);
             }
-            // You can navigate to a success page or perform further actions here
-
-            // Save data to the database (you need to implement this on your backend)
           },
-          // prefill: {
-          //   //We recommend using the prefill parameter to auto-fill customer's contact information especially their phone number
-          //   name: "Gaurav Kumar", //your customer's name
-          //   email: "gaurav.kumar@example.com",
-          //   contact: "9000090000", //Provide the customer's phone number for better conversion rates
-          // },
 
           notes: {
             address: "Razorpay Corporate Office",
@@ -199,14 +151,7 @@ export default function CartDetailsPage() {
         const rzp1 = new window.Razorpay(options);
 
         rzp1.on("payment.success", function (response) {
-          // Payment was successful, now save data to the database
-          // console.log("response ", response);
-          // if (response) {
-          //   saveDataToDatabase(response);
-          //   setPaymentResp(response);
-          // }
           console.log("Payment successful: ", response);
-          // You can navigate to a success page or perform further actions here
         });
 
         rzp1.open();
@@ -222,7 +167,6 @@ export default function CartDetailsPage() {
 
   const saveDataToDatabase = async (resp) => {
     try {
-      const paisa = localStorage.getItem("amunt2");
       const formData = {
         email: email,
         hostId: bookingData.hostId,
@@ -344,10 +288,6 @@ export default function CartDetailsPage() {
                           <span>{elm.place}</span>
                         </div>
 
-                        {/* <div className="tourtype">
-                            <p>Type Tour : Daliy Tour</p> 
-                            </div> */}
-
                         <div className="departurDate">
                           <p>
                             Checkin : <span>{elm.startDate}</span>
@@ -374,10 +314,7 @@ export default function CartDetailsPage() {
                           >
                             Rooms :{elm.roomCount}
                           </p>
-                          {/* <p>
-                          Number of Room : {room} = {room} x {diff * elm.price}{" "}
-                          = {room * diff * elm.price}
-                        </p> */}
+
                           <div className="total ">
                             Total amount : ₹{" "}
                             {elm.dayCount * elm.perRoomPrice * elm.roomCount}
@@ -480,9 +417,6 @@ export default function CartDetailsPage() {
                         value={email}
                         required
                         placeholder="email"
-                        // onChange={(e) => {
-                        //   setEmail(e.target.value);
-                        // }}
                         disabled
                       />
                       <label for="email"></label>
@@ -551,14 +485,7 @@ export default function CartDetailsPage() {
                   </div>
                 </div>
 
-                <div class="grid">
-                  {/* <div class="col-2-3">
-          <div class="controls">
-            <input type="text" id="city" class="floatLabel" name="city" placeholder='City' />
-            <label for="city"></label>
-          </div>         
-        </div> */}
-                </div>
+                <div class="grid"></div>
 
                 <div
                   class="controls"

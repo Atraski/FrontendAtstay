@@ -73,7 +73,10 @@ const LowerNavbar = ({ setSelectedCategory }) => {
         }}
       >
         <p>
-          <img src={less} style={{ width: "22px",transform:'rotate(0deg)' }} />
+          <img
+            src={less}
+            style={{ width: "22px", transform: "rotate(0deg)" }}
+          />
         </p>
       </div>
 
