@@ -28,6 +28,8 @@ const API_23 = `${API}/bookings/getUserBookingData`;
 const API_24 = `${API}/properties/getListingsHost`;
 const API_25 = `${API}/properties/updateListing`;
 const API_26 = `${API}/api/createAvailabilities`;
+const API_27 = `${API}/auth/reset`;
+const API_28 = `${API}/auth/new-password`;
 
 // for production
 
@@ -57,4 +59,6 @@ export {
   API_24,
   API_25,
   API_26,
+  API_27,
+  API_28,
 };

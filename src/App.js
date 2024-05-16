@@ -23,6 +23,7 @@ import EditListing from "./pages/EditListing";
 import CreateAvailability from "./pages/availability/CreateAvailability";
 import EditAvailability from "./pages/availability/EditAvailability";
 import PrivacyPolicy from "./pages/PrivacyPolicies";
+import ResetPasswordPage from "./pages/ResetPasswordPage";
 
 function App() {
   const [dropdownMenu, setDropdownMenu] = useState(false);
@@ -43,7 +44,10 @@ function App() {
             path="/properties/category/:category"
             element={<CategoryPage />}
           />
-          <Route path="/properties/search/:search/:checkIn/:checkOut/:guest" element={<SearchPage />} />
+          <Route
+            path="/properties/search/:search/:checkIn/:checkOut/:guest"
+            element={<SearchPage />}
+          />
           <Route path="/:userId/trips" element={<TripList />} />
           <Route path="/:userId/wishList" element={<WishList />} />
           <Route path="/:userId/properties" element={<PropertyList />} />
@@ -60,7 +64,8 @@ function App() {
           <Route path="/create-availability" element={<CreateAvailability />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
 
-
+          {/* Reset Password */}
+          <Route path="/reset/:resetToken" element={<ResetPasswordPage />} />
         </Routes>
       </BrowserRouter>
     </div>

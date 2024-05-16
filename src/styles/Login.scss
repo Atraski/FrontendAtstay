@@ -52,6 +52,7 @@
           color: white;
         }
       }
+
       .password-input {
         width: 100%;
         position: relative;
@@ -67,6 +68,17 @@
           &:hover {
             background: none;
             box-shadow: none;
+          }
+
+          @media (max-width: 576px) {
+            width: fit-content;
+            right: -30px;
+          }
+
+          .icon {
+            @media (max-width: 576px) {
+              width: 2px;
+            }
           }
         }
       }
@@ -115,4 +127,17 @@
   display: flex;
   justify-content: center;
   color: white;
+}
+
+.reset-link {
+  text-decoration: none;
+  color: white;
+  font-size: 17px;
+  font-weight: 600;
+  text-align: center;
+
+  &:hover {
+    text-decoration: underline;
+    cursor: pointer;
+  }
 }

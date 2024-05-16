@@ -18,6 +18,7 @@ const HomePage = () => {
   const gettingWishlist = async () => {
     try {
       const resp = await axios.get(`${API_3}users/${user._id}/getAllWishlist`);
+
       console.log("getting wishlist response", resp);
       dispatch(setWishList(resp.data.wishList));
     } catch (error) {
@@ -25,9 +26,9 @@ const HomePage = () => {
     }
   };
 
- useEffect(() =>{
-  dispatch(setShowPopup({popup:false}))
- },[])
+  useEffect(() => {
+    dispatch(setShowPopup({ popup: false }));
+  }, []);
 
   useEffect(() => {
     if (user) {
@@ -36,7 +37,7 @@ const HomePage = () => {
   }, []);
   return (
     <>
-    <LoginPopup />
+      <LoginPopup />
       {/* <LowerNavbar /> */}
       <Listings />
       {/* <Slide /> */}

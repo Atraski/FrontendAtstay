@@ -57,7 +57,7 @@ const ListingCard = ({
   const patchWishList = async () => {
     // console.log("user", user);
     if (user == null) {
-      dispatch(setShowPopup({ popup: true }));
+      return dispatch(setShowPopup({ popup: true }));
     }
     if (user?._id !== creator) {
       const response = await fetch(`${API_20}${user?._id}/${listingId}`, {
