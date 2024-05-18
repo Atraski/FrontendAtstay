@@ -49,11 +49,11 @@ const Footer = () => {
 
         <div className="footer_right">
           <h3>Contact</h3>
-          <a href="tel:+91 8077412283">
+          <a href="tel:+919088797850">
             <div className="footer_right_info footer-call">
               <LocalPhone />
 
-              <p>+91 8077412283</p>
+              <p>+91 9088797850</p>
             </div>
           </a>
           <div className="footer_right_info">

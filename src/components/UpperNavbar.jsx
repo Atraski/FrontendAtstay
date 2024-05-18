@@ -37,7 +37,7 @@ export default function UpperNavbar() {
           <div className="navtopright">
             <span className="mx-3 calls" style={{ color: "white" }}>
               <a
-                href="tel:+9654862355"
+                href="tel:+919088797850"
                 style={{
                   display: "flex",
                   alignItems: "center",
