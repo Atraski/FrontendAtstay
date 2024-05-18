@@ -10,13 +10,14 @@ import LowerNavbar from "./LowerNavbar";
 
 const Listings = () => {
   const dispatch = useDispatch();
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   const [selectedCategory, setSelectedCategory] = useState("All");
 
   const listings = useSelector((state) => state.listings);
 
   const getFeedListings = async () => {
+    setLoading(true);
     try {
       const response = await fetch(
         selectedCategory !== "All"

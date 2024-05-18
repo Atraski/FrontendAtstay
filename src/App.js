@@ -24,6 +24,7 @@ import CreateAvailability from "./pages/availability/CreateAvailability";
 import EditAvailability from "./pages/availability/EditAvailability";
 import PrivacyPolicy from "./pages/PrivacyPolicies";
 import ResetPasswordPage from "./pages/ResetPasswordPage";
+import ScrollRestoration from "./utility/ScrollRestoration";
 
 function App() {
   const [dropdownMenu, setDropdownMenu] = useState(false);
@@ -31,6 +32,7 @@ function App() {
   return (
     <div onClick={() => setDropdownMenu(false)}>
       <BrowserRouter>
+        <ScrollRestoration />
         <Navbar dropdownMenu={dropdownMenu} setDropdownMenu={setDropdownMenu} />
         <Routes>
           <Route path="/" element={<HomePage />} />

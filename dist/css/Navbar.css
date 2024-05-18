@@ -268,9 +268,13 @@
   flex-grow: 1;
 }
 
-.search-popup .container-1 .main-content .guest .guest-value-container .icons {
+.search-popup .container-1 .main-content .guest .guest-value-container .icons:hover {
   cursor: pointer;
+
 }
+
+
+
 
 @media (max-width: 768px) {
   #mob {
@@ -301,6 +305,8 @@
     display: none;
   }
 }
+
+
 
 @media (min-width: 769px) {
   #mob {
