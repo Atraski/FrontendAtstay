@@ -1,32 +1,27 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import html2pdf from "html2pdf.js";
-// import logo from "../images/atstaylogo.webp";
 import "./invoice.css";
-import { API_19, API_3 } from "../../api/api";
+import { API_19 } from "../../api/api";
 import { useSelector } from "react-redux";
 
 function Invoice() {
+  // Image URL
+  const img = "http://Atstay.in/assets/logo.webp";
+
   const bookingData = useSelector((state) => state.bookingData);
+
   const tempHost = useSelector((state) => state.tempHost);
   const user = useSelector((state) => state.user);
   console.log("user", user);
   console.log("bookingData", bookingData);
-  const name = localStorage.getItem("NAME");
-  const add = localStorage.getItem("add");
-
-  const mail = localStorage.getItem("mail");
-  const phone = localStorage.getItem("phone");
-  const amount = localStorage.getItem("amount");
-  const namess = localStorage.getItem("namess");
-  const trips = localStorage.getItem("trip");
 
   const handleDownload = () => {
     const element = document.getElementById("invoice-container");
     html2pdf(element);
-    // sendInvoiceByEmail(element.innerHTML);
+
     const s = element.innerHTML; // Send invoice HTML to the server
     localStorage.setItem("html", s);
-    console.log(s);
+    console.log(s, "PDF");
   };
   useEffect(() => {
     const element = document.getElementById("invoice-container");
@@ -46,7 +41,6 @@ function Invoice() {
           hostEmail: tempHost.email,
         }),
       });
-      console.log("kkkkk");
 
       const result = await response.json();
 
@@ -60,50 +54,91 @@ function Invoice() {
     }
   };
 
-  const [selectedDate, setSelectedDate] = useState(getCurrentDate());
-
-  function getCurrentDate() {
-    const currentDate = new Date();
-    const year = currentDate.getFullYear();
-    let month = currentDate.getMonth() + 1;
-    month = month < 10 ? "0" + month : month;
-    let day = currentDate.getDate();
-    day = day < 10 ? "0" + day : day;
-    return `${day}-${month}-${year}`;
-  }
-
-  const date = localStorage.setItem("curdate", selectedDate);
   const date1 = localStorage.getItem("curdate");
-  const mmmm = localStorage.getItem("orderr");
+
+  let orderId;
+  if (bookingData.razorpay_order_id) {
+    orderId = bookingData.razorpay_order_id.split("_")[1];
+  }
 
   return (
     <>
-      {/* <div id="invoice-container"> */}
-      <div className="" id="invoice-container">
-        <table
-          width="90%"
-          className=""
-          style={{ margin: "auto", marginBottom: "60px" }}
-        >
-          <img
-            src="/assets/logo.webp"
-            height="80px"
-            width="80px"
-            style={{ textAlign: "left" }}
-            alt="Atstay"
-          />
-          <tr style={{ textAlign: "left", height: "100px" }}>
-            <th>
-              Atstay <br />
-              640, Second floor, 262, Westend Marg, Saidulajab New Delhi -
-              110030
+      <div
+        style={{
+          width: "60%",
+          margin: "auto",
+          padding: "20px 40px",
+          backgroundColor: "#fff",
+          boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
+        }}
+        id="invoice-container"
+      >
+        <div width="90%" className="invoice-data" style={{ margin: "auto" }}>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              marginBottom: "1rem",
+            }}
+          >
+            <div>
+              <img
+                src={img}
+                alt="Atstay"
+                style={{ width: "90px", height: "90px", marginLeft: "-1rem" }}
+              />
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                }}
+              >
+                <h1
+                  style={{
+                    textAlign: "center",
+                    fontSize: "2.3rem",
+                    marginTop: "-1rem",
+                  }}
+                >
+                  Invoice
+                </h1>
+              </div>
+            </div>
+            <div style={{ marginTop: "2rem" }}>
+              <span>Atstay </span>
+              <br />
+              640, Second floor, 262, Westend Marg, Saidulajab <br /> New Delhi
+              - 110030
               <br />
               India
               <br />
               VAT Reg #: 9919SGP29004OSJ
-            </th>
-
-            <th style={{ textAlign: "right" }}>
+            </div>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              padding: "1rem 0 1rem 0",
+              borderTop: "1px solid",
+            }}
+          >
+            <div>
+              <span style={{ textTransform: "uppercase", fontWeight: "bold" }}>
+                Billed To
+              </span>
+              <br />
+              {bookingData.clientName}
+              <br />
+              {`${bookingData.add} - ${bookingData.pin}`}
+              <br />
+              India
+              <br />
+              Email : {bookingData.email}
+              <br />
+              MOB : {bookingData.phone}
+            </div>
+            <div style={{ width: "43%" }}>
               Invoice # HSG-841693
               <br />
               Invoice Date # {date1}
@@ -114,171 +149,88 @@ function Invoice() {
                 bookingData.roomCount}
               .00 (INR)
               <br />
-              Order Nr. # {mmmm}
+              Order Nr. # {orderId}
               <br />
               PAID
-            </th>
-          </tr>
-
-          <tr style={{ textAlign: "left", height: "200px" }}>
-            <th>
-              BILLED TO
+            </div>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              padding: "1rem 0 1rem 0",
+              borderTop: "1px solid",
+              borderBottom: "1px solid",
+            }}
+          >
+            <div className="client-address">
+              <span style={{ textTransform: "uppercase", fontWeight: "bold" }}>
+                Hotel Details
+              </span>
               <br />
-              {bookingData.clientName}
-             
-              <br />
-              {bookingData.add + " " + bookingData.pin}
-              <br />
-              India
-              <br />
-              Email : {bookingData.email}
-              <br />
-              MOB : {bookingData.phone}
-              <br />
-              Booking No: {bookingData.bookingNo}
-              <br />
-              Guest Count: {bookingData.guestCount}
-            </th>
-          </tr>
-        </table>
-
-        <table
-          width="100%"
-          style={{ textAlign: "center", border: "1px solid black" }}
-        >
-          <tr>
-            <td
-              className="jsm"
-              style={{
-                width: "200px",
-                border: "1px solid black",
-                padding: "15px",
-              }}
-            >
-              Description
-            </td>
-            <td
-              className="jsm"
-              style={{
-                width: "200px",
-                border: "1px solid black",
-                padding: "15px",
-              }}
-            >
-              Price
-            </td>
-            <td
-              className="jsm"
-              style={{
-                width: "200px",
-                border: "1px solid black",
-                padding: "15px",
-              }}
-            >
-              TOTAL EXCL. VAT
-            </td>
-            <td
-              className="jsm"
-              style={{
-                width: "200px",
-                border: "1px solid black",
-                padding: "15px",
-              }}
-            >
-              AMOUNT (INR)
-            </td>
-          </tr>
-
-          <tr>
-            <th
-              className="jsm"
-              style={{
-                width: "200px",
-                border: "1px solid black",
-                padding: "15px",
-              }}
-            >
               {bookingData.listing.title}
-            </th>
-            <th
-              className="jsm"
+              <br />
+              {`${bookingData.listing.streetAddress},${bookingData.listing.province}`}
+              <br />
+              {`${bookingData.listing.city} - ${bookingData.listing.pincode}`}
+              <br />
+              {bookingData.listing.country}
+              <br />
+            </div>
+            <div>
+              <h3 style={{ textTransform: "uppercase", fontWeight: "bold" }}>
+                CheckIn
+              </h3>
+              <span>{bookingData.startDate}</span>
+            </div>
+            <div>
+              <h3 style={{ textTransform: "uppercase", fontWeight: "bold" }}>
+                CheckOut
+              </h3>
+              <span>{bookingData.endDate}</span>
+            </div>
+          </div>
+          <div
+            className="booking-details"
+            style={{ paddingTop: "1rem", width: "100%", margin: "auto" }}
+          >
+            <h1
               style={{
-                width: "200px",
-                border: "1px solid black",
-                padding: "15px",
+                fontSize: "1rem",
+                marginBottom: "10px",
+                textAlign: "center",
               }}
             >
-              {bookingData.dayCount *
-                bookingData.perRoomPrice *
-                bookingData.roomCount}
-            </th>
-            <th
-              className="jsm"
-              style={{
-                width: "200px",
-                border: "1px solid black",
-                padding: "15px",
-              }}
-            >
-              -----
-            </th>
-            <th
-              className="jsm"
-              style={{
-                width: "200px",
-                border: "1px solid black",
-                padding: "15px",
-              }}
-            >
-              {bookingData.dayCount *
-                bookingData.perRoomPrice *
-                bookingData.roomCount}
-            </th>
-          </tr>
+              Booking Id - #{bookingData.bookingNo}
+            </h1>
+            <table width="100%" style={{ textAlign: "center", margin: "auto" }}>
+              <tr>
+                <th>Room Type</th>
+                <th>Guests</th>
+                <th>Total Rooms</th>
+                <th>Price</th>
+              </tr>
 
-          <tr>
-            <th
-              className="jsm"
-              style={{
-                width: "200px",
-                border: "1px solid black",
-                padding: "15px",
-              }}
-            ></th>
-            <th
-              className="jsm"
-              style={{
-                width: "200px",
-                border: "1px solid black",
-                padding: "15px",
-              }}
-            ></th>
-            <th
-              className="jsm"
-              style={{
-                width: "200px",
-                border: "1px solid black",
-                padding: "15px",
-              }}
-            >
-              0
-            </th>
-            <th
-              className="jsm"
-              style={{
-                width: "200px",
-                border: "1px solid black",
-                padding: "15px",
-              }}
-            >
-              ₹
-              {bookingData.dayCount *
-                bookingData.perRoomPrice *
-                bookingData.roomCount}
-              .00 (INR)
-            </th>
-          </tr>
-        </table>
+              <tr>
+                <td style={{ textTransform: "capitalize" }}>
+                  {bookingData.roomType}
+                </td>
+                <td>{bookingData.guestCount}</td>
+                <td>{bookingData.roomCount}</td>
+                <td>₹{bookingData.perRoomPrice}</td>
+              </tr>
+            </table>
+          </div>
+          <h1
+            style={{ textAlign: "right", fontSize: "1.5rem" }}
+            className="total-price"
+          >
+            Total : ₹
+            {bookingData.dayCount *
+              bookingData.perRoomPrice *
+              bookingData.roomCount}
+          </h1>
+        </div>
       </div>
       <div
         className="button"

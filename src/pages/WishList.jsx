@@ -43,9 +43,10 @@ const WishList = () => {
     <>
       {/* <Navbar /> */}
       <h1 className="title-list">Your Wish List</h1>
+
       <div className="list">
-        {data &&
-          data?.map(
+        {data.length !== 0 ? (
+          data.map(
             ({
               _id,
               creator,
@@ -74,7 +75,10 @@ const WishList = () => {
                 rooms={rooms}
               />
             )
-          )}
+          )
+        ) : (
+          <h1 style={{ color: "red" }}>NO ITEMS YET!</h1>
+        )}
       </div>
       <Footer />
     </>

@@ -11,7 +11,7 @@ const API_8 = `${API}/properties?category=`; //for getting data using categories
 const API_9 = `${API}/properties/`; // for getting particular property using id
 const API_10 = `${API}/api/availability/particular-room`;
 const API_11 = `${API}/api/hostInfo`;
-const API_12 = `${API}/Order`;
+
 const API_13 = `${API}/key`;
 const API_14 = `${API}/verification`;
 
@@ -28,6 +28,8 @@ const API_23 = `${API}/bookings/getUserBookingData`;
 const API_24 = `${API}/properties/getListingsHost`;
 const API_25 = `${API}/properties/updateListing`;
 const API_26 = `${API}/api/createAvailabilities`;
+const API_27 = `${API}/auth/reset`;
+const API_28 = `${API}/auth/new-password`;
 
 // for production
 
@@ -43,7 +45,6 @@ export {
   API_9,
   API_10,
   API_11,
-  API_12,
   API_13,
   API_14,
   API_15,
@@ -58,4 +59,6 @@ export {
   API_24,
   API_25,
   API_26,
+  API_27,
+  API_28,
 };

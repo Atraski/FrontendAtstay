@@ -3,27 +3,33 @@ import "../styles/upperNavbar.css";
 import { Link } from "react-router-dom";
 // import FacebookIcon from '@mui/icons-material/Facebook';
 import { Call, Facebook, Instagram } from "@mui/icons-material";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFacebookF, faInstagram } from "@fortawesome/free-brands-svg-icons";
 
 export default function UpperNavbar() {
   return (
     <div>
       <div className="nav">
         <div
-          className="container-fluid nav-top p-2 d-flex justify-content-between "
+          className="container-fluid nav-top d-flex justify-content-between"
           style={{ alignItems: "center" }}
         >
           <div className="navtopleft">
             <Link
-              to="https://m.facebook.com/story.php/?story_fbid=719437636867766&id=100064046080035"
+              to="https://www.facebook.com/atstaybyatraski"
               target="_blank"
+              className="icon"
             >
-              <Facebook style={{ fontSize: "1.5rem", color: "white" }} />
+              <FontAwesomeIcon icon={faFacebookF} />
             </Link>
             <Link
               to="https://www.instagram.com/atstaybyatraski?igsh=N2hodnQzdXkzd3E5"
               target="_blank"
             >
-              <Instagram style={{ fontSize: "1.5rem", color: "white" }} />
+              <FontAwesomeIcon
+                icon={faInstagram}
+                style={{ fontSize: "2rem", marginTop: "2.4px" }}
+              />
             </Link>
             {/* <span className="mx-3 emm" style={{color:"white"}}> <a style={{ color:"white"}} href="mailto:support@attravels.in">support@attravels.in</a></span> */}
           </div>
@@ -33,20 +39,20 @@ export default function UpperNavbar() {
               <a
                 href="tel:+9654862355"
                 style={{
-                  color: "white",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
+                  color: "white",
                 }}
               >
                 <Call
                   style={{
-                    fontSize: "1rem",
+                    fontSize: "1.5rem",
                     color: "white",
                     fontWeight: "bold",
                   }}
                 />
-                <p style={{ fontSize: "15px" }}>Call Now</p>
+                <p style={{ fontSize: "17px" }}>Call Now</p>
               </a>
             </span>
             {/* <Link  to ="/signin"><span className="mx-3 log" style={{color:"white"}}>Login</span></Link>

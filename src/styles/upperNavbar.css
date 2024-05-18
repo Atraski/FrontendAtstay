@@ -1,5 +1,31 @@
+.nav {}
+
 .nav-top {
   background-color: #67c7b9;
+}
+
+.navtopleft {
+  display: flex;
+  gap: 15px;
+
+}
+
+.navtopright {
+  display: flex;
+  gap: 5px;
+  color: white;
+}
+
+.navtopleft a {
+  font-size: 1.8rem;
+  color: #ffffff;
+  transition: all 100ms ease-in;
+
+}
+
+.navtopleft a:hover,
+navtopright span a:hover {
+  color: rgb(255, 255, 255, 0.6)
 }
 
 .logoimg {
@@ -10,10 +36,12 @@
 .navitem li {
   list-style: none;
 }
+
 a {
   text-decoration: none;
   color: black;
 }
+
 .fa-phone:before {
   font-size: 17px;
 }
@@ -25,6 +53,7 @@ a {
   align-items: center;
   position: relative;
 }
+
 .navbar_search {
   border: 1px solid grey;
   border-radius: 30px;
@@ -34,30 +63,37 @@ a {
   gap: 40px;
   align-items: center;
 }
+
 .navbar_search input {
   border: none;
   outline: none;
 }
+
 .navbar_search:hover {
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
+
 .navbar_right {
   display: flex;
   align-items: center;
   gap: 20px;
 }
+
 .navbar_right .host {
   text-decoration: none;
   color: black;
   font-weight: 700;
   cursor: pointer;
 }
+
 .navbar_right .host:hover {
   color: #66cccc;
 }
+
 .navbar_right .host.sm {
   display: none;
 }
+
 .navbar_right_account {
   height: 50px;
   display: flex;
@@ -70,13 +106,16 @@ a {
   background-color: white;
   cursor: pointer;
 }
+
 .navbar_right_account:hover {
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
+
 .navbar_right_account img {
   width: 40px;
   height: 40px;
 }
+
 .navbar_right_accountmenu {
   position: absolute;
   background-color: white;
@@ -91,9 +130,11 @@ a {
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
   z-index: 9999;
 }
+
 .navbar_right_accountmenu.sm {
   right: 20px;
 }
+
 .navbar_right_accountmenu a {
   width: 100%;
   padding: 8px 15px;
@@ -101,6 +142,7 @@ a {
   color: black;
   font-weight: 700;
 }
+
 .navbar_right_accountmenu a:hover {
   color: #67c7b9;
   background-color: rgba(217, 213, 213, 0.2);
@@ -137,6 +179,7 @@ a {
 }
 
 @media (max-width: 430px) {
+
   .fa-facebook,
   .emm,
   .log,
@@ -151,9 +194,11 @@ a {
     flex-wrap: wrap;
     gap: 0.5rem;
   }
+
   .navbar .search-container .navbar_search {
     /* width: 50px; */
   }
+
   .navbar .search-container {
     display: flex;
     flex-wrap: wrap;

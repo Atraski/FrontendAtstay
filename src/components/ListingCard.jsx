@@ -56,10 +56,10 @@ const ListingCard = ({
 
   const patchWishList = async () => {
     // console.log("user", user);
-    if(user == null){
-      dispatch(setShowPopup({popup:true}))
+    if (user == null) {
+      return dispatch(setShowPopup({ popup: true }));
     }
-    if (user?._id !== creator._id) {
+    if (user?._id !== creator) {
       const response = await fetch(`${API_20}${user?._id}/${listingId}`, {
         method: "PATCH",
         header: {
@@ -94,7 +94,7 @@ const ListingCard = ({
               />
               <div
                 className="prev-button"
-                onClick={(e) =>  {
+                onClick={(e) => {
                   e.stopPropagation();
                   goToPrevSlide(e);
                 }}

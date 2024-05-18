@@ -10,13 +10,14 @@ import LowerNavbar from "./LowerNavbar";
 
 const Listings = () => {
   const dispatch = useDispatch();
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   const [selectedCategory, setSelectedCategory] = useState("All");
 
   const listings = useSelector((state) => state.listings);
 
   const getFeedListings = async () => {
+    setLoading(true);
     try {
       const response = await fetch(
         selectedCategory !== "All"
@@ -63,49 +64,54 @@ const Listings = () => {
         <Loader />
       ) : (
         <div className="listings">
-          {listings.length>0? listings.map(
-            ({
-              _id,
-              hotelId,
-              hostId,
-              creator,
-              listingPhotoPaths,
-              city,
-              province,
-              country,
-              category,
-              type,
-              price,
-              booking = false,
-              rooms,
-            }) => (
-              <ListingCard
-                listingId={hotelId}
-                creator={hostId}
-                listingPhotoPaths={listingPhotoPaths}
-                city={city}
-                province={province}
-                country={country}
-                category={category}
-                type={type}
-                price={price}
-                booking={booking}
-                rooms={rooms}
-              />
+          {listings.length > 0 ? (
+            listings.map(
+              ({
+                _id,
+                hotelId,
+                hostId,
+                creator,
+                listingPhotoPaths,
+                city,
+                province,
+                country,
+                category,
+                type,
+                price,
+                booking = false,
+                rooms,
+              }) => (
+                <ListingCard
+                  key={_id}
+                  listingId={hotelId}
+                  creator={hostId}
+                  listingPhotoPaths={listingPhotoPaths}
+                  city={city}
+                  province={province}
+                  country={country}
+                  category={category}
+                  type={type}
+                  price={price}
+                  booking={booking}
+                  rooms={rooms}
+                />
+              )
             )
-          ):( <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              flexDirection: "column",
-            }}
-          >
-            <h2>Coming Soon..........</h2>
-            <h4 >
-              connect with us: <br></br> Phone No.: 8077412283 <br></br> Email:
-              atstaytravel@gmail.com
-            </h4>
-          </div>)}
+          ) : (
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                flexDirection: "column",
+              }}
+            >
+              <h2>Coming Soon..........</h2>
+              <h4>
+                connect with us: <br></br> Phone No.: 8077412283 <br></br>{" "}
+                Email: atstaytravel@gmail.com
+              </h4>
+            </div>
+          )}
         </div>
       )}
       {/* <div className="category-list">
