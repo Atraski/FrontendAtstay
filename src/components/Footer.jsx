@@ -4,6 +4,8 @@ import { FaSquareFacebook } from "react-icons/fa6";
 import { FaInstagramSquare } from "react-icons/fa";
 import FooterLower from "./FooterLower";
 import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFacebookF, faInstagram } from "@fortawesome/free-brands-svg-icons";
 
 const Footer = () => {
   return (
@@ -17,33 +19,43 @@ const Footer = () => {
 
         <div className="footer_center">
           <h3>Useful Links</h3>
-          <ul>
-            <li>
+          <ul className="useful-links">
+            <li className="socials">
               {" "}
-              <a href="https://m.facebook.com/story.php/?story_fbid=719437636867766&id=100064046080035">
+              <a
+                href="https://www.facebook.com/atstaybyatraski"
+                target="_blank"
+              >
                 {" "}
-                <FaSquareFacebook style={{ fontSize: "2.3rem" }} />
+                <FontAwesomeIcon icon={faFacebookF} size="xl" />
+                {/* <FaSquareFacebook style={{ fontSize: "2.3rem" }} /> */}
               </a>
-              <a href="https://www.instagram.com/atstaybyatraski?igsh=N2hodnQzdXkzd3E5">
+              <a
+                href="https://www.instagram.com/atstaybyatraski?igsh=N2hodnQzdXkzd3E5"
+                target="_blank"
+              >
                 {" "}
-                <FaInstagramSquare style={{ fontSize: "2.3rem" }} />
+                {/* <FaInstagramSquare style={{ fontSize: "2.3rem" }} /> */}
+                <FontAwesomeIcon icon={faInstagram} size="xl" />
               </a>
             </li>
             <li>About Us</li>
             <li>Terms and Conditions</li>
-            <li><Link to="/privacy-policy">
-            
-            Privacy Policy</Link> 
+            <li>
+              <Link to="/privacy-policy">Privacy Policy</Link>
             </li>
           </ul>
         </div>
 
         <div className="footer_right">
           <h3>Contact</h3>
-          <div className="footer_right_info">
-            <LocalPhone />
-            <p>+91 8077412283</p>
-          </div>
+          <a href="tel:+91 8077412283">
+            <div className="footer_right_info footer-call">
+              <LocalPhone />
+
+              <p>+91 8077412283</p>
+            </div>
+          </a>
           <div className="footer_right_info">
             <Email />
             <p>atstaytravel@gmail.com</p>

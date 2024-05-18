@@ -32,8 +32,16 @@ const Navbar = ({ dropdownMenu, setDropdownMenu }) => {
   useEffect(() => {
     if (location.pathname.split("/")[1] === "reset") {
       setIsResetPage(true);
+    } else {
+      setIsResetPage(false);
     }
   }, [location]);
+
+  const searchIsEmpty = search === "";
+
+  const searchChangeHandler = (e) => {
+    setSearch(e.target.value);
+  };
 
   return (
     <>
@@ -105,7 +113,7 @@ const Navbar = ({ dropdownMenu, setDropdownMenu }) => {
               <div className="guest">
                 <div className="label">Guests</div>
                 <div className="guest-value-container">
-                  <p
+                  <button
                     className="icons"
                     onClick={() => {
                       if (guest > 1) {
@@ -114,9 +122,9 @@ const Navbar = ({ dropdownMenu, setDropdownMenu }) => {
                     }}
                   >
                     -
-                  </p>
+                  </button>
                   <p className="guest-value">{guest}</p>
-                  <p
+                  <button
                     className="icons"
                     onClick={() => {
                       if (guest < 100) {
@@ -125,7 +133,7 @@ const Navbar = ({ dropdownMenu, setDropdownMenu }) => {
                     }}
                   >
                     +
-                  </p>
+                  </button>
                 </div>
               </div>
             </div>
@@ -171,7 +179,7 @@ const Navbar = ({ dropdownMenu, setDropdownMenu }) => {
                     type="text"
                     placeholder="Destination..."
                     value={search}
-                    onChange={(e) => setSearch(e.target.value)}
+                    onChange={searchChangeHandler}
                   />
                   <div>
                     <div>CheckIn</div>
@@ -222,9 +230,20 @@ const Navbar = ({ dropdownMenu, setDropdownMenu }) => {
                       </p>
                     </div>
                   </div>
-                  <IconButton disabled={search === ""}>
+                  <IconButton
+                    style={
+                      searchIsEmpty
+                        ? { background: "#d3d3d3", cursor: "not-allowed" }
+                        : {}
+                    }
+                    disabled={searchIsEmpty}
+                  >
                     <Search
-                      sx={{ color: "#66cccc" }}
+                      sx={
+                        searchIsEmpty
+                          ? { color: "#808080" }
+                          : { color: "#66cccc" }
+                      }
                       onClick={() => {
                         if (search.length > 0 && checkIn && checkOut && guest) {
                           navigate(
@@ -248,8 +267,21 @@ const Navbar = ({ dropdownMenu, setDropdownMenu }) => {
                 <div className="input" onClick={() => setShowPopUp(true)}>
                   <div className="text">Anywhere</div>
                   <div className="icon">
-                    <IconButton disabled={search === ""}>
-                      <Search sx={{ color: "#66cccc" }} />
+                    <IconButton
+                      style={
+                        searchIsEmpty
+                          ? { background: "#d3d3d3", cursor: "not-allowed" }
+                          : {}
+                      }
+                      disabled={searchIsEmpty}
+                    >
+                      <Search
+                        sx={
+                          searchIsEmpty
+                            ? { color: "#808080" }
+                            : { color: "#66cccc" }
+                        }
+                      />
                     </IconButton>
                   </div>
                 </div>
