@@ -157,8 +157,12 @@ const Navbar = ({ dropdownMenu, setDropdownMenu }) => {
             }
           >
             {!isResetPage && (
-              <div style={{ flexGrow: "1", justifyContent: "center" }} id="pc">
+              <div id="pc">
                 <form
+                  style={{
+                    flexGrow: "1",
+                    justifyContent: "center",
+                  }}
                   className="navbar_search"
                   onSubmit={(e) => {
                     e.preventDefault();
@@ -175,38 +179,45 @@ const Navbar = ({ dropdownMenu, setDropdownMenu }) => {
                     }
                   }}
                 >
-                  <input
-                    type="text"
-                    placeholder="Destination..."
-                    value={search}
-                    onChange={searchChangeHandler}
-                  />
                   <div>
-                    <div>CheckIn</div>
+                    <div className="input-heading">Desired destination</div>
+
+                    <input
+                      type="text"
+                      placeholder="Destination..."
+                      value={search}
+                      onChange={searchChangeHandler}
+                      className="border"
+                    />
+                  </div>
+                  <div>
+                    <div className="input-heading">CheckIn</div>
                     <div>
                       <input
                         type="date"
                         placeholder="Checkin"
                         value={checkIn}
                         onChange={(e) => setCheckIn(e.target.value)}
+                        className="border"
                       />
                     </div>
                   </div>
                   <div>
-                    <div>Checkout</div>
+                    <div className="input-heading">Checkout</div>
                     <div>
                       <input
                         type="date"
                         placeholder="Checkin"
                         value={checkOut}
                         onChange={(e) => setCheckOut(e.target.value)}
+                        className="border"
                       />
                     </div>
                   </div>
 
                   <div className="guest-container">
-                    <div className="label">Guests</div>
-                    <div className="guest-value-container">
+                    <div className="label input-heading">Guests</div>
+                    <div className="guest-value-container border">
                       <p
                         className="icons"
                         onClick={() => {
@@ -230,7 +241,26 @@ const Navbar = ({ dropdownMenu, setDropdownMenu }) => {
                       </p>
                     </div>
                   </div>
-                  <IconButton
+                  <h3
+                    className="search-btn"
+                    disabled={searchIsEmpty}
+                    onClick={() => {
+                      if (search.length > 0 && checkIn && checkOut && guest) {
+                        navigate(
+                          `/properties/search/${search}/${checkIn}/${checkOut}/${guest}`
+                        );
+                      } else if (search.length > 0 && (checkIn || checkOut)) {
+                        window.alert("please alert proper date");
+                      } else if (search.length > 0) {
+                        navigate(
+                          `/properties/search/${search}/undefined/undefined/${guest}`
+                        );
+                      }
+                    }}
+                  >
+                    Search
+                  </h3>
+                  {/* <IconButton
                     style={
                       searchIsEmpty
                         ? { background: "#d3d3d3", cursor: "not-allowed" }
@@ -258,7 +288,7 @@ const Navbar = ({ dropdownMenu, setDropdownMenu }) => {
                         }
                       }}
                     />
-                  </IconButton>
+                  </IconButton> */}
                 </form>
               </div>
             )}

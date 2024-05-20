@@ -54,24 +54,16 @@ a {
   position: relative;
 }
 
-.navbar_search {
-  border: 1px solid grey;
-  border-radius: 30px;
-  height: 50px;
-  padding: 0px 20px;
-  display: flex;
-  gap: 40px;
-  align-items: center;
-}
+
 
 .navbar_search input {
   border: none;
   outline: none;
 }
 
-.navbar_search:hover {
+/* .navbar_search:hover {
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-}
+} */
 
 .navbar_right {
   display: flex;

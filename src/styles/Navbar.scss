@@ -51,25 +51,50 @@
   }
 
   &_search {
-    border: 1px solid $grey;
-    border-radius: 30px;
-    height: 50px;
-    padding: 0px 20px;
+    // border: 1px solid $grey;
+    // border-radius: 30px;
+    // height: 50px;
+    padding: 7px 20px;
     display: flex;
+    gap: 40px;
     // gap: 100px !important;
     align-items: center;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    margin-left: 1.2rem;
+
     @include sm {
       gap: 0px !important;
       margin-left: 8%;
     }
-    input {
-      border: none;
-      outline: none;
+
+    .input-heading {
+      font-size: 13px;
+      margin-bottom: 4px;
     }
 
-    &:hover {
-      @include shadow;
+    .border {
+      border: 1px solid gray;
+      padding: 4px 11px;
+      border-radius: 6px;
     }
+
+    .search-btn {
+      margin-top: 1.2rem;
+      border: 1px solid white;
+      padding: 6px 2rem;
+      border-radius: 6px;
+      background-color: #67c7b9;
+      color: white;
+    }
+
+    .search-btn:hover {
+      cursor: pointer;
+      background-color: rgb(103, 199, 185, 0.6);
+    }
+
+    // &:hover {
+    //   @include shadow;
+    // }
 
     @include lg {
       display: none;
@@ -248,22 +273,28 @@
 }
 
 .navbar_right00 {
+  margin-left: -2rem;
   .navbar_right_accountmenu {
     margin-top: 1rem;
-    margin-right: -3rem;
+  }
+
+  .navbar_right_account {
+    margin-left: -1rem;
   }
 }
 
 @media (max-width: 768px) {
   #mob {
     display: flex;
+
     .input {
       display: flex;
       align-items: center;
       gap: 1rem;
       box-shadow: 0 3px 10px 2px rgba(0, 0, 0, 0.2);
-      padding: 0.5rem;
+      padding: 0.5rem 1.4rem;
       border-radius: 5%;
+      margin-top: -2rem;
     }
   }
   #pc {
@@ -278,6 +309,10 @@
   .navbar_right00 {
     .mobHost {
       display: none;
+    }
+
+    .navbar_right_account {
+      margin: -2rem 0 0 1rem;
     }
   }
 }

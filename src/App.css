@@ -7,4 +7,9 @@
 
 html {
   scroll-behavior: smooth;
+
+  ::selection {
+    background-color: #d0eeea;
+
+  }
 }

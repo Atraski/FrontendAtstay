@@ -33,13 +33,10 @@ const LowerNavbar = ({ setSelectedCategory }) => {
       breakpoint: { max: 3000, min: 1024 },
       items: 10,
     },
-    tablet: {
-      breakpoint: { max: 1024, min: 464 },
-      items: 2,
-    },
+
     mobile: {
       breakpoint: { max: 464, min: 0 },
-      items: 5,
+      items: 3,
     },
   };
 
@@ -69,15 +66,17 @@ const LowerNavbar = ({ setSelectedCategory }) => {
       onMouseLeave={carouselLeaveEnterHandler}
       onMouseDown={carouselMouseDownHandler}
       onMouseUp={carouselMouseUpHandler}
+      className="nav-carousel-wrapper"
       // style={isGrabbed ? { cursor: "grabbing" } : { cursor: "default" }}
     >
       <Carousel
         responsive={responsive}
-        arrows={carouselHover}
         containerClass="carousel"
         sliderClass={`slider ${isGrabbed ? "grabbing" : ""}`}
         customTransition={transition}
+        removeArrowOnDeviceType={["mobile"]}
         partialVisible={true}
+        className="nav-carousel"
       >
         <div
           className="lower-navbar-carousel-item"

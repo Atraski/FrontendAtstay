@@ -1,82 +1,115 @@
- .carousel {
-   width: 78rem;
-   margin: auto;
-   border: red 1px blue;
- }
+nav-carousel-wrapper {
+  position: relative
+}
+
+.nav-carousel {
+  position: unset;
+
+}
+
+.react-multiple-carousel__arrow {
+  margin-top: -5px;
+  z-index: 1;
+  background: none;
+}
+
+.react-multiple-carousel__arrow:hover {
+  background: #67c7b9;
+}
+
+.react-multiple-carousel__arrow::before {
+  color: black;
+}
+
+.react-multiple-carousel__arrow:hover::before {
+  color: white;
+}
+
+.carousel {
+  width: 78rem;
+  margin: auto;
+}
 
 
- .carousel-button-group {
-   position: absolute
- }
+.carousel-button-group {
+  position: absolute
+}
 
- .slider {
-   padding: 1rem 0;
- }
+.slider {
+  padding: 1rem 0;
+}
 
- .slider:hover {
-   cursor: grab;
- }
+.slider:hover {
+  cursor: grab;
+}
 
- .slider.grabbing {
-   cursor: grabbing;
- }
+.slider.grabbing {
+  cursor: grabbing;
+}
 
- .lower-navbar-carousel-item {
-   /* border: 1px solid blue; */
-   display: flex;
-   flex-direction: column;
-   align-items: center;
-   cursor: pointer;
-   user-select: none;
- }
+.lower-navbar-carousel-item {
+  /* border: 1px solid blue; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+}
 
- .lower-navbar-carousel-item p {
-   font-size: 14px;
- }
+.lower-navbar-carousel-item p {
+  font-size: 14px;
+}
 
- .lower-navbar-carousel-item:hover p,
- .lower-navbar-carousel-item:hover .icon {
-   color: #67c7b9;
-   transition: color 0.3s ease-in-out;
+.lower-navbar-carousel-item:hover p,
+.lower-navbar-carousel-item:hover .icon {
+  color: #67c7b9;
+  transition: color 0.3s ease-in-out;
 
- }
-
-
- .lower-navbar-carousel-item .icon {
-   width: 25px;
-   height: 25px;
-   margin-bottom: 5px;
- }
-
- @media (min-width: 350px) {
+}
 
 
-   /* Container for the next and previous buttons */
-   .product-carousel-1 {
-     display: flex;
-     /* Display buttons in a row */
-     align-items: center;
-     /* Center buttons vertically */
-   }
+.lower-navbar-carousel-item .icon {
+  width: 25px;
+  height: 25px;
+  margin-bottom: 5px;
+}
 
-   /* Styles for previous button */
-   #pre-btn-1,
-   #next-btn-1 {
-     cursor: pointer;
-     background: none;
-     background-color: transparent;
-     border: none;
-     outline: none;
-     width: fit-content;
-     /* Change cursor to pointer on hover */
-   }
+@media (min-width: 350px) {
 
-   /* Styles for the button icon */
-   #pre-btn-1 img,
-   #next-btn-1 img {
-     width: 22px;
-     /* Set width of the icon */
-     transform: scaleX(-1);
-     /* Flip icon horizontally for previous button */
-   }
- }
+
+
+  /* Container for the next and previous buttons */
+  .product-carousel-1 {
+    display: flex;
+    /* Display buttons in a row */
+    align-items: center;
+    /* Center buttons vertically */
+  }
+
+  /* Styles for previous button */
+  #pre-btn-1,
+  #next-btn-1 {
+    cursor: pointer;
+    background: none;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    width: fit-content;
+    /* Change cursor to pointer on hover */
+  }
+
+  /* Styles for the button icon */
+  #pre-btn-1 img,
+  #next-btn-1 img {
+    width: 22px;
+    /* Set width of the icon */
+    transform: scaleX(-1);
+    /* Flip icon horizontally for previous button */
+  }
+}
+
+@media (max-width: 768px) {
+  .carousel {
+    width: 20rem;
+  }
+}
