@@ -1,14 +1,19 @@
 import { useState } from "react";
-import "../styles/ListingCard.scss";
+import { useSelector, useDispatch } from "react-redux";
 import {
   ArrowForwardIos,
   ArrowBackIosNew,
   Favorite,
 } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
+
 import { setShowPopup, setWishList } from "../redux/state";
 import { API_1, API_20, API_3 } from "../api/api";
+import "../styles/ListingCard.scss";
 
 const ListingCard = ({
   listingId,
@@ -74,6 +79,21 @@ const ListingCard = ({
     }
   };
 
+  const responsive = {
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 10,
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 464 },
+      items: 2,
+    },
+    mobile: {
+      breakpoint: { max: 464, min: 0 },
+      items: 5,
+    },
+  };
+
   return (
     <div
       className="listing-card"
@@ -115,40 +135,33 @@ const ListingCard = ({
         </div>
       </div>
 
-      <h3>
-        {`${city}, ${province}, ${country}`.slice(0, 33) + "..."}
+      <h3 className="location">
+        <FontAwesomeIcon
+          icon={faLocationDot}
+          size="sm"
+          style={{ color: "#ffffff", marginRight: "5px" }}
+        />
+        {`${city}, ${province}`}
         {/* {city}, {province}, {country} */}
       </h3>
-      <p>{category}</p>
+      {/* <p>{category}</p> */}
 
-      {!booking ? (
-        <>
-          <p>{type}</p>
-          <p>
-            <span>
-              Rs.{" "}
-              {type === "Rooms"
-                ? rooms &&
-                  (rooms[0].price === 0
-                    ? rooms[1].price === 0
-                      ? rooms[2].price
-                      : rooms[1].price
-                    : rooms[0].price)
-                : price}
-            </span>{" "}
-            per night
-          </p>
-        </>
-      ) : (
-        <>
-          <p>
-            {startDate} - {endDate}
-          </p>
-          <p>
-            <span>Rs. {totalPrice}</span> total
-          </p>
-        </>
-      )}
+      <>
+        <p>
+          <span>
+            Rs.{" "}
+            {type === "Rooms"
+              ? rooms &&
+                (rooms[0].price === 0
+                  ? rooms[1].price === 0
+                    ? rooms[2].price
+                    : rooms[1].price
+                  : rooms[0].price)
+              : price}
+          </span>{" "}
+          per night
+        </p>
+      </>
 
       <button
         className="favorite"

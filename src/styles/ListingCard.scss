@@ -19,12 +19,13 @@
     .slider {
       display: flex;
       transition: transform 0.5s ease;
+      padding: 0;
 
       .slide {
         position: relative;
         flex: 0 0 100%;
         width: 100%;
-        height: 270px;
+        height: 300px;
         display: flex;
         align-items: center;
 
@@ -32,6 +33,7 @@
           width: 100%;
           height: 100%;
           filter: brightness(85%);
+          position: relative;
         }
 
         .prev-button,
@@ -65,8 +67,12 @@
     }
   }
 
-  h3 {
-    font-size: 18px;
+  .location {
+    position: absolute;
+    top: 17rem;
+    left: 1rem;
+    color: white;
+    font-size: 15px;
   }
 
   p {
@@ -75,7 +81,7 @@
 
   span {
     font-weight: 700;
-    font-size: 18px;
+    font-size: 16px;
   }
 
   .favorite {
