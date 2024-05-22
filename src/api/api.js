@@ -1,5 +1,8 @@
+// For production
+const API = "https://www.stay.atstay.in";
+
 // for local environment
-const API = "http://localhost:5001";
+// const API = "http://localhost:5001";
 const API_1 = `${API}/auth/login`;
 const API_2 = `${API}/auth/register`;
 const API_3 = `${API}/`;
@@ -30,8 +33,6 @@ const API_25 = `${API}/properties/updateListing`;
 const API_26 = `${API}/api/createAvailabilities`;
 const API_27 = `${API}/auth/reset`;
 const API_28 = `${API}/auth/new-password`;
-
-// for production
 
 export {
   API_1,
