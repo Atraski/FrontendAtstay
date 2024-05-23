@@ -24,6 +24,7 @@ const SearchPage = () => {
       });
 
       const data = await response.json();
+      console.log(data);
       dispatch(setListings({ listings: data }));
       setLoading(false);
     } catch (err) {
@@ -31,26 +32,26 @@ const SearchPage = () => {
     }
   };
 
-  const tempFunc = async () => {
-    try {
-      console.log(search, checkIn, checkOut, guest);
-      const response = await axios.post(`${API_3}api/searchPage`, {
-        search,
-        checkIn,
-        checkOut,
-        guest,
-      });
-      dispatch(setListings({ listings: response.data.result }));
-      console.log(response.data);
-      setLoading(false);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const tempFunc = async () => {
+  //   try {
+  //     console.log(search, checkIn, checkOut, guest);
+  //     const response = await axios.post(`${API_3}api/searchPage`, {
+  //       search,
+  //       checkIn,
+  //       checkOut,
+  //       guest,
+  //     });
+  //     dispatch(setListings({ listings: response.data.result }));
+  //     console.log(response.data);
+  //     setLoading(false);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   useEffect(() => {
-    // getSearchListings();
-    tempFunc();
+    getSearchListings();
+    // tempFunc();
   }, [search, checkIn, checkOut, guest]);
 
   return loading ? (

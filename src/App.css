@@ -5,6 +5,10 @@
   font-family: 'Nunito', sans-serif;
 }
 
+body {
+  overflow-x: hidden;
+}
+
 html {
   scroll-behavior: smooth;
 

@@ -1,4 +1,4 @@
-nav-carousel-wrapper {
+.nav-carousel-wrapper {
   position: relative
 }
 
@@ -8,7 +8,9 @@ nav-carousel-wrapper {
 }
 
 .react-multiple-carousel__arrow {
-  margin-top: -5px;
+  margin: -0.3125rem 3rem 0 3rem;
+
+
   z-index: 1;
   background: none;
 }
@@ -21,12 +23,17 @@ nav-carousel-wrapper {
   color: black;
 }
 
+.react-multiple-carousel__arrow--right {
+  margin-left: -5rem
+}
+
 .react-multiple-carousel__arrow:hover::before {
   color: white;
 }
 
 .carousel {
-  width: 78rem;
+  display: flex;
+  width: 71rem;
   margin: auto;
 }
 

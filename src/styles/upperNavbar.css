@@ -1,4 +1,6 @@
-.nav {}
+.nav {
+  width: 100%;
+}
 
 .nav-top {
   background-color: #67c7b9;
@@ -6,8 +8,7 @@
 
 .navtopleft {
   display: flex;
-  gap: 15px;
-
+  gap: 1rem;
 }
 
 .navtopright {
@@ -46,13 +47,13 @@ a {
   font-size: 17px;
 }
 
-.navbar {
+/* .navbar {
   padding: 10px 60px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   position: relative;
-}
+} */
 
 
 

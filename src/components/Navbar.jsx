@@ -8,7 +8,7 @@ import { Link, useNavigate, useLocation, useParams } from "react-router-dom";
 import { setHostLogout, setLogout } from "../redux/state";
 import UpperNavbar from "./UpperNavbar";
 import LowerNavbar from "./LowerNavbar";
-import { API_3 } from "../api/api";
+import { API_3, API_21 } from "../api/api";
 
 const Navbar = ({ dropdownMenu, setDropdownMenu }) => {
   // const [dropdownMenu, setDropdownMenu] = useState(false);
@@ -39,8 +39,14 @@ const Navbar = ({ dropdownMenu, setDropdownMenu }) => {
 
   const searchIsEmpty = search === "";
 
-  const searchChangeHandler = (e) => {
+  const searchChangeHandler = async (e) => {
     setSearch(e.target.value);
+
+    const response = await fetch(`${API_21}${e.target.value}`);
+
+    const resData = await response.json();
+
+    console.log(resData);
   };
 
   return (
@@ -100,7 +106,7 @@ const Navbar = ({ dropdownMenu, setDropdownMenu }) => {
                 </div>
               </div>
               <div className="check-out" style={{ background: "black" }}>
-                <div className="label">CheckOutsasas</div>
+                <div className="label">CheckOut</div>
                 <div>
                   <input
                     type="date"
@@ -190,6 +196,22 @@ const Navbar = ({ dropdownMenu, setDropdownMenu }) => {
                       className="border"
                     />
                   </div>
+                  {/* <div
+                    style={{
+                      position: "absolute",
+                      top: "6rem",
+                      left: "19%",
+                      width: "15rem",
+                      background: "white",
+                      boxShadow: "0 0 10px gray",
+                      zIndex: "100",
+                      borderRadius: "5px",
+                    }}
+                  >
+                    <div>1</div>
+                    <div>2</div>
+                    <div>3</div>
+                  </div> */}
                   <div>
                     <div className="input-heading">CheckIn</div>
                     <div>
