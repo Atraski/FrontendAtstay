@@ -41,6 +41,15 @@ const HostLogin = () => {
         body: JSON.stringify({ email, password }),
       });
 
+      if (response.status === 409) {
+        window.alert("User not found!");
+        return;
+      }
+      if (response.status === 400) {
+        window.alert("Password does not match!");
+        return;
+      }
+
       /* Get data after fetching */
       const loggedIn = await response.json();
       console.log("LoggedIn data", loggedIn);

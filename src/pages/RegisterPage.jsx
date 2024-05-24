@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../styles/Register.scss";
 import { API_2 } from "../api/api";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -46,34 +46,42 @@ const RegisterPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (formData.contact.toString().length === 10) {
-      try {
-        const register_form = new FormData();
+    if (formData.contact.toString().length !== 10) {
+      window.alert("Please enter correct 10 digit mobile number");
+      return;
+    }
 
-        for (var key in formData) {
-          console.log("key", key);
-          register_form.append(key, formData[key]);
-        }
-        console.log(register_form);
-        // Assuming register_form is your FormData object
-        for (const pair of register_form.entries()) {
-          const [name, value] = pair;
-          console.log(`Field name: ${name}, Field value: ${value}`);
-        }
-        const response = await fetch(API_2, {
-          method: "POST",
-          body: register_form,
-        });
+    if (formData.profileImage === null) {
+      window.alert("Please enter profile image.");
+      return;
+    }
 
-        if (response.ok) {
-          navigate("/login");
-        }
-      } catch (err) {
-        console.log("Registration failed", err.message);
-        window.alert("please enter proper values");
-      }
+    const register_form = new FormData();
+
+    for (var key in formData) {
+      console.log("key", key);
+      register_form.append(key, formData[key]);
+    }
+
+    const response = await fetch(API_2, {
+      method: "POST",
+      body: register_form,
+    });
+
+    if (response.status === 409) {
+      window.alert("Email already in use!");
+      return;
+    }
+
+    if (response.status === 400) {
+      window.alert("Please enter profile image.");
+      return;
+    }
+
+    if (response.ok) {
+      navigate("/login");
     } else {
-      window.alert("please enter correct 10 digit mobile number");
+      window.alert("Registration failed!");
     }
   };
 
@@ -215,7 +223,7 @@ const RegisterPage = () => {
             REGISTER
           </button>
         </form>
-        <a href="/login">Already have an account? Log In Here</a>
+        <Link to="/login">Already have an account? Log In Here</Link>
       </div>
     </div>
   );

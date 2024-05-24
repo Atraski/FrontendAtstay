@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../../styles/Register.scss";
@@ -26,29 +26,45 @@ const HostRegister = () => {
 
   const navigate = useNavigate();
 
+  useEffect(() => {
+    setPasswordMatch(
+      formData.password === formData.confirmPassword ||
+        formData.confirmPassword === ""
+    );
+  });
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("handle submit called");
-    console.log("formData:", formData);
 
+    if (formData.contact.toString().length !== 10) {
+      window.alert("Please enter correct 10 digit mobile number");
+      return;
+    }
+
+    const { firstName, lastName, email, password, contact } = formData;
+
+    let response;
     try {
-      const { firstName, lastName, email, password, contact } = formData;
-      const response = await axios.post(`${API_3}api/Registerhosts`, {
+      response = await axios.post(`${API_3}api/Registerhosts`, {
         firstName,
         lastName,
         email,
         password,
         contact,
       });
-      console.log("response", response);
-      if (response.status === 201) {
-        navigate("/hostLogin");
-      } else {
-        throw new Error("Registration failed");
+    } catch (err) {
+      if (err.response.status === 400) {
+        window.alert("All fields are required!");
+        return;
       }
-    } catch (error) {
-      console.error("Registration failed:", error.message);
-      window.alert("Registration failed. Please try again.");
+      if (err.response.status === 409) {
+        window.alert("User already exists!");
+        return;
+      }
+    }
+
+    if (response.response.ok) {
+      navigate("/hostLogin");
     }
   };
 
