@@ -10,12 +10,14 @@
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Adding box shadow */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  /* Adding box shadow */
 }
 
 .hotel-id {
   font-size: 20px;
-  margin-bottom: 20px; /* Increased margin */
+  margin-bottom: 20px;
+  /* Increased margin */
 }
 
 .calendar {
@@ -37,9 +39,11 @@
   padding: 12px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  width: 100%; /* Added width */
+  width: 100%;
+  /* Added width */
   transition: border-color 0.3s ease;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Adding box shadow */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  /* Adding box shadow */
 }
 
 .input-field-container input[type="number"]:focus {
@@ -77,10 +81,12 @@ button {
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Adding box shadow */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  /* Adding box shadow */
 }
 
 button:hover {
   background-color: #67c7b9;
-};
+}
 
+;

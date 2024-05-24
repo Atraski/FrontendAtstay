@@ -5,10 +5,12 @@ import "../styles/ImageZoomPopup.scss";
 import { useDispatch } from "react-redux";
 import { setImagePopup } from "../redux/state";
 import { useSwipeable } from "react-swipeable";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
 const ImageCarousel = ({ imageArr, imageIndex }) => {
   const imagePopup = useSelector((state) => state.imagePopup);
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(imageIndex);
   const dispatch = useDispatch();
 
   const goToPrevSlide = () => {
@@ -23,8 +25,8 @@ const ImageCarousel = ({ imageArr, imageIndex }) => {
     );
   };
   useEffect(() => {
-    console.log("image array ", imageArr);
-  }, [imageArr]);
+    setCurrentIndex(imageIndex);
+  }, [imageIndex]);
 
   const handleSwipe = (direction) => {
     console.log(`Swiped ${direction}`);
@@ -56,18 +58,21 @@ const ImageCarousel = ({ imageArr, imageIndex }) => {
       >
         {"<"}
       </button>
-      <div className="img-container" onClick={(e) => e.stopPropagation()} {...handlers}>
+      <div
+        className="img-container"
+        onClick={(e) => e.stopPropagation()}
+        {...handlers}
+      >
         <div
           style={{
             display: "flex",
             justifyContent: "flex-end",
             fontSize: "2rem",
-            cursor: "pointer",
+            width: "100%",
           }}
           onClick={() => dispatch(setImagePopup({ imagePopup: false }))}
-          
         >
-          X
+          <FontAwesomeIcon icon={faXmark} />
         </div>
         {imageArr.length > 0 ? (
           <img

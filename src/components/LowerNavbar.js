@@ -33,9 +33,12 @@ const LowerNavbar = ({ setSelectedCategory }) => {
       breakpoint: { max: 3000, min: 1200 },
       items: 10,
     },
-
+    smallDesktop: {
+      breakpoint: { max: 1420, min: 1117 },
+      items: 6,
+    },
     mobile: {
-      breakpoint: { max: 464, min: 0 },
+      breakpoint: { max: 768, min: 0 },
       items: 3,
     },
   };

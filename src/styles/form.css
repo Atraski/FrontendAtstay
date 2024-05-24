@@ -51,8 +51,8 @@ form {
 }
 
 /* Label active state */
-.controls input:focus + label,
-.controls input:valid + label {
+.controls input:focus+label,
+.controls input:valid+label {
   top: -15px;
   font-size: 14px;
   color: #555;
@@ -80,7 +80,7 @@ button {
   border: none;
   color: #fff;
   padding: 10px 20px;
-  border-radius: 5px;
+  border-radius: 0 5px 5px 0;
   font-size: 16px;
   transition: background-color 0.3s;
 }
@@ -107,6 +107,7 @@ button:hover {
 
 /* Responsive styles */
 @media (max-width: 768px) {
+
   .controls input[type="text"],
   .controls input[type="email"],
   .controls input[type="tel"] {
@@ -119,10 +120,12 @@ button:hover {
   align-items: center;
   justify-content: center;
 }
+
 #form-container .inner-div {
   display: flex;
   align-items: center;
 }
+
 #form-container .inner-div form {
   padding: 1rem;
 }

@@ -120,3 +120,9 @@
     width: 20rem;
   }
 }
+
+@media only screen and (min-width: 1117px) and (max-width: 1420px) {
+  .react-multiple-carousel__arrow {
+    margin: 0
+  }
+}

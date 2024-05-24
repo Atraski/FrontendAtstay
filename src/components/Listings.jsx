@@ -15,6 +15,7 @@ const Listings = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
 
   const listings = useSelector((state) => state.listings);
+  console.log(listings);
 
   const getFeedListings = async () => {
     setLoading(true);

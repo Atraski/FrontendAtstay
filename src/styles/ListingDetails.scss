@@ -1,13 +1,13 @@
 @import "./variables.scss";
 @import "./breakpoints.scss";
 
-.details{
+.details {
   display: flex;
   flex-wrap: wrap;
   gap: 50px;
 }
 
-.stickyBookNow{
+.stickyBookNow {
   display: none;
 }
 
@@ -206,6 +206,7 @@
   width: 100%;
   margin: auto;
   object-fit: contain;
+  cursor: pointer;
 }
 
 /* Outer Image Styles */
@@ -435,17 +436,17 @@
       width: 100%;
     }
   }
-  .stickyBookNow{
+  .stickyBookNow {
     display: flex;
-    justify-content: space-around ;
+    justify-content: space-around;
     background-color: #c0bfbf;
     position: fixed;
     bottom: 0;
     padding: 7px;
     width: 88vw;
 
-    button{
-      background-color: #F8395A;
+    button {
+      background-color: #f8395a;
     }
   }
 }
@@ -453,13 +454,11 @@
 @media (min-width: 769px) {
   .property-details {
     width: 60%;
-  } 
+  }
 }
-@media (max-width:768px) {
-  
-  .date-box-container{
-  
-    .rdrCalendarWrapper{
+@media (max-width: 768px) {
+  .date-box-container {
+    .rdrCalendarWrapper {
       font-size: 11px;
     }
   }

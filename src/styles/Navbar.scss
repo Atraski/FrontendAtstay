@@ -76,6 +76,37 @@
       margin-bottom: 4px;
     }
 
+    .dropdown-container {
+      position: absolute;
+      top: 5.2rem;
+      left: 16rem;
+      background-color: red;
+      background: white;
+      box-shadow: 0 0 10px gray;
+      border-radius: 5px;
+      width: 14rem;
+
+      .dropdown-section {
+        padding: 8px;
+        border-bottom: 1px solid #ccc;
+
+        h4 {
+          margin: 0;
+          font-size: 14px;
+          color: #67c7b9;
+        }
+
+        div {
+          padding: 4px 0;
+          cursor: pointer;
+
+          &:hover {
+            background-color: #f0f0f0;
+            color: #67c7b9;
+          }
+        }
+      }
+    }
     .border {
       border: 1px solid gray;
       padding: 4px 11px;
@@ -195,6 +226,7 @@
 
     .icons:hover {
       cursor: pointer;
+      user-select: none;
     }
   }
 }
@@ -238,16 +270,27 @@
         .input {
           input {
             height: 2rem;
-            border-radius: 5px;
+            border-radius: 5px 0 0 5px;
             padding: 2px;
             outline: none;
             border: none;
           }
           .search-btn {
             height: 2rem !important;
+
             button {
-              height: 2rem;
-              // padding: 6px 10px;
+              cursor: pointer;
+              background-color: #66cccc;
+              border: none;
+              color: #fff;
+              padding: 10px 20px;
+              border-radius: 5px;
+              font-size: 16px;
+              transition: background-color 0.3s;
+
+              &:hover {
+                background-color: #67c7b9;
+              }
             }
           }
         }
@@ -337,5 +380,19 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
+  }
+}
+
+@media only screen and (min-width: 1117px) and (max-width: 1420px) {
+  .navbar {
+    display: flex;
+    margin: 0;
+
+    &_search {
+      margin: 0;
+
+      padding: 5px 0;
+      gap: 25px;
+    }
   }
 }
