@@ -20,25 +20,6 @@ const Footer = () => {
         <div className="footer_center">
           <h3>Useful Links</h3>
           <ul className="useful-links">
-            <li className="socials">
-              {" "}
-              <a
-                href="https://www.facebook.com/atstaybyatraski"
-                target="_blank"
-              >
-                {" "}
-                <FontAwesomeIcon icon={faFacebookF} size="xl" />
-                {/* <FaSquareFacebook style={{ fontSize: "2.3rem" }} /> */}
-              </a>
-              <a
-                href="https://www.instagram.com/atstaybyatraski?igsh=N2hodnQzdXkzd3E5"
-                target="_blank"
-              >
-                {" "}
-                {/* <FaInstagramSquare style={{ fontSize: "2.3rem" }} /> */}
-                <FontAwesomeIcon icon={faInstagram} size="xl" />
-              </a>
-            </li>
             <li>About Us</li>
             <li>Terms and Conditions</li>
             <li>
@@ -52,7 +33,6 @@ const Footer = () => {
           <a href="tel:+919088797850">
             <div className="footer_right_info footer-call">
               <LocalPhone />
-
               <p>+91 9088797850</p>
             </div>
           </a>
@@ -63,8 +43,26 @@ const Footer = () => {
         </div>
 
         <div>
-          <p>Pay Via</p>
-          <img src="/assets/payment.png" alt="payment" />
+          <div className="payment-options">
+            <h3>Pay Via</h3>
+            <img src="/assets/payment.png" alt="payment" />
+          </div>
+          <div className="socials">
+            {" "}
+            <a href="https://www.facebook.com/atstaybyatraski" target="_blank">
+              {" "}
+              <FontAwesomeIcon icon={faFacebookF} size="xl" />
+              {/* <FaSquareFacebook style={{ fontSize: "2.3rem" }} /> */}
+            </a>
+            <a
+              href="https://www.instagram.com/atstaybyatraski?igsh=N2hodnQzdXkzd3E5"
+              target="_blank"
+            >
+              {" "}
+              {/* <FaInstagramSquare style={{ fontSize: "2.3rem" }} /> */}
+              <FontAwesomeIcon icon={faInstagram} size="xl" />
+            </a>
+          </div>
         </div>
       </div>
       <FooterLower />

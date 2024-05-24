@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   ArrowForwardIos,
@@ -111,27 +111,28 @@ const ListingCard = ({
               <img
                 src={`${API_3}${photo?.replace("public", "")}`}
                 alt={`photo ${index + 1}`}
+                style={{ cursor: "pointer" }}
               />
-              <div
-                className="prev-button"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  goToPrevSlide(e);
-                }}
-              >
-                <ArrowBackIosNew sx={{ fontSize: "15px" }} />
-              </div>
-              <div
-                className="next-button"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  goToNextSlide(e);
-                }}
-              >
-                <ArrowForwardIos sx={{ fontSize: "15px" }} />
-              </div>
             </div>
           ))}
+        </div>
+        <div
+          className="prev-button"
+          onClick={(e) => {
+            e.stopPropagation();
+            goToPrevSlide(e);
+          }}
+        >
+          <ArrowBackIosNew sx={{ fontSize: "15px" }} />
+        </div>
+        <div
+          className="next-button"
+          onClick={(e) => {
+            e.stopPropagation();
+            goToNextSlide(e);
+          }}
+        >
+          <ArrowForwardIos sx={{ fontSize: "15px" }} />
         </div>
       </div>
 

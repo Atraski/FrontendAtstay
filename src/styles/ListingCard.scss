@@ -35,35 +35,34 @@
           filter: brightness(85%);
           position: relative;
         }
-
-        .prev-button,
-        .next-button {
-          position: absolute;
-          top: 50%;
-          transform: translateY(-50%);
-          padding: 6px;
-          border-radius: 50%;
-          border: none;
-          cursor: pointer;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          background-color: rgba(255, 255, 255, 0.7);
-          z-index: 9999;
-
-          &:hover {
-            background-color: white;
-          }
-        }
-
-        .prev-button {
-          left: 10px;
-        }
-
-        .next-button {
-          right: 10px;
-        }
       }
+    }
+    .prev-button,
+    .next-button {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      padding: 6px;
+      border-radius: 50%;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: rgba(255, 255, 255, 0.7);
+      z-index: 10;
+
+      &:hover {
+        background-color: white;
+      }
+    }
+
+    .prev-button {
+      left: 15px;
+    }
+
+    .next-button {
+      right: 15px;
     }
   }
 

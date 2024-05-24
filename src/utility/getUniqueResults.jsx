@@ -8,8 +8,7 @@ const getUniqueResults = (results, key) => {
     if (seen.has(val)) {
       return false;
     } else {
-      seen.add(val);
-      console.log(seen);
+      seen.add(val); 
       return true;
     }
   });

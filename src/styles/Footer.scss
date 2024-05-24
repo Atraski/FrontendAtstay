@@ -11,6 +11,8 @@
 
   @include sm {
     flex-direction: column;
+
+    align-items: center;
   }
 
   @include lg {
@@ -51,12 +53,16 @@
   &_center {
     text-decoration: none;
 
+    @include sm {
+      text-align: center;
+    }
+
     ul {
       display: flex;
       flex-direction: column;
       gap: 5px;
       list-style: none;
-      margin-top: 20px;
+      margin-top: 10px;
       cursor: pointer;
 
       li:hover {
@@ -92,14 +98,17 @@
     max-width: 350px;
 
     h3 {
-      margin-bottom: 20px;
+      margin-bottom: 15px;
+      @include sm {
+        text-align: center;
+      }
     }
 
     &_info {
       display: flex;
 
       p {
-        margin-left: 20px;
+        margin-left: 10px;
         margin-bottom: 15px;
       }
     }
@@ -107,6 +116,37 @@
     @include sm {
       // display: none;
       flex-direction: column;
+      align-items: center;
+    }
+  }
+
+  .socials {
+    display: flex;
+    margin-top: 1rem;
+    gap: 1rem;
+
+    @include sm {
+      justify-content: center;
+    }
+
+    a:first-child:hover {
+      color: #0866ff;
+      transition: all 100ms ease-in-out;
+    }
+
+    a:last-child:hover {
+      color: #c53480;
+      transition: all 100ms ease-in-out;
+    }
+  }
+
+  .payment-options {
+    h3 {
+      margin-bottom: 10px;
+    }
+
+    @include sm {
+      text-align: center;
     }
   }
 }
@@ -117,16 +157,6 @@
       cursor: pointer;
       color: rgb(0, 0, 0, 0.6);
     }
-  }
-}
-
-.footer_center {
-  .socials {
-    display: flex;
-    // border: red 1px solid;
-    margin: -1rem 0 2px 0;
-
-    gap: 1rem;
   }
 }
 
