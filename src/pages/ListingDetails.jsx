@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import "../styles/ListingDetails.scss";
 import { useNavigate, useParams } from "react-router-dom";
 import { facilities } from "../data";
@@ -32,6 +32,7 @@ const ListingDetails = () => {
   const [imageIndex, setImageIndex] = useState(0);
 
   const dispatch = useDispatch();
+
   useEffect(() => {
     if (listing) {
       setImageArr(listing.listingPhotoPaths);
@@ -48,10 +49,12 @@ const ListingDetails = () => {
       console.log(error);
     }
   };
+
   useEffect(() => {
     getHostInfo();
     setSelectedRoom(
       listing &&
+        listing.rooms.length !== 0 &&
         (listing.rooms[0].price === 0
           ? listing.rooms[1].price === 0
             ? listing.rooms[2].roomType
@@ -434,68 +437,71 @@ const ListingDetails = () => {
                 className="div room-type"
                 style={{ display: listing.type === "Rooms" ? "" : "none" }}
               >
-                <div className="rooms-type">
-                  <button
-                    onClick={() => setSelectedRoom("standard")}
-                    style={{
-                      background:
-                        selectRoom === "standard" ? "#66cccc" : "white",
-                      color: selectRoom === "standard" ? "white" : "#66cccc",
-                      display: listing.rooms[0].price !== 0 ? "" : "none",
-                    }}
-                  >
-                    Standard
-                  </button>
-                  <button
-                    onClick={() => setSelectedRoom("double")}
-                    style={{
-                      background: selectRoom === "double" ? "#66cccc" : "white",
-                      color: selectRoom === "double" ? "white" : "#66cccc",
-                      display: listing.rooms[1].price !== 0 ? "" : "none",
-                    }}
-                  >
-                    Double
-                  </button>
-                  <button
-                    onClick={() => setSelectedRoom("deluxe")}
-                    style={{
-                      background: selectRoom === "deluxe" ? "#66cccc" : "white",
-                      color: selectRoom === "deluxe" ? "white" : "#66cccc",
-                      display: listing.rooms[2].price !== 0 ? "" : "none",
-                    }}
-                  >
-                    Deluxe
-                  </button>
-                </div>
-                <div className="rooms-count">
-                  <div className="text">Rooms</div>
-                  <div className="value">
-                    <div
-                      className="decrement"
-                      onClick={() => {
-                        if (parseInt(roomCount) > 1) {
-                          console.log("inside if", roomCount);
-                          setRoomCount(parseInt(roomCount) - 1);
-                        }
-                      }}
-                    >
-                      -
+                {listing.rooms.length !== 0 && (
+                  <Fragment>
+                    <div className="rooms-type">
+                      <button
+                        onClick={() => setSelectedRoom("standard")}
+                        style={{
+                          background:
+                            selectRoom === "standard" ? "#66cccc" : "white",
+                          color:
+                            selectRoom === "standard" ? "white" : "#66cccc",
+                          display: listing.rooms[0].price !== 0 ? "" : "none",
+                        }}
+                      >
+                        Standard
+                      </button>
+                      <button
+                        onClick={() => setSelectedRoom("double")}
+                        style={{
+                          background:
+                            selectRoom === "double" ? "#66cccc" : "white",
+                          color: selectRoom === "double" ? "white" : "#66cccc",
+                          display: listing.rooms[1].price !== 0 ? "" : "none",
+                        }}
+                      >
+                        Double
+                      </button>
+                      <button
+                        onClick={() => setSelectedRoom("deluxe")}
+                        style={{
+                          background:
+                            selectRoom === "deluxe" ? "#66cccc" : "white",
+                          color: selectRoom === "deluxe" ? "white" : "#66cccc",
+                          display: listing.rooms[2].price !== 0 ? "" : "none",
+                        }}
+                      >
+                        Deluxe
+                      </button>
                     </div>
-                    {/* <input
-                      type="number"
-                      min={1}
-                      value={roomCount}
-                      onChange={(e) => setRoomCount(e.target.value)}
-                    /> */}
-                    <div className="input">{roomCount}</div>
-                    <div
-                      className="increment"
-                      onClick={() => setRoomCount(parseInt(roomCount) + 1)}
-                    >
-                      +
+
+                    <div className="rooms-count">
+                      <div className="text">Rooms</div>
+                      <div className="value">
+                        <div
+                          className="decrement"
+                          onClick={() => {
+                            if (parseInt(roomCount) > 1) {
+                              console.log("inside if", roomCount);
+                              setRoomCount(parseInt(roomCount) - 1);
+                            }
+                          }}
+                        >
+                          -
+                        </div>
+
+                        <div className="input">{roomCount}</div>
+                        <div
+                          className="increment"
+                          onClick={() => setRoomCount(parseInt(roomCount) + 1)}
+                        >
+                          +
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                </div>
+                  </Fragment>
+                )}
                 <div className="rooms-count">
                   <div className="text">Guests</div>
                   <div className="value">
