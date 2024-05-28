@@ -116,20 +116,18 @@ const ListingDetails = () => {
       setRoomCountErr(null);
       setAvailability(null);
     }
-    if (dayCount < 1) {
-      setDayCountErr("Please Select proper date range");
-    } else {
-      setDayCountErr(null);
-      setAvailability("null");
-    }
+    // if (dayCount < 1) {
+    //   setDayCountErr("Please Select proper date range");
+    // } else {
+    //   setDayCountErr(null);
+    //   setAvailability("null");
+    // }
     if (currentDate < start) {
       if (roomCount > 0 && dayCount > 0) {
         checkAvailability();
         setDayCountErr(null);
       }
       // console.log("start :",start," \n currentDate : ",currentDate)
-    } else {
-      setDayCountErr("Please Select proper date range");
     }
   }, [roomCount, dayCount, datesArray, selectRoom]);
 
@@ -419,7 +417,11 @@ const ListingDetails = () => {
           <div className="date-box-container">
             <h2>How long do you want to stay?</h2>
             <div className="date-range-calendar">
-              <DateRange ranges={dateRange} onChange={handleSelect} />
+              <DateRange
+                ranges={dateRange}
+                minDate={new Date()}
+                onChange={handleSelect}
+              />
               {dayCount > 1 ? (
                 <h2>
                   Rs. {price} x {dayCount} nights
