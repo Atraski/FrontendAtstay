@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { API_3 } from "../api/api";
 import "../styles/ImageZoomPopup.scss";
@@ -58,32 +58,34 @@ const ImageCarousel = ({ imageArr, imageIndex }) => {
       >
         {"<"}
       </button>
-      <div
-        className="img-container"
-        onClick={(e) => e.stopPropagation()}
-        {...handlers}
-      >
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "flex-end",
-            fontSize: "2rem",
-            width: "100%",
-          }}
-          onClick={() => dispatch(setImagePopup({ imagePopup: false }))}
-        >
-          <FontAwesomeIcon icon={faXmark} />
+      {
+        <div className="popup-container">
+          <div
+            className="img-container"
+            onClick={(e) => e.stopPropagation()}
+            {...handlers}
+          >
+            {imageArr.length > 0 ? (
+              <img
+                className="img"
+                src={`${API_3}${imageArr[currentIndex].replace("public", "")}`}
+                alt={`image-${currentIndex}`}
+              />
+            ) : (
+              <img src="" />
+            )}
+          </div>
+          <div
+            // style={{
+            //   fontSize: "2rem",
+            //   width: "100%",
+            // }}
+            onClick={() => dispatch(setImagePopup({ imagePopup: false }))}
+          >
+            <FontAwesomeIcon icon={faXmark} />
+          </div>
         </div>
-        {imageArr.length > 0 ? (
-          <img
-            className="img"
-            src={`${API_3}${imageArr[currentIndex].replace("public", "")}`}
-            alt={`image-${currentIndex}`}
-          />
-        ) : (
-          <img src="" />
-        )}
-      </div>
+      }
       <button
         className="buttonNext"
         onClick={(e) => {

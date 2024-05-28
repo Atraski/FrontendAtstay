@@ -9,16 +9,23 @@
   z-index: 1000;
   inset: 0;
 
-  .img-container {
-    max-width: 60rem;
-    max-height: 60rem;
-    overflow: hidden;
+  .popup-container {
     position: relative;
 
+    .img-container {
+      max-width: 60rem;
+      max-height: 60rem;
+      overflow: hidden;
+      position: relative;
+    }
     // Cross-Icon
     .fa-xmark {
+      position: absolute;
+      top: -5px;
+      right: -2rem;
       color: white;
       transition: all 300ms ease-in-out;
+      font-size: 2rem;
     }
 
     .fa-xmark:hover {
