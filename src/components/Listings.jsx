@@ -15,7 +15,7 @@ const Listings = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
 
   const listings = useSelector((state) => state.listings);
-  console.log(listings);
+  // console.log(listings);
 
   const getFeedListings = async () => {
     setLoading(true);
@@ -29,12 +29,18 @@ const Listings = () => {
         }
       );
 
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
       const data = await response.json();
-      console.log("listingData", data);
+      console.log("Fetched data:", data); // Log fetched data
+
       dispatch(setListings({ listings: data }));
-      setLoading(false);
     } catch (err) {
-      console.log("Fetch Listings Failed", err.message);
+      console.error("Fetch Listings Failed:", err.message);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -43,6 +49,7 @@ const Listings = () => {
   }, [selectedCategory]);
   // console.log("stored listing", listings);
 
+  console.log(listings);
   return (
     <>
       {/* <div className="category-list">

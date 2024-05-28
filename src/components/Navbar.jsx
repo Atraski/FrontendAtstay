@@ -78,7 +78,7 @@ const Navbar = ({ dropdownMenu, setDropdownMenu }) => {
     };
   }, []);
 
-  console.log(filteredResults);
+  // console.log(filteredResults);
 
   return (
     <>
@@ -454,7 +454,6 @@ const Navbar = ({ dropdownMenu, setDropdownMenu }) => {
                   </div>
                   <h3
                     className="search-btn"
-                    disabled={searchIsEmpty}
                     onClick={() => {
                       if (search.length > 0 && checkIn && checkOut && guest) {
                         navigate(
@@ -485,7 +484,6 @@ const Navbar = ({ dropdownMenu, setDropdownMenu }) => {
                           ? { background: "#d3d3d3", cursor: "not-allowed" }
                           : {}
                       }
-                      disabled={searchIsEmpty}
                     >
                       <Search
                         sx={

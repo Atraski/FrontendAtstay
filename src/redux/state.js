@@ -9,6 +9,7 @@ const initialState = {
   tempHost: null,
   showPopup: false,
   imagePopup: false,
+  listings: [],
 };
 
 export const userSlice = createSlice({
