@@ -5,12 +5,11 @@ import {
   ArrowBackIosNew,
   Favorite,
 } from "@mui/icons-material";
-import { useNavigate } from "react-router-dom";
-import Carousel from "react-multi-carousel";
-import "react-multi-carousel/lib/styles.css";
+import { useNavigate, Link } from "react-router-dom";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
-
+import { Snackbar } from "@mui/material";
 import { setShowPopup, setWishList } from "../redux/state";
 import { API_1, API_20, API_3 } from "../api/api";
 import "../styles/ListingCard.scss";
@@ -34,6 +33,16 @@ const ListingCard = ({
 }) => {
   /* SLIDER FOR IMAGES */
   const [currentIndex, setCurrentIndex] = useState(0);
+
+  const [isFavorite, setIsFavorite] = useState({
+    open: false,
+    vertical: "top",
+    horizontal: "center",
+  });
+
+  const [snackbarMessage, setSnackbarMessage] = useState("");
+
+  const { vertical, horizontal, open } = isFavorite;
 
   const goToPrevSlide = () => {
     setCurrentIndex(
@@ -71,6 +80,10 @@ const ListingCard = ({
           "Content-Type": "application/json",
         },
       });
+      setIsFavorite({ vertical: "bottom", horizontal: "left", open: true });
+      setSnackbarMessage(
+        !isLiked ? "Added to Wishlist" : "Removed from Wishlist"
+      );
       const data = await response.json();
       // console.log("Response data", data);
       dispatch(setWishList(data.wishList));
@@ -79,106 +92,127 @@ const ListingCard = ({
     }
   };
 
-  const responsive = {
-    desktop: {
-      breakpoint: { max: 3000, min: 1024 },
-      items: 10,
-    },
-    tablet: {
-      breakpoint: { max: 1024, min: 464 },
-      items: 2,
-    },
-    mobile: {
-      breakpoint: { max: 464, min: 0 },
-      items: 5,
-    },
+  const favoriteHandler = (e) => {
+    e.stopPropagation();
+    patchWishList();
+    // setIsFavorite({ vertical: "bottom", horizontal: "left", open: true });
+    // setSnackbarMessage(
+    //   !isLiked ? "Added to Wishlist" : "Removed from Wishlist"
+    // );
+  };
+
+  const snackbarCloseHandler = () => {
+    setIsFavorite({ ...isFavorite, open: false });
   };
 
   return (
-    <div
-      className="listing-card"
-      onClick={() => {
-        navigate(`/properties/${listingId}`);
-      }}
-    >
-      <div className="slider-container">
-        <div
-          className="slider"
-          style={{ transform: `translateX(-${currentIndex * 100}%)` }}
-        >
-          {listingPhotoPaths?.map((photo, index) => (
-            <div key={index} className="slide">
-              <img
-                src={`${API_3}${photo?.replace("public", "")}`}
-                alt={`photo ${index + 1}`}
-                style={{ cursor: "pointer" }}
-              />
-            </div>
-          ))}
-        </div>
-        <div
-          className="prev-button"
-          onClick={(e) => {
-            e.stopPropagation();
-            goToPrevSlide(e);
-          }}
-        >
-          <ArrowBackIosNew sx={{ fontSize: "15px" }} />
-        </div>
-        <div
-          className="next-button"
-          onClick={(e) => {
-            e.stopPropagation();
-            goToNextSlide(e);
-          }}
-        >
-          <ArrowForwardIos sx={{ fontSize: "15px" }} />
-        </div>
-      </div>
-
-      <h3 className="location">
-        <FontAwesomeIcon
-          icon={faLocationDot}
-          size="sm"
-          style={{ color: "#ffffff", marginRight: "5px" }}
-        />
-        {`${city}, ${province}`}
-        {/* {city}, {province}, {country} */}
-      </h3>
-      {/* <p>{category}</p> */}
-
-      <>
-        <p>
-          <span>
-            Rs.{" "}
-            {type === "Rooms"
-              ? rooms &&
-                (rooms[0].price === 0
-                  ? rooms[1].price === 0
-                    ? rooms[2].price
-                    : rooms[1].price
-                  : rooms[0].price)
-              : price}
-          </span>{" "}
-          per night
-        </p>
-      </>
-
-      <button
-        className="favorite"
-        onClick={(e) => {
-          e.stopPropagation();
-          patchWishList();
+    <Fragment>
+      <div
+        className="listing-card"
+        onClick={() => {
+          navigate(`/properties/${listingId}`);
         }}
-        // disabled={!user}
       >
-        {isLiked ? (
-          <Favorite sx={{ color: "red" }} />
-        ) : (
-          <Favorite sx={{ color: "white" }} />
-        )}
-      </button>
-    </div>
+        <div className="slider-container">
+          <div
+            className="slider"
+            style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+          >
+            {listingPhotoPaths?.map((photo, index) => (
+              <div key={index} className="slide">
+                <img
+                  src={`${API_3}${photo?.replace("public", "")}`}
+                  alt={`photo ${index + 1}`}
+                  style={{ cursor: "pointer" }}
+                />
+              </div>
+            ))}
+          </div>
+          <div
+            className="prev-button"
+            onClick={(e) => {
+              e.stopPropagation();
+              goToPrevSlide(e);
+            }}
+          >
+            <ArrowBackIosNew sx={{ fontSize: "15px" }} />
+          </div>
+          <div
+            className="next-button"
+            onClick={(e) => {
+              e.stopPropagation();
+              goToNextSlide(e);
+            }}
+          >
+            <ArrowForwardIos sx={{ fontSize: "15px" }} />
+          </div>
+        </div>
+
+        <h3 className="location">
+          <FontAwesomeIcon
+            icon={faLocationDot}
+            size="sm"
+            style={{ color: "#ffffff", marginRight: "5px" }}
+          />
+          {`${city}, ${province}`}
+          {/* {city}, {province}, {country} */}
+        </h3>
+        {/* <p>{category}</p> */}
+
+        <>
+          <p>
+            <span>
+              Rs.{" "}
+              {type === "Rooms"
+                ? rooms &&
+                  (rooms[0].price === 0
+                    ? rooms[1].price === 0
+                      ? rooms[2].price
+                      : rooms[1].price
+                    : rooms[0].price)
+                : price}
+            </span>{" "}
+            per night
+          </p>
+        </>
+
+        <button className="favorite" onClick={favoriteHandler}>
+          {isLiked ? (
+            <Favorite sx={{ color: "red" }} />
+          ) : (
+            <Favorite sx={{ color: "white" }} />
+          )}
+        </button>
+      </div>
+      <Snackbar
+        anchorOrigin={{ vertical, horizontal }}
+        open={open}
+        autoHideDuration={3000}
+        onClose={snackbarCloseHandler}
+        message={
+          <span
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              gap: "1rem",
+              fontSize: "1rem",
+            }}
+          >
+            {snackbarMessage}
+            <Link
+              to={`/${user._id}/wishList`}
+              style={{
+                color: "#67c7b9",
+                textDecoration: "underline",
+              }}
+            >
+              Wishlist
+            </Link>
+          </span>
+        }
+        key={vertical + horizontal}
+      />
+    </Fragment>
   );
 };
 
