@@ -5,6 +5,7 @@ import {
   ArrowBackIosNew,
   Favorite,
 } from "@mui/icons-material";
+import { CircularProgress } from "@mui/material";
 import { useNavigate, Link } from "react-router-dom";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -42,6 +43,8 @@ const ListingCard = ({
 
   const [snackbarMessage, setSnackbarMessage] = useState("");
 
+  const [favoriteIsLoading, setFavoriteIsLoading] = useState(false);
+
   const { vertical, horizontal, open } = isFavorite;
 
   const goToPrevSlide = () => {
@@ -74,6 +77,7 @@ const ListingCard = ({
       return dispatch(setShowPopup({ popup: true }));
     }
     if (user?._id !== creator) {
+      setFavoriteIsLoading(true);
       const response = await fetch(`${API_20}${user?._id}/${listingId}`, {
         method: "PATCH",
         header: {
@@ -81,6 +85,7 @@ const ListingCard = ({
         },
       });
       setIsFavorite({ vertical: "bottom", horizontal: "left", open: true });
+      setFavoriteIsLoading(false);
       setSnackbarMessage(
         !isLiked ? "Added to Wishlist" : "Removed from Wishlist"
       );
@@ -177,7 +182,9 @@ const ListingCard = ({
         </>
 
         <button className="favorite" onClick={favoriteHandler}>
-          {isLiked ? (
+          {favoriteIsLoading ? (
+            <CircularProgress sx={{ color: "red" }} size={30} />
+          ) : isLiked ? (
             <Favorite sx={{ color: "red" }} />
           ) : (
             <Favorite sx={{ color: "white" }} />
