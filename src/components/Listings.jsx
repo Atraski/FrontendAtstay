@@ -12,9 +12,10 @@ const Listings = () => {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
 
-  const [selectedCategory, setSelectedCategory] = useState("All");
+  // const [selectedCategory, setSelectedCategory] = useState("All");
 
   const listings = useSelector((state) => state.listings);
+  const selectedCategory = useSelector((state) => state.selectedCategory);
   // console.log(listings);
 
   const getFeedListings = async () => {
@@ -49,7 +50,6 @@ const Listings = () => {
   }, [selectedCategory]);
   // console.log("stored listing", listings);
 
-  console.log(listings);
   return (
     <>
       {/* <div className="category-list">
@@ -66,7 +66,7 @@ const Listings = () => {
           </div>
         ))}
       </div> */}
-      <LowerNavbar setSelectedCategory={setSelectedCategory} />
+      <LowerNavbar />
 
       {loading ? (
         <Loader />

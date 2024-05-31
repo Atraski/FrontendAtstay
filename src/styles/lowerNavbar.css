@@ -71,7 +71,10 @@
 .lower-navbar-carousel-item:hover .icon {
   color: #67c7b9;
   transition: color 0.3s ease-in-out;
+}
 
+.active {
+  color: #67c7b9;
 }
 
 

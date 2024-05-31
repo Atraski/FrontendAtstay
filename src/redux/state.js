@@ -10,6 +10,7 @@ const initialState = {
   showPopup: false,
   imagePopup: false,
   listings: [],
+  selectedCategory: "All",
 };
 
 export const userSlice = createSlice({
@@ -61,6 +62,9 @@ export const userSlice = createSlice({
     setImagePopup: (state, action) => {
       state.imagePopup = action.payload.show;
     },
+    setSelectedCategory: (state, action) => {
+      state.selectedCategory = action.payload;
+    },
   },
 });
 
@@ -79,5 +83,6 @@ export const {
   setTempHostData,
   setShowPopup,
   setImagePopup,
+  setSelectedCategory,
 } = userSlice.actions;
 export default userSlice.reducer;

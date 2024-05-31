@@ -194,13 +194,14 @@ const ListingCard = ({
             style={{
               display: "flex",
               justifyContent: "center",
+              alignItems: "center",
               gap: "1rem",
               fontSize: "1rem",
             }}
           >
             {snackbarMessage}
             <Link
-              to={`/${user._id}/wishList`}
+              to={`/${user?._id}/wishList`}
               style={{
                 color: "#67c7b9",
                 textDecoration: "underline",

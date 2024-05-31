@@ -1,9 +1,6 @@
 import { useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-
-import "../styles/lowerNavbar.css";
 import {
   faGlobe,
   faUmbrellaBeach,
@@ -24,8 +21,9 @@ import BreakfastDiningIcon from "@mui/icons-material/BreakfastDining";
 import WavesIcon from "@mui/icons-material/Waves";
 import HouseIcon from "@mui/icons-material/House";
 
-const LowerNavbar = ({ setSelectedCategory }) => {
-  const [carouselHover, setCarouselHover] = useState(false);
+import CategoryBuilder from "../utility/CategoryBuilder";
+
+const LowerNavbar = () => {
   const [isGrabbed, setIsGrabbed] = useState(false);
 
   const responsive = {
@@ -43,13 +41,7 @@ const LowerNavbar = ({ setSelectedCategory }) => {
     },
   };
 
-  const iconSize = "xl";
-
-  const carouselMouseEnterHandler = () => {
-    setCarouselHover(true);
-  };
-  const carouselLeaveEnterHandler = () => {
-    setCarouselHover(false);
+  const carouselMouseLeaveHandler = () => {
     setIsGrabbed(false);
   };
 
@@ -63,14 +55,32 @@ const LowerNavbar = ({ setSelectedCategory }) => {
 
   const transition = "all 500ms ease-in-out";
 
+  const categories = [
+    { name: "All", icon: faGlobe },
+    { name: "Beachfront", icon: faUmbrellaBeach },
+    { name: "Desert", icon: faSun },
+    { name: "Farms", icon: faTractor },
+    { name: "Ski-in/out", icon: faPersonSkiing },
+    { name: "Camping", icon: faCampground },
+    { name: "Castles", icon: <CastleIcon /> },
+    { name: "Countryside", icon: faWheatAwn },
+    { name: "Arctic", icon: faSnowflake },
+    { name: "Lakefront", icon: <WavesIcon /> },
+    { name: "Iconic Cities", icon: faCity },
+    { name: "Caves", icon: faFire },
+    { name: "Barns", icon: <HouseIcon /> },
+    { name: "Amazing Pool", icon: faWaterLadder },
+    { name: "Luxury", icon: faGem },
+    { name: "Bed & Breakfast", icon: <BreakfastDiningIcon /> },
+    { name: "Islands", icon: faSailboat },
+  ];
+
   return (
     <div
-      onMouseEnter={carouselMouseEnterHandler}
-      onMouseLeave={carouselLeaveEnterHandler}
+      onMouseLeave={carouselMouseLeaveHandler}
       onMouseDown={carouselMouseDownHandler}
       onMouseUp={carouselMouseUpHandler}
       className="nav-carousel-wrapper"
-      // style={isGrabbed ? { cursor: "grabbing" } : { cursor: "default" }}
     >
       <Carousel
         responsive={responsive}
@@ -81,170 +91,13 @@ const LowerNavbar = ({ setSelectedCategory }) => {
         partialVisible={true}
         className="nav-carousel"
       >
-        <div
-          className="lower-navbar-carousel-item"
-          onClick={() => setSelectedCategory("All")}
-        >
-          <FontAwesomeIcon icon={faGlobe} size={iconSize} className="icon" />
-          <p>All</p>
-        </div>
-        <div
-          className="lower-navbar-carousel-item"
-          onClick={() => setSelectedCategory("Beachfront")}
-        >
-          <FontAwesomeIcon
-            icon={faUmbrellaBeach}
-            size={iconSize}
-            className="icon"
+        {categories.map((category, index) => (
+          <CategoryBuilder
+            key={index}
+            name={category.name}
+            icon={category.icon}
           />
-          <p>Beachfront</p>
-        </div>
-        <div
-          className="lower-navbar-carousel-item"
-          onClick={() => setSelectedCategory("Desert")}
-        >
-          <FontAwesomeIcon icon={faSun} size={iconSize} className="icon" />
-
-          <p>Desert</p>
-        </div>
-        <div
-          className="lower-navbar-carousel-item"
-          onClick={() => setSelectedCategory("lake")}
-        >
-          <FontAwesomeIcon icon={faTractor} size={iconSize} className="icon" />
-
-          <p>Farms</p>
-        </div>
-        <div
-          className="lower-navbar-carousel-item"
-          onClick={() => setSelectedCategory("Ski-in/out")}
-        >
-          <FontAwesomeIcon
-            icon={faPersonSkiing}
-            size={iconSize}
-            className="icon"
-          />
-
-          <p>Ski-in/out</p>
-        </div>
-        <div
-          className="lower-navbar-carousel-item"
-          onClick={() => setSelectedCategory("Camping")}
-        >
-          <FontAwesomeIcon
-            icon={faCampground}
-            size={iconSize}
-            className="icon"
-          />
-
-          <p>Camping</p>
-        </div>
-        <div className="lower-navbar-carousel-item">
-          <CastleIcon
-            className="icon"
-            sx={{
-              "&:hover:": {
-                color: "#67c7b9",
-              },
-            }}
-          />
-          <p>Castles</p>
-        </div>
-        <div
-          className="lower-navbar-carousel-item"
-          onClick={() => setSelectedCategory("Countryside")}
-        >
-          <FontAwesomeIcon icon={faWheatAwn} size={iconSize} className="icon" />
-
-          <p> Countryside</p>
-        </div>
-        <div
-          className="lower-navbar-carousel-item"
-          onClick={() => setSelectedCategory("Arctic")}
-        >
-          <FontAwesomeIcon
-            icon={faSnowflake}
-            size={iconSize}
-            className="icon"
-          />
-
-          <p>Arctic</p>
-        </div>
-        <div
-          className="lower-navbar-carousel-item"
-          onClick={() => setSelectedCategory("Lakefront")}
-        >
-          <WavesIcon
-            className="icon"
-            sx={{
-              "&:hover:": {
-                color: "#67c7b9",
-              },
-            }}
-          />
-          <p>Lakefront</p>
-        </div>
-        <div className="lower-navbar-carousel-item">
-          <FontAwesomeIcon icon={faCity} size={iconSize} className="icon" />
-
-          <p>Iconic Cities</p>
-        </div>
-        <div
-          className="lower-navbar-carousel-item"
-          onClick={() => setSelectedCategory("Caves")}
-        >
-          <FontAwesomeIcon icon={faFire} size={iconSize} className="icon" />
-
-          <p>Caves</p>
-        </div>
-        <div className="lower-navbar-carousel-item">
-          <HouseIcon
-            className="icon"
-            sx={{
-              "&:hover:": {
-                color: "#67c7b9",
-              },
-            }}
-          />
-          <p>Barns</p>
-        </div>
-        <div
-          className="lower-navbar-carousel-item"
-          onClick={() => setSelectedCategory("Barns")}
-        >
-          <FontAwesomeIcon
-            icon={faWaterLadder}
-            size={iconSize}
-            className="icon"
-          />
-
-          <p>Amazing Pool</p>
-        </div>
-
-        <div
-          className="lower-navbar-carousel-item"
-          onClick={() => setSelectedCategory("Luxury")}
-        >
-          <FontAwesomeIcon icon={faGem} size={iconSize} className="icon" />
-
-          <p>Luxury</p>
-        </div>
-        <div className="lower-navbar-carousel-item">
-          <BreakfastDiningIcon
-            className="icon"
-            sx={{
-              "&:hover:": {
-                color: "#67c7b9",
-              },
-            }}
-          />
-          <p>Bed & Breakfast</p>
-        </div>
-        <div className="lower-navbar-carousel-item">
-          <FontAwesomeIcon icon={faSailboat} size={iconSize} className="icon" />
-
-          <p>Islands</p>
-        </div>
+        ))}
       </Carousel>
     </div>
   );
