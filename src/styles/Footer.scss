@@ -9,6 +9,11 @@
   padding: 10px 70px;
   background-color: #d0eeea;
 
+  a:hover {
+    cursor: pointer;
+    color: #38b0a09f;
+  }
+
   @include sm {
     flex-direction: column;
 
@@ -60,30 +65,37 @@
     ul {
       display: flex;
       flex-direction: column;
-      gap: 5px;
+      gap: 10px;
       list-style: none;
       margin-top: 10px;
       cursor: pointer;
-
-      li:hover {
-        color: #333232;
-      }
 
       a {
         text-decoration: none;
         color: black;
         transition: all 100ms ease-in;
-        margin-top: 5px;
+        // &:hover {
+        //   cursor: pointer;
+        //   color: #38b0a09f;
+        // }
+      }
 
-        &:hover {
-          cursor: pointer;
+      .socials {
+        display: flex;
+        gap: 1rem;
+
+        @include sm {
+          justify-content: center;
         }
 
-        &:first-child:hover {
+        a:first-child:hover {
           color: #0866ff;
+          transition: all 100ms ease-in-out;
         }
-        &:last-child:hover {
-          color: #da359f;
+
+        a:last-child:hover {
+          color: #c53480;
+          transition: all 100ms ease-in-out;
         }
       }
     }
@@ -117,26 +129,6 @@
       // display: none;
       flex-direction: column;
       align-items: center;
-    }
-  }
-
-  .socials {
-    display: flex;
-    margin-top: 1rem;
-    gap: 1rem;
-
-    @include sm {
-      justify-content: center;
-    }
-
-    a:first-child:hover {
-      color: #0866ff;
-      transition: all 100ms ease-in-out;
-    }
-
-    a:last-child:hover {
-      color: #c53480;
-      transition: all 100ms ease-in-out;
     }
   }
 

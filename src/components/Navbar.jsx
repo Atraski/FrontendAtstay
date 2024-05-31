@@ -78,6 +78,8 @@ const Navbar = ({ dropdownMenu, setDropdownMenu }) => {
     };
   }, []);
 
+  const today = new Date().toISOString().split("T")[0];
+
   // console.log(filteredResults);
 
   return (
@@ -222,6 +224,7 @@ const Navbar = ({ dropdownMenu, setDropdownMenu }) => {
                     type="date"
                     placeholder="Checkin"
                     value={checkIn}
+                    min={today}
                     onChange={(e) => setCheckIn(e.target.value)}
                   />
                 </div>
@@ -233,6 +236,7 @@ const Navbar = ({ dropdownMenu, setDropdownMenu }) => {
                     type="date"
                     placeholder="Checkin"
                     value={checkOut}
+                    min={today}
                     onChange={(e) => setCheckOut(e.target.value)}
                   />
                 </div>
@@ -409,6 +413,7 @@ const Navbar = ({ dropdownMenu, setDropdownMenu }) => {
                         type="date"
                         placeholder="Checkin"
                         value={checkIn}
+                        min={today}
                         onChange={(e) => setCheckIn(e.target.value)}
                         className="border"
                       />
@@ -421,6 +426,7 @@ const Navbar = ({ dropdownMenu, setDropdownMenu }) => {
                         type="date"
                         placeholder="Checkin"
                         value={checkOut}
+                        min={today}
                         onChange={(e) => setCheckOut(e.target.value)}
                         className="border"
                       />
@@ -531,7 +537,7 @@ const Navbar = ({ dropdownMenu, setDropdownMenu }) => {
               {dropdownMenu && !user && !host && (
                 <div className="navbar_right_accountmenu">
                   <Link to="/login">Log In</Link>
-                  <Link to="/register">Sign Up</Link>
+                  {/* <Link to="/register">Sign Up</Link> */}
                   <Link to="/hostLogin">Host Login</Link>
                 </div>
               )}

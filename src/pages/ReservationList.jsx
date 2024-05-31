@@ -101,28 +101,32 @@ const ReservationList = () => {
       {/* <Navbar /> */}
       <h1 className="title-list">Your Reservation List</h1>
       <div className="list">
-        {reservationList?.map(
-          ({
-            listingId,
-            hostId,
-            startDate,
-            endDate,
-            totalPrice,
-            booking = true,
-          }) => (
-            <ListingCard
-              listingId={listingId._id}
-              creator={hostId._id}
-              listingPhotoPaths={listingId.listingPhotoPaths}
-              city={listingId.city}
-              province={listingId.province}
-              country={listingId.country}
-              category={listingId.category}
-              startDate={startDate}
-              endDate={endDate}
-              totalPrice={totalPrice}
-              booking={booking}
-            />
+        {reservationList.length === 0 ? (
+          <h1 style={{ color: "red" }}>NO RESERVATIONS YET!</h1>
+        ) : (
+          reservationList.map(
+            ({
+              listingId,
+              hostId,
+              startDate,
+              endDate,
+              totalPrice,
+              booking = true,
+            }) => (
+              <ListingCard
+                listingId={listingId._id}
+                creator={hostId._id}
+                listingPhotoPaths={listingId.listingPhotoPaths}
+                city={listingId.city}
+                province={listingId.province}
+                country={listingId.country}
+                category={listingId.category}
+                startDate={startDate}
+                endDate={endDate}
+                totalPrice={totalPrice}
+                booking={booking}
+              />
+            )
           )
         )}
         {bookingData.map((ele) => (

@@ -327,6 +327,10 @@
   margin-left: -2rem;
   .navbar_right_accountmenu {
     margin-top: 1rem;
+
+    @include sm {
+      margin-top: -1rem;
+    }
   }
 
   .navbar_right_account {

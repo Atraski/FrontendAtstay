@@ -20,11 +20,28 @@ const Footer = () => {
         <div className="footer_center">
           <h3>Useful Links</h3>
           <ul className="useful-links">
-            <li>About Us</li>
-            <li>Terms and Conditions</li>
+            {/* <li>About Us</li>
+            <li>Terms and Conditions</li> */}
+            <li>
+              <Link to="/HostLogin">Become A Host</Link>
+            </li>
             <li>
               <Link to="/privacy-policy">Privacy Policy</Link>
             </li>
+            <div className="socials">
+              <a
+                href="https://www.facebook.com/atstaybyatraski"
+                target="_blank"
+              >
+                <FontAwesomeIcon icon={faFacebookF} size="xl" />
+              </a>
+              <a
+                href="https://www.instagram.com/atstaybyatraski?igsh=N2hodnQzdXkzd3E5"
+                target="_blank"
+              >
+                <FontAwesomeIcon icon={faInstagram} size="xl" />
+              </a>
+            </div>
           </ul>
         </div>
 
@@ -47,22 +64,17 @@ const Footer = () => {
             <h3>Pay Via</h3>
             <img src="/assets/payment.png" alt="payment" />
           </div>
-          <div className="socials">
-            {" "}
+          {/* <div className="socials">
             <a href="https://www.facebook.com/atstaybyatraski" target="_blank">
-              {" "}
               <FontAwesomeIcon icon={faFacebookF} size="xl" />
-              {/* <FaSquareFacebook style={{ fontSize: "2.3rem" }} /> */}
             </a>
             <a
               href="https://www.instagram.com/atstaybyatraski?igsh=N2hodnQzdXkzd3E5"
               target="_blank"
             >
-              {" "}
-              {/* <FaInstagramSquare style={{ fontSize: "2.3rem" }} /> */}
               <FontAwesomeIcon icon={faInstagram} size="xl" />
             </a>
-          </div>
+          </div> */}
         </div>
       </div>
       <FooterLower />
