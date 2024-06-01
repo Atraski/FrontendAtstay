@@ -114,7 +114,7 @@ const ListingDetails = () => {
       setRoomCountErr("Room Count must be greater than 0");
     } else {
       setRoomCountErr(null);
-      setAvailability(null);
+      // setAvailability(null);
     }
     // if (dayCount < 1) {
     //   setDayCountErr("Please Select proper date range");
@@ -142,10 +142,12 @@ const ListingDetails = () => {
         type: listing.type,
       });
       console.log("Response ", resp.data);
-      if (resp.data.roomAvailability) {
-        setAvailability("Available");
-      } else {
-        setAvailability("Not Available");
+      if (listing.type === "Rooms") {
+        if (resp.data.roomAvailability) {
+          setAvailability("Available");
+        } else {
+          setAvailability("Not Available");
+        }
       }
     } catch (error) {
       console.log(error);
