@@ -21,6 +21,8 @@ const EditAvailability = () => {
   const [endDate, setEndDate] = useState();
   const [datesArray, setDatesArray] = useState([]);
 
+  const navigate = useNavigate();
+
   const [state, setState] = useState({
     standard: 0,
     double: 0,
