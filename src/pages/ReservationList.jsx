@@ -51,7 +51,7 @@ const ReservationList = () => {
   //   console.log("booking data :", bookings);
   // }, [tempData]);
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   // const getReservationList1 = async () => {
   //   try {
   //     const response = await axios.post(`${API_3}`, {
@@ -101,7 +101,7 @@ const ReservationList = () => {
       {/* <Navbar /> */}
       <h1 className="title-list">Your Reservation List</h1>
       <div className="list">
-        {reservationList.length === 0 ? (
+        {/* {reservationList.length === 0 ? (
           <h1 style={{ color: "red" }}>NO RESERVATIONS YET!</h1>
         ) : (
           reservationList.map(
@@ -128,52 +128,58 @@ const ReservationList = () => {
               />
             )
           )
-        )}
-        {bookingData.map((ele) => (
-          <div className="booking-data-container">
-            <div className="booking-data">
-              <div className="item">booking No : {ele.booking._id}</div>
-              <div className="booking-date">
-                Booked At : {ele.booking.createdAt.slice(0, 10)}
-              </div>
-              <div className="hotel-id">Hotel Id : {ele.booking.listingId}</div>
-              <div className="check-in">
-                Check In Date : {ele.booking.startDate}
-              </div>
-              <div className="check-out">
-                Check Out Date : {ele.booking.endDate}
-              </div>
+        )} */}
+        {bookingData.length === 0 ? (
+          <h1 style={{ color: "red" }}>NO RESERVATIONS YET!</h1>
+        ) : (
+          bookingData.map((ele) => (
+            <div className="booking-data-container">
+              <div className="booking-data">
+                <div className="item">Booking No : {ele.booking._id}</div>
+                <div className="booking-date">
+                  Booked At : {ele.booking.createdAt.slice(0, 10)}
+                </div>
+                <div className="hotel-id">
+                  Hotel Id : {ele.booking.listingId}
+                </div>
+                <div className="check-in">
+                  Check In Date : {ele.booking.startDate}
+                </div>
+                <div className="check-out">
+                  Check Out Date : {ele.booking.endDate}
+                </div>
 
-              <div className="total-price">
-                Total Price : {ele.booking.totalPrice}
+                <div className="total-price">
+                  Total Price : {ele.booking.totalPrice}
+                </div>
+                <div className="place-type">
+                  Type :{" "}
+                  {ele.booking.placeType !== "An entire place"
+                    ? `${ele.booking.roomType} Room`
+                    : "An entire place"}
+                </div>
+                <div
+                  className="room-count"
+                  style={{
+                    display: ele.booking.placeType === "Rooms" ? "" : "none",
+                  }}
+                >
+                  Room Count : {ele.booking.roomCount}
+                </div>
               </div>
-              <div className="place-type">
-                Type :{" "}
-                {ele.booking.placeType !== "An entire place"
-                  ? `${ele.booking.roomType} Room`
-                  : "An entire place"}
-              </div>
-              <div
-                className="room-count"
-                style={{
-                  display: ele.booking.placeType === "Rooms" ? "" : "none",
-                }}
-              >
-                Room Count : {ele.booking.roomCount}
+              <div className="image-container">
+                <img
+                  src={`${API_3}${ele.listing.listingPhotoPaths[0].replace(
+                    "public",
+                    ""
+                  )}`}
+                  alt=""
+                  srcset=""
+                />
               </div>
             </div>
-            <div className="image-container">
-              <img
-                src={`${API_3}${ele.listing.listingPhotoPaths[0].replace(
-                  "public",
-                  ""
-                )}`}
-                alt=""
-                srcset=""
-              />
-            </div>
-          </div>
-        ))}
+          ))
+        )}
       </div>
 
       <Footer />
