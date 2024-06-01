@@ -21,8 +21,6 @@ const EditAvailability = () => {
   const [endDate, setEndDate] = useState();
   const [datesArray, setDatesArray] = useState([]);
 
-  const navigate = useNavigate()
-
   const [state, setState] = useState({
     standard: 0,
     double: 0,
@@ -68,6 +66,7 @@ const EditAvailability = () => {
 
   const handleSelect = (ranges) => {
     // Update the selected date range when user makes a selection
+
     setDateRange([ranges.selection]);
   };
   const { hotelId, type } = useParams();
@@ -109,8 +108,15 @@ const EditAvailability = () => {
           ],
         };
       } else {
+        data = {
+          startDate: datesArray[0],
+          endDate: datesArray[datesArray.length - 1],
+          type: "An entire place",
+          hotelId,
+        };
       }
       const resp = await axios.post(`${API_26}`, data);
+
       console.log(resp.data);
     } catch (error) {
       console.log(error);
@@ -118,11 +124,10 @@ const EditAvailability = () => {
   };
   const handleClick = () => {
     datesArray.forEach((element) => {
-      console.log(element);
+      // console.log(element);
       CreateAvailabilityRooms(element);
     });
-    navigate("/create-availability")
-    
+    navigate("/create-availability");
   };
 
   return (
@@ -133,39 +138,41 @@ const EditAvailability = () => {
         <div className="calender">
           <DateRange ranges={dateRange} onChange={handleSelect} />
         </div>
-        <div className="input-field-container">
-          <label htmlFor="standard">
-            Number of Standard Rooms:
-            <input
-              type="number"
-              value={state.standard}
-              onChange={(e) => handleChange(e)}
-              id="standard"
-              name="standard"
-            />
-          </label>
-          <label htmlFor="double">
-            Number of Double Rooms :
-            <input
-              type="number"
-              value={state.double}
-              onChange={(e) => handleChange(e)}
-              id="double"
-              name="double"
-            />
-          </label>
-          <label htmlFor="deluxe">
-            Number of Deluxe Rooms :
-            <input
-              type="number"
-              value={state.deluxe}
-              onChange={(e) => handleChange(e)}
-              id="deluxe"
-              name="deluxe"
-            />
-            <p></p>
-          </label>
-        </div>
+        {type === "Rooms" && (
+          <div className="input-field-container">
+            <label htmlFor="standard">
+              Number of Standard Rooms:
+              <input
+                type="number"
+                value={state.standard}
+                onChange={(e) => handleChange(e)}
+                id="standard"
+                name="standard"
+              />
+            </label>
+            <label htmlFor="double">
+              Number of Double Rooms :
+              <input
+                type="number"
+                value={state.double}
+                onChange={(e) => handleChange(e)}
+                id="double"
+                name="double"
+              />
+            </label>
+            <label htmlFor="deluxe">
+              Number of Deluxe Rooms :
+              <input
+                type="number"
+                value={state.deluxe}
+                onChange={(e) => handleChange(e)}
+                id="deluxe"
+                name="deluxe"
+              />
+              <p></p>
+            </label>
+          </div>
+        )}
         <div
           style={{
             display: "flex",
