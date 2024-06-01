@@ -14,6 +14,7 @@ import LoginPopup from "../components/LoginPopup";
 
 const HomePage = () => {
   const user = useSelector((state) => state?.user);
+
   const dispatch = useDispatch();
   const gettingWishlist = async () => {
     try {

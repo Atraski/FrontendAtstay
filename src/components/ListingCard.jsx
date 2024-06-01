@@ -63,6 +63,7 @@ const ListingCard = ({
 
   /* ADD TO WISHLIST */
   const user = useSelector((state) => state.user);
+  const host = useSelector((state) => state.host);
   // console.log("user", user);
   const wishlist = user?.wishList || [];
 
@@ -181,15 +182,20 @@ const ListingCard = ({
           </p>
         </>
 
-        <button className="favorite" onClick={favoriteHandler}>
-          {favoriteIsLoading ? (
-            <CircularProgress sx={{ color: "red" }} size={30} />
-          ) : isLiked ? (
-            <Favorite sx={{ color: "red" }} />
-          ) : (
-            <Favorite sx={{ color: "white" }} />
-          )}
-        </button>
+        {host === null && (
+          <button className="favorite" onClick={favoriteHandler}>
+            {favoriteIsLoading ? (
+              <CircularProgress
+                sx={isLiked ? { color: "white" } : { color: "red" }}
+                size={30}
+              />
+            ) : isLiked ? (
+              <Favorite sx={{ color: "red" }} />
+            ) : (
+              <Favorite sx={{ color: "white" }} />
+            )}
+          </button>
+        )}
       </div>
       <Snackbar
         anchorOrigin={{ vertical, horizontal }}
