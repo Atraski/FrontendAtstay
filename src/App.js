@@ -13,7 +13,7 @@ import CategoryPage from "./pages/CategoryPage";
 import SearchPage from "./pages/SearchPage";
 import HostLogin from "./pages/host/HostLogin";
 import HostRegister from "./pages/host/HostRegister";
-import Navbar from "./components/Navbar";
+import Navbar from "./components/Navbar/Navbar";
 import BookingPage from "./pages/booking/BookingPage";
 import BookingForm from "./pages/booking/BookingForm";
 import CartDetailsPage from "./pages/temp/CartDetailsPage";

@@ -1,6 +1,6 @@
 import "../styles/List.scss";
 import { useSelector } from "react-redux";
-import Navbar from "../components/Navbar";
+import Navbar from "../components/Navbar/Navbar";
 import ListingCard from "../components/ListingCard";
 import Footer from "../components/Footer";
 import { useEffect } from "react";

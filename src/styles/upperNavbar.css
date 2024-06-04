@@ -128,7 +128,7 @@ a {
   right: 20px;
 }
 
-.navbar_right_accountmenu a {
+/* .navbar_right_accountmenu a {
   width: 100%;
   padding: 8px 15px;
   text-decoration: none;
@@ -139,7 +139,7 @@ a {
 .navbar_right_accountmenu a:hover {
   color: #67c7b9;
   background-color: rgba(217, 213, 213, 0.2);
-}
+} */
 
 .container-fluid {
   width: 100%;

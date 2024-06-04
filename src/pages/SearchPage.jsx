@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { setListings } from "../redux/state";
 import { useEffect, useState } from "react";
 import Loader from "../components/Loader";
-import Navbar from "../components/Navbar";
+import Navbar from "../components/Navbar/Navbar";
 import ListingCard from "../components/ListingCard";
 import Footer from "../components/Footer";
 import { API_21, API_3 } from "../api/api";

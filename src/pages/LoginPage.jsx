@@ -4,7 +4,7 @@ import { setLogin, setShowPopup } from "../redux/state";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { API_1, API_27 } from "../api/api";
-import Navbar from "../components/Navbar";
+import Navbar from "../components/Navbar/Navbar";
 import { useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";

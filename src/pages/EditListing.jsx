@@ -1,5 +1,5 @@
 import "../styles/CreateListing.scss";
-import Navbar from "../components/Navbar";
+import Navbar from "../components/Navbar/Navbar";
 import { categories, types, facilities } from "../data";
 
 import { RemoveCircleOutline, AddCircleOutline } from "@mui/icons-material";
@@ -782,15 +782,12 @@ const EditListing = () => {
 
           <button
             className="submit_btn"
-            style={{ background:"#66cccc" }}
+            style={{ background: "#66cccc" }}
             type="submit"
           >
             UPDATE YOUR LISTING
           </button>
-          <button
-            className="submit_btn"
-            onClick={() => handleDelete()}
-          >
+          <button className="submit_btn" onClick={() => handleDelete()}>
             DELETE YOUR LISTING
           </button>
         </form>

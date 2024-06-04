@@ -90,6 +90,14 @@
         padding: 8px;
         border-bottom: 1px solid #ccc;
 
+        .focused {
+          /* Add this to your CSS file */
+          .focused {
+            background-color: #e0e0e0; /* Change to desired highlight color */
+            cursor: pointer;
+          }
+        }
+
         h4 {
           margin: 0;
           font-size: 14px;
@@ -188,28 +196,51 @@
       top: 80px;
       display: flex;
       flex-direction: column;
-      width: 200px;
+      width: 300px;
       padding: 10px 0;
       border: 1px solid $lightgrey;
       border-radius: 20px;
+      margin-top: 1rem;
       @include shadow;
       z-index: 9999;
+      padding: 8px 15px;
+
+      .user-info {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        border-bottom: 1px solid rgb(191, 189, 189);
+        padding-bottom: 10px;
+
+        h2 {
+          font-size: 16px;
+          text-align: center;
+          color: $blue;
+        }
+      }
 
       @include sm {
         right: 6px !important;
         top: 193px !important;
+        margin-top: -1rem;
       }
 
-      a {
-        width: 100%;
-        padding: 8px 15px;
-        text-decoration: none;
-        color: $blue;
-        font-weight: 700;
+      &-links {
+        display: flex;
+        flex-direction: column;
+        padding-top: 10px;
+        gap: 5px;
+        a {
+          width: 100%;
+          text-decoration: none;
+          color: $blue;
+          font-weight: 700;
+          padding: 8px 0 8px 3px;
 
-        &:hover {
-          color: #66cccc;
-          background-color: rgba(217, 213, 213, 0.2);
+          &:hover {
+            color: #66cccc;
+            background-color: rgba(217, 213, 213, 0.2);
+          }
         }
       }
     }
@@ -325,17 +356,6 @@
 
 .navbar_right00 {
   margin-left: -2rem;
-  .navbar_right_accountmenu {
-    margin-top: 1rem;
-
-    @include sm {
-      margin-top: -1rem;
-    }
-  }
-
-  .navbar_right_account {
-    margin-left: -1rem;
-  }
 }
 
 @media (max-width: 768px) {

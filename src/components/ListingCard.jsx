@@ -12,6 +12,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import { Snackbar } from "@mui/material";
 import { setShowPopup, setWishList } from "../redux/state";
+import addCommasToPrice from "../utility/addCommasToPrice";
 import { API_1, API_20, API_3 } from "../api/api";
 import "../styles/ListingCard.scss";
 
@@ -57,6 +58,8 @@ const ListingCard = ({
   const goToNextSlide = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % listingPhotoPaths.length);
   };
+
+  const modifiedPrice = addCommasToPrice(price);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -173,10 +176,10 @@ const ListingCard = ({
                 ? rooms &&
                   (rooms[0].price === 0
                     ? rooms[1].price === 0
-                      ? rooms[2].price
-                      : rooms[1].price
-                    : rooms[0].price)
-                : price}
+                      ? addCommasToPrice(rooms[2].price)
+                      : addCommasToPrice(rooms[1].price)
+                    : addCommasToPrice(rooms[0].price))
+                : modifiedPrice}
             </span>{" "}
             per night
           </p>

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import "../styles/List.scss";
-import Navbar from "../components/Navbar";
+import Navbar from "../components/Navbar/Navbar";
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { setListings } from "../redux/state";
