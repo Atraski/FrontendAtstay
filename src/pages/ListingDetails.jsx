@@ -1,6 +1,6 @@
 import { Fragment, useEffect, useState } from "react";
 import "../styles/ListingDetails.scss";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useLocation } from "react-router-dom";
 import { facilities } from "../data";
 
 import "react-date-range/dist/styles.css";
@@ -32,6 +32,8 @@ const ListingDetails = () => {
   const [imageIndex, setImageIndex] = useState(0);
 
   const dispatch = useDispatch();
+
+  const location = useLocation();
 
   useEffect(() => {
     if (listing) {
@@ -599,14 +601,22 @@ const ListingDetails = () => {
             </div>
           )}
         </div>
-        <div className="stickyBookNow">
-          <p>Total price: Rs. {price * dayCount * roomCount}</p>
-          <a href="#booking-box">
-            <button className="mobileBookNow" onClick={() => {}}>
-              Book Now
-            </button>
-          </a>
-        </div>
+        {!host && (
+          <div className="stickyBookNow">
+            <p>Total price: Rs. {price * dayCount * roomCount}</p>
+            <a href={location.hash !== "#booking-box" && "#booking-box"}>
+              <button
+                className="mobileBookNow"
+                onClick={
+                  location.hash === "#booking-box" ? handleSubmit : () => {}
+                }
+                type={location.hash === "#booking-box" ? "submit" : "button"}
+              >
+                Book Now
+              </button>
+            </a>
+          </div>
+        )}
       </div>
 
       <Footer />

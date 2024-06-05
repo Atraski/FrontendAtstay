@@ -347,9 +347,11 @@ const Navbar = ({ dropdownMenu, setDropdownMenu }) => {
               </button>
               {dropdownMenu && !user && !host && (
                 <div className="navbar_right_accountmenu">
-                  <Link to="/login">Log In</Link>
-                  {/* <Link to="/register">Sign Up</Link> */}
-                  <Link to="/hostLogin">Host Login</Link>
+                  <div className="navbar_right_accountmenu-links">
+                    <Link to="/login">Log In</Link>
+                    {/* <Link to="/register">Sign Up</Link> */}
+                    <Link to="/hostLogin">Host Login</Link>
+                  </div>
                 </div>
               )}
               {dropdownMenu && user && (
@@ -358,16 +360,20 @@ const Navbar = ({ dropdownMenu, setDropdownMenu }) => {
                     <h2>{`${user.firstName}`}</h2>
                     <h2>{user.email}</h2>
                   </div>
-                  <Link to={`/${user._id}/wishList`}>Wish List</Link>
-                  <Link to={`/${user._id}/reservations`}>Reservation List</Link>
-                  <Link
-                    to="/login"
-                    onClick={() => {
-                      dispatch(setLogout());
-                    }}
-                  >
-                    Log Out
-                  </Link>
+                  <div className="navbar_right_accountmenu-links">
+                    <Link to={`/${user._id}/wishList`}>Wish List</Link>
+                    <Link to={`/${user._id}/reservations`}>
+                      Reservation List
+                    </Link>
+                    <Link
+                      to="/login"
+                      onClick={() => {
+                        dispatch(setLogout());
+                      }}
+                    >
+                      Log Out
+                    </Link>
+                  </div>
                 </div>
               )}
               {dropdownMenu && host && (
@@ -376,17 +382,19 @@ const Navbar = ({ dropdownMenu, setDropdownMenu }) => {
                     <h2>{`${host.firstName} ${host.lastName}`}</h2>
                     <h2>{host.email}</h2>
                   </div>
-                  <Link to="/create-listing">Add Property</Link>
-                  <Link to={`/${host._id}/properties`}>Property List</Link>
-                  <Link to="/create-availability">Create Availability</Link>
-                  <Link
-                    to="/"
-                    onClick={() => {
-                      dispatch(setHostLogout());
-                    }}
-                  >
-                    Log Out
-                  </Link>
+                  <div className="navbar_right_accountmenu-links">
+                    <Link to="/create-listing">Add Property</Link>
+                    <Link to={`/${host._id}/properties`}>Property List</Link>
+                    <Link to="/create-availability">Create Availability</Link>
+                    <Link
+                      to="/"
+                      onClick={() => {
+                        dispatch(setHostLogout());
+                      }}
+                    >
+                      Log Out
+                    </Link>
+                  </div>
                 </div>
               )}
             </div>

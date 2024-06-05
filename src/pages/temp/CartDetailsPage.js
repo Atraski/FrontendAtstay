@@ -8,13 +8,15 @@ import Footer from "../../components/Footer";
 import { setBookingData, setShowPopup } from "../../redux/state";
 import { API_15, API_16, API_17, API_18, API_22, API_3 } from "../../api/api";
 import "./CartDetailspage.css";
-import "../../styles/form.css";
+import Backdrop from "../../utility/Backdrop";
+// import "../../styles/form.css";
 
 export default function CartDetailsPage() {
   const bookingData = useSelector((state) => state.bookingData);
   const user = useSelector((state) => state?.user);
   const dispatch = useDispatch();
   const [paymentResp, setPaymentResp] = useState();
+  const [formIsShown, setFormIsShown] = useState(false);
 
   const mm1 = bookingData;
 
@@ -62,24 +64,30 @@ export default function CartDetailsPage() {
   const checkin = localStorage.getItem("checkin");
   const rooms = localStorage.getItem("room");
 
-  useEffect(() => {
-    const show = document.querySelector(".showsss");
-    show.style.display = "none";
-  }, []);
+  // useEffect(() => {
+  //   const show = document.querySelector(".showsss");
+  //   show.style.display = "none";
+  // }, []);
   const showsss = () => {
+    // if (user) {
+    //   const show = document.querySelector(".showsss");
+    //   show.style.display = "flex";
+    //   show.style.overflow = "hidden";
+    // } else {
+    //   dispatch(setShowPopup({ popup: true }));
+    // }
     if (user) {
-      const show = document.querySelector(".showsss");
-      show.style.display = "flex";
-      show.style.overflow = "hidden";
+      setFormIsShown(true);
     } else {
       dispatch(setShowPopup({ popup: true }));
     }
   };
 
   const closeee = (e) => {
-    e.preventDefault();
-    const show = document.querySelector(".showsss");
-    show.style.display = "none";
+    // e.preventDefault();
+    // const show = document.querySelector(".showsss");
+    // show.style.display = "none";
+    setFormIsShown(false);
   };
 
   const checkout = async (amount) => {
@@ -229,9 +237,10 @@ export default function CartDetailsPage() {
     <>
       <LoginPopup />
       <div>
+        <Backdrop show={formIsShown} backdropClose={closeee} />
         <div
           className="container p-5  checkoutmainbox"
-          style={{ height: "fit-content" }}
+          style={{ height: "fit-content", position: "relative" }}
         >
           {Array.isArray([mm1]) &&
             [mm1].map((elm) => {
@@ -382,140 +391,96 @@ export default function CartDetailsPage() {
             })}
         </div>
 
-        <div className="showsss" id="form-container">
-          <div className="inner-div">
+        {formIsShown && (
+          <div id="form-container" className="form-container">
             <form
               onSubmit={(e) => {
                 e.preventDefault();
                 checkout(amount);
               }}
+              className="form"
             >
-              <div class="form-group">
-                <h2 class="heading">Fill Your Details</h2>
-                <div className="formrow">
-                  <div className="coloumn">
-                    <div class="controls">
-                      <input
-                        type="text"
-                        placeholder="Name"
-                        value={clientName}
-                        required
-                        onChange={(e) => {
-                          setClientName(e.target.value);
-                        }}
-                        style={{}}
-                      />
-                    </div>
-                  </div>
-                  <div className="coloumn">
-                    <div class="controls">
-                      <input
-                        type="text"
-                        id="email"
-                        class="floatLabel"
-                        name="email"
-                        value={email}
-                        required
-                        placeholder="email"
-                        disabled
-                      />
-                      <label for="email"></label>
-                    </div>
-                  </div>
-                </div>
+              <h2>Fill Your Details</h2>
+              <div className="input-container">
+                <input
+                  type="text"
+                  placeholder="Name"
+                  value={clientName}
+                  required
+                  onChange={(e) => {
+                    setClientName(e.target.value);
+                  }}
+                  style={{}}
+                />
 
-                <div
-                  class="grid "
-                  style={{ paddingLeft: "8px", paddingRight: "8px" }}
-                >
-                  <div class="col-2-3">
-                    <div class="controls">
-                      <input
-                        type="text"
-                        id="street"
-                        class="floatLabel"
-                        name="street"
-                        required
-                        value={add}
-                        placeholder="Adress"
-                        onChange={(e) => {
-                          setadd(e.target.value);
-                        }}
-                      />
-                      <label for="street"></label>
-                    </div>
-                  </div>
-                </div>
-                <div className="formrow">
-                  <div className="coloumn">
-                    <div class="controls">
-                      <input
-                        type="tel"
-                        id="phone"
-                        class="floatLabel"
-                        name="phone"
-                        value={phone}
-                        required
-                        placeholder="Phone"
-                        onChange={(e) => {
-                          setphone(e.target.value);
-                        }}
-                      />
-                      <label for="phone"></label>
-                    </div>
-                  </div>
-                  <div className="coloumn">
-                    <div class="col-1-3">
-                      <div class="controls">
-                        <input
-                          type="text"
-                          id="post-code"
-                          class="floatLabel"
-                          name="post-code"
-                          required
-                          value={pin}
-                          placeholder="Pin-code"
-                          onChange={(e) => {
-                            setpin(e.target.value);
-                          }}
-                        />
-                        <label for="post-code"></label>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="grid"></div>
-
-                <div
-                  class="controls"
-                  style={{ paddingLeft: "8px", paddingRight: "8px" }}
-                >
-                  <input
-                    type="text"
-                    id="country"
-                    class="floatLabel"
-                    name="country"
-                    placeholder="Country"
-                    required
-                    value={country}
-                    onChange={(e) => {
-                      setcountry(e.target.value);
-                    }}
-                  />
-                  <label for="country"></label>
-                </div>
+                <input
+                  type="text"
+                  id="email"
+                  class="floatLabel"
+                  name="email"
+                  value={email}
+                  required
+                  placeholder="email"
+                  disabled
+                />
               </div>
 
-              <div
-                className="d-flex"
-                style={{
-                  width: "100%",
-                  gap: "40px",
-                  padding: "8px",
-                  justifyContent: "center",
+              <input
+                type="text"
+                id="street"
+                class="floatLabel"
+                name="street"
+                required
+                value={add}
+                placeholder="Adress"
+                onChange={(e) => {
+                  setadd(e.target.value);
                 }}
-              >
+                style={{ width: "100%" }}
+              />
+
+              <div className="input-container">
+                <input
+                  type="tel"
+                  id="phone"
+                  class="floatLabel"
+                  name="phone"
+                  value={phone}
+                  required
+                  placeholder="Phone"
+                  onChange={(e) => {
+                    setphone(e.target.value);
+                  }}
+                />
+
+                <input
+                  type="text"
+                  id="post-code"
+                  class="floatLabel"
+                  name="post-code"
+                  required
+                  value={pin}
+                  placeholder="Pin-code"
+                  onChange={(e) => {
+                    setpin(e.target.value);
+                  }}
+                />
+              </div>
+
+              <input
+                type="text"
+                id="country"
+                class="floatLabel"
+                name="country"
+                placeholder="Country"
+                required
+                value={country}
+                onChange={(e) => {
+                  setcountry(e.target.value);
+                }}
+              />
+
+              <div className="input-container">
                 <button
                   type="submit"
                   value="Submit"
@@ -534,7 +499,7 @@ export default function CartDetailsPage() {
               </div>
             </form>
           </div>
-        </div>
+        )}
         <Footer />
       </div>
     </>
