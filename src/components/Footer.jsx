@@ -28,6 +28,9 @@ const Footer = () => {
             <li>
               <Link to="/privacy-policy">Privacy Policy</Link>
             </li>
+            <li>
+              <Link to="/terms-&-conditions">Terms & Conditions</Link>
+            </li>
             <div className="socials">
               <a
                 href="https://www.facebook.com/atstaybyatraski"

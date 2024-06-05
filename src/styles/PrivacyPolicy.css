@@ -1,11 +1,49 @@
-.privacy-policy-container{
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
+.policy-container {
+    padding: 0 5rem 2rem 5rem;
+    text-align: justify;
 }
 
-@media (min-width: 769px){
-    .privacy-policy-container{
-        margin: 2rem 4rem;
+.policy-container .policy-main-heading {
+    text-align: center;
+    border-bottom: 1px solid gray;
+    margin-bottom: 1.5rem;
+}
+
+.policy-container .sub-heading {
+    color: #1d6c60d8;
+    margin-bottom: 5px;
+}
+
+
+.policy-container .policy-content {
+    margin-bottom: 1rem;
+}
+
+.policy-container .policy-list {
+    margin-left: 1.2rem;
+    margin-top: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.policy-container .policy-list .list-heading {
+    color: #1d6c60;
+    font-weight: 800;
+
+}
+
+@media (max-width: 780px) {
+    .policy-container {
+        padding: 0 1rem 1rem 1rem;
+        text-align: left;
+    }
+
+    .policy-container .policy-main-heading {
+        font-size: 1.5rem;
+    }
+
+    .policy-container .sub-heading {
+        font-size: 1.2rem;
     }
 }

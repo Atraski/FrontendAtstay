@@ -25,6 +25,7 @@ import EditAvailability from "./pages/availability/EditAvailability";
 import PrivacyPolicy from "./pages/PrivacyPolicies";
 import ResetPasswordPage from "./pages/ResetPasswordPage";
 import ScrollRestoration from "./utility/ScrollRestoration";
+import TermsConditions from "./pages/Terms&Condition";
 
 function App() {
   const [dropdownMenu, setDropdownMenu] = useState(false);
@@ -65,6 +66,7 @@ function App() {
           />
           <Route path="/create-availability" element={<CreateAvailability />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/terms-&-conditions" element={<TermsConditions />} />
 
           {/* Reset Password */}
           <Route path="/reset/:resetToken" element={<ResetPasswordPage />} />
