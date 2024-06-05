@@ -133,7 +133,7 @@
   position: absolute;
   bottom: 15%;
   left: 35%;
-  z-index: 1000;
+  z-index: 2000;
 }
 
 .form-container .form h2 {
