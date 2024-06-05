@@ -16,6 +16,7 @@ const CreateAvailability = () => {
 
   const getPropertyList = async () => {
     try {
+      setLoading(true);
       const response = await axios.get(`${API_24}/${host._id}`);
       console.log("response: ", response.data);
       setPropertyList(response.data);

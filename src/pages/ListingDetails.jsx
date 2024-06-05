@@ -104,6 +104,9 @@ const ListingDetails = () => {
   /* SUBMIT BOOKING */
   const customerId = useSelector((state) => state?.user?._id);
   const tempHost = useSelector((state) => state?.tempHost);
+  const host = useSelector((state) => state?.host);
+
+  console.log(host);
 
   const navigate = useNavigate();
 
@@ -363,8 +366,26 @@ const ListingDetails = () => {
         </div>
 
         <div className="details">
-          <div className="property-details">
-            <h2>
+          <div
+            className="property-details"
+            style={
+              host
+                ? {
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    textAlign: "center",
+                    width: "100%",
+                  }
+                : {}
+            }
+          >
+            <h2
+              style={
+                host ? { borderBottom: "1px solid gray", width: "100%" } : {}
+              }
+            >
               {listing.type} in {listing.city}, {listing.province},{" "}
               {listing.country}
             </h2>
@@ -376,24 +397,22 @@ const ListingDetails = () => {
             <hr />
 
             <div className="profile">
-              {/*<img
-            src={`http://localhost:3001/${listing.creator.profileImagePath.replace(
-              "public",
-              ""
-            )}`}
-          />*/}
-              <h3>
+              <h3 style={host ? { borderBottom: "1px solid gray" } : {}}>
                 Hosted by {tempHost ? tempHost.firstName : "firstname"}{" "}
                 {tempHost ? tempHost.lastName : "lastNAme"}
               </h3>
             </div>
             <hr />
 
-            <h3>Description</h3>
+            <h3 style={host ? { borderBottom: "1px solid gray" } : {}}>
+              Description
+            </h3>
             <p>{listing.description}</p>
             <hr />
 
-            <h3>{listing.highlight}</h3>
+            <h3 style={host ? { borderBottom: "1px solid gray" } : {}}>
+              {listing.highlight}
+            </h3>
             <p>{listing.highlightDesc}</p>
             <hr />
 
@@ -416,162 +435,169 @@ const ListingDetails = () => {
               </div>
             </div>
           </div>
-          <div className="date-box-container">
-            <h2>How long do you want to stay?</h2>
-            <div className="date-range-calendar">
-              <DateRange
-                ranges={dateRange}
-                minDate={new Date()}
-                onChange={handleSelect}
-              />
-              {dayCount > 1 ? (
-                <h2>
-                  Rs. {price} x {dayCount} nights
-                </h2>
-              ) : (
-                <h2>
-                  Rs. {price} x {dayCount} night
-                </h2>
-              )}
+          {!host && (
+            <div className="date-box-container">
+              <h2>How long do you want to stay?</h2>
+              <div className="date-range-calendar">
+                <DateRange
+                  ranges={dateRange}
+                  minDate={new Date()}
+                  onChange={handleSelect}
+                />
+                {dayCount > 1 ? (
+                  <h2>
+                    Rs. {price} x {dayCount} nights
+                  </h2>
+                ) : (
+                  <h2>
+                    Rs. {price} x {dayCount} night
+                  </h2>
+                )}
 
-              <div className="error-container">
-                {dayCountErr && <p style={{ color: "red" }}>{dayCountErr}</p>}
-              </div>
-              <div
-                className="div room-type"
-                style={{ display: listing.type === "Rooms" ? "" : "none" }}
-              >
-                {listing.rooms.length !== 0 && (
-                  <Fragment>
-                    <div className="rooms-type">
-                      <button
-                        onClick={() => setSelectedRoom("standard")}
-                        style={{
-                          background:
-                            selectRoom === "standard" ? "#66cccc" : "white",
-                          color:
-                            selectRoom === "standard" ? "white" : "#66cccc",
-                          display: listing.rooms[0].price !== 0 ? "" : "none",
-                        }}
-                      >
-                        Standard
-                      </button>
-                      <button
-                        onClick={() => setSelectedRoom("double")}
-                        style={{
-                          background:
-                            selectRoom === "double" ? "#66cccc" : "white",
-                          color: selectRoom === "double" ? "white" : "#66cccc",
-                          display: listing.rooms[1].price !== 0 ? "" : "none",
-                        }}
-                      >
-                        Double
-                      </button>
-                      <button
-                        onClick={() => setSelectedRoom("deluxe")}
-                        style={{
-                          background:
-                            selectRoom === "deluxe" ? "#66cccc" : "white",
-                          color: selectRoom === "deluxe" ? "white" : "#66cccc",
-                          display: listing.rooms[2].price !== 0 ? "" : "none",
-                        }}
-                      >
-                        Deluxe
-                      </button>
-                    </div>
-
-                    <div className="rooms-count">
-                      <div className="text">Rooms</div>
-                      <div className="value">
-                        <div
-                          className="decrement"
-                          onClick={() => {
-                            if (parseInt(roomCount) > 1) {
-                              console.log("inside if", roomCount);
-                              setRoomCount(parseInt(roomCount) - 1);
-                            }
+                <div className="error-container">
+                  {dayCountErr && <p style={{ color: "red" }}>{dayCountErr}</p>}
+                </div>
+                <div
+                  className="div room-type"
+                  style={{ display: listing.type === "Rooms" ? "" : "none" }}
+                >
+                  {listing.rooms.length !== 0 && (
+                    <Fragment>
+                      <div className="rooms-type">
+                        <button
+                          onClick={() => setSelectedRoom("standard")}
+                          style={{
+                            background:
+                              selectRoom === "standard" ? "#66cccc" : "white",
+                            color:
+                              selectRoom === "standard" ? "white" : "#66cccc",
+                            display: listing.rooms[0].price !== 0 ? "" : "none",
                           }}
                         >
-                          -
-                        </div>
-
-                        <div className="input">{roomCount}</div>
-                        <div
-                          className="increment"
-                          onClick={() => setRoomCount(parseInt(roomCount) + 1)}
+                          Standard
+                        </button>
+                        <button
+                          onClick={() => setSelectedRoom("double")}
+                          style={{
+                            background:
+                              selectRoom === "double" ? "#66cccc" : "white",
+                            color:
+                              selectRoom === "double" ? "white" : "#66cccc",
+                            display: listing.rooms[1].price !== 0 ? "" : "none",
+                          }}
                         >
-                          +
+                          Double
+                        </button>
+                        <button
+                          onClick={() => setSelectedRoom("deluxe")}
+                          style={{
+                            background:
+                              selectRoom === "deluxe" ? "#66cccc" : "white",
+                            color:
+                              selectRoom === "deluxe" ? "white" : "#66cccc",
+                            display: listing.rooms[2].price !== 0 ? "" : "none",
+                          }}
+                        >
+                          Deluxe
+                        </button>
+                      </div>
+
+                      <div className="rooms-count">
+                        <div className="text">Rooms</div>
+                        <div className="value">
+                          <div
+                            className="decrement"
+                            onClick={() => {
+                              if (parseInt(roomCount) > 1) {
+                                console.log("inside if", roomCount);
+                                setRoomCount(parseInt(roomCount) - 1);
+                              }
+                            }}
+                          >
+                            -
+                          </div>
+
+                          <div className="input">{roomCount}</div>
+                          <div
+                            className="increment"
+                            onClick={() =>
+                              setRoomCount(parseInt(roomCount) + 1)
+                            }
+                          >
+                            +
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </Fragment>
-                )}
-                <div className="rooms-count">
-                  <div className="text">Guests</div>
-                  <div className="value">
-                    <div
-                      className="decrement"
-                      onClick={() => {
-                        if (parseInt(guestCounter) > 1) {
-                          setGuestCounter(parseInt(guestCounter) - 1);
-                        }
-                      }}
-                    >
-                      -
-                    </div>
-                    <div className="input">{guestCounter}</div>
-                    <div
-                      className="increment"
-                      onClick={() => {
-                        if (parseInt(guestCounter) < listing.guestCount) {
-                          setGuestCounter(parseInt(guestCounter) + 1);
-                        }
-                      }}
-                    >
-                      +
+                    </Fragment>
+                  )}
+                  <div className="rooms-count">
+                    <div className="text">Guests</div>
+                    <div className="value">
+                      <div
+                        className="decrement"
+                        onClick={() => {
+                          if (parseInt(guestCounter) > 1) {
+                            setGuestCounter(parseInt(guestCounter) - 1);
+                          }
+                        }}
+                      >
+                        -
+                      </div>
+                      <div className="input">{guestCounter}</div>
+                      <div
+                        className="increment"
+                        onClick={() => {
+                          if (parseInt(guestCounter) < listing.guestCount) {
+                            setGuestCounter(parseInt(guestCounter) + 1);
+                          }
+                        }}
+                      >
+                        +
+                      </div>
                     </div>
                   </div>
+                  <div className="error-container">
+                    {roomCountErr && (
+                      <p style={{ color: "red" }}>{roomCountErr}</p>
+                    )}
+                  </div>
                 </div>
-                <div className="error-container">
-                  {roomCountErr && (
-                    <p style={{ color: "red" }}>{roomCountErr}</p>
-                  )}
-                </div>
-              </div>
 
-              <div className="availability-container">
-                {/* <div className="button" style={{ backgroundColor: "white" }}>
+                <div className="availability-container">
+                  {/* <div className="button" style={{ backgroundColor: "white" }}>
                   <button onClick={() => handleAvailability()}>
                     Check Availability
                   </button>
                 </div> */}
-                <div
-                  className="text"
+                  <div
+                    className="text"
+                    style={{
+                      color: availability === "Available" ? "#66cccc" : "red",
+                    }}
+                  >
+                    {availability}
+                  </div>
+                </div>
+                <h2>Total price: Rs. {price * dayCount * roomCount}</h2>
+                <p>*All taxes are included</p>
+                <p>CheckIn Date: {dateRange[0].startDate.toDateString()}</p>
+                <p>CheckOut Date: {dateRange[0].endDate.toDateString()}</p>
+
+                <button
+                  className="button"
+                  type="submit"
+                  onClick={handleSubmit}
+                  disabled={!(availability === "Available")}
                   style={{
-                    color: availability === "Available" ? "#66cccc" : "red",
+                    background:
+                      availability === "Available" ? "#F8395A" : "grey",
                   }}
                 >
-                  {availability}
-                </div>
+                  BOOKING
+                </button>
               </div>
-              <h2>Total price: Rs. {price * dayCount * roomCount}</h2>
-              <p>*All taxes are included</p>
-              <p>CheckIn Date: {dateRange[0].startDate.toDateString()}</p>
-              <p>CheckOut Date: {dateRange[0].endDate.toDateString()}</p>
-
-              <button
-                className="button"
-                type="submit"
-                onClick={handleSubmit}
-                disabled={!(availability === "Available")}
-                style={{
-                  background: availability === "Available" ? "#F8395A" : "grey",
-                }}
-              >
-                BOOKING
-              </button>
             </div>
-          </div>
+          )}
         </div>
         <div className="stickyBookNow">
           <p>Total price: Rs. {price * dayCount * roomCount}</p>

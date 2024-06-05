@@ -138,7 +138,11 @@ const EditAvailability = () => {
       <div className="date-container">
         <div className="hotel-id"> Hotel Id : {hotelId}</div>
         <div className="calender">
-          <DateRange ranges={dateRange} onChange={handleSelect} />
+          <DateRange
+            ranges={dateRange}
+            minDate={new Date()}
+            onChange={handleSelect}
+          />
         </div>
         {type === "Rooms" && (
           <div className="input-field-container">
