@@ -359,6 +359,14 @@
 }
 
 @media (max-width: 768px) {
+  .navbar {
+    padding: 0;
+  }
+
+  .navbar img {
+    margin-top: -1rem;
+  }
+
   #mob {
     display: flex;
 
@@ -376,10 +384,9 @@
     display: none;
   }
   .search-container {
+    display: flex;
     justify-content: center;
-    flex-grow: 1;
-    width: 100vw;
-    margin-left: 0 !important;
+    width: 25rem;
   }
   .navbar_right00 {
     .mobHost {
@@ -387,7 +394,7 @@
     }
 
     .navbar_right_account {
-      margin: -2rem 0 0 1rem;
+      margin: -2rem -1rem 0 1rem;
     }
   }
 }

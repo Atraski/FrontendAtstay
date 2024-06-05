@@ -126,10 +126,7 @@
 
 @media only screen and (min-width: 1117px) and (max-width: 1420px) {
   .carousel {
-    width: 60rem;
+    width: 50rem;
   }
 
-  .react-multiple-carousel__arrow {
-    margin: 0;
-  }
 }
