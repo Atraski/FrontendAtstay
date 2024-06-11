@@ -15,6 +15,10 @@
     margin-bottom: 5px;
 }
 
+.policy-container .policy-content-container {
+    text-align: justify;
+}
+
 
 .policy-container .policy-content {
     margin-bottom: 1rem;
@@ -37,7 +41,7 @@
 @media (max-width: 780px) {
     .policy-container {
         padding: 0 1rem 1rem 1rem;
-        text-align: left;
+        text-align: justify;
     }
 
     .policy-container .policy-main-heading {

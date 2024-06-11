@@ -7,7 +7,7 @@ const PrivacyPolicy = () => {
     <>
       <div className="policy-container">
         <h1 className="policy-main-heading">Privacy Policy</h1>
-        <div className=" ">
+        <div className="policy-content-container">
           <p className="policy-content">
             AtStay is dedicated to protecting the privacy of personal
             information that you deliver to us when utilizing our Journey Travel
