@@ -96,6 +96,7 @@ const ListingDetails = () => {
 
   const handleSelect = (ranges) => {
     // Update the selected date range when user makes a selection
+
     setDateRange([ranges.selection]);
   };
 
@@ -136,19 +137,35 @@ const ListingDetails = () => {
     }
   }, [roomCount, dayCount, datesArray, selectRoom]);
 
+  let resp;
   const checkAvailability = async () => {
     try {
-      console.log("roomCount in api", roomCount);
-      const resp = await axios.post(API_10, {
-        date: datesArray,
-        hotelId: listing.hotelId,
-        roomType: selectRoom,
-        roomNum: roomCount,
-        type: listing.type,
-      });
+      if (listing.type === "Rooms") {
+        resp = await axios.post(API_10, {
+          date: datesArray,
+          hotelId: listing.hotelId,
+          roomType: selectRoom,
+          roomNum: roomCount,
+          type: listing.type,
+        });
+      } else {
+        resp = await axios.post(API_10, {
+          startDate,
+          endDate,
+          hotelId: listing.hotelId,
+          type: listing.type,
+        });
+      }
       console.log("Response ", resp.data);
       if (listing.type === "Rooms") {
         if (resp.data.roomAvailability) {
+          setAvailability("Available");
+        } else {
+          setAvailability("Not Available");
+        }
+      } else {
+        console.log("IMPPPP!!!!", resp);
+        if (resp.data.available) {
           setAvailability("Available");
         } else {
           setAvailability("Not Available");
@@ -179,9 +196,6 @@ const ListingDetails = () => {
 
     setDatesArray(dates);
   }, [startDate, endDate]);
-  useEffect(() => {
-    console.log("Dates Array", datesArray);
-  }, [datesArray]);
 
   useEffect(() => {
     const startdate = new Date(dateRange[0].startDate);
@@ -558,11 +572,11 @@ const ListingDetails = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="error-container">
+                  {/* <div className="error-container">
                     {roomCountErr && (
                       <p style={{ color: "red" }}>{roomCountErr}</p>
                     )}
-                  </div>
+                  </div> */}
                 </div>
 
                 <div className="availability-container">

@@ -6,7 +6,7 @@ import axios from "axios";
 import LoginPopup from "../../components/LoginPopup";
 import Footer from "../../components/Footer";
 import { setBookingData, setShowPopup } from "../../redux/state";
-import { API_15, API_16, API_17, API_18, API_22, API_3 } from "../../api/api";
+import { API_15, API_16, API_17, API_22, API_3 } from "../../api/api";
 import "./CartDetailspage.css";
 import Backdrop from "../../utility/Backdrop";
 // import "../../styles/form.css";
@@ -14,11 +14,13 @@ import Backdrop from "../../utility/Backdrop";
 export default function CartDetailsPage() {
   const bookingData = useSelector((state) => state.bookingData);
   const user = useSelector((state) => state?.user);
+  const listing = useSelector((state) => state?.listings);
   const dispatch = useDispatch();
-  const [paymentResp, setPaymentResp] = useState();
   const [formIsShown, setFormIsShown] = useState(false);
 
   const mm1 = bookingData;
+
+  console.log("LISTING!!", listing);
 
   const adult = localStorage.getItem("adult");
   const child = localStorage.getItem("child");
@@ -173,32 +175,61 @@ export default function CartDetailsPage() {
     }
   };
 
+  console.log(bookingData);
+
+  let formData;
   const saveDataToDatabase = async (resp) => {
     try {
-      const formData = {
-        email: email,
-        hostId: bookingData.hostId,
-        listingId: bookingData.listingId,
-        roomType: bookingData.roomType,
-        type: bookingData.type,
-        roomCount: bookingData.roomCount,
-        contact: phone,
-        userId: user._id,
-        adult,
-        children,
-        startDate: bookingData.startDate,
-        endDate: bookingData.endDate,
-        totalPrice:
-          bookingData.dayCount *
-          bookingData.perRoomPrice *
-          bookingData.roomCount,
-        status: "booked",
-        paymentStatus: "success",
-        guestCount: bookingData.guestCount,
-        datesArray: bookingData.datesArray,
-        razorpay_payment_id: resp.razorpay_payment_id,
-        razorpay_order_id: resp.razorpay_order_id,
-      };
+      if (bookingData.type === "Rooms") {
+        formData = {
+          email: email,
+          hostId: bookingData.hostId,
+          listingId: bookingData.listingId,
+          roomType: bookingData.roomType,
+          type: bookingData.type,
+          roomCount: bookingData.roomCount,
+          contact: phone,
+          userId: user._id,
+          adult,
+          children,
+          startDate: bookingData.startDate,
+          endDate: bookingData.endDate,
+          totalPrice:
+            bookingData.dayCount *
+            bookingData.perRoomPrice *
+            bookingData.roomCount,
+          status: "booked",
+          paymentStatus: "success",
+          guestCount: bookingData.guestCount,
+          datesArray: bookingData.datesArray,
+          razorpay_payment_id: resp.razorpay_payment_id,
+          razorpay_order_id: resp.razorpay_order_id,
+        };
+      } else {
+        formData = {
+          email: email,
+          hostId: bookingData.hostId,
+          hotelId: bookingData.listing.hotelId,
+          listingId: bookingData.listingId,
+          type: bookingData.type,
+          contact: phone,
+          userId: user._id,
+          adult,
+          children,
+          startDate: bookingData.startDate,
+          endDate: bookingData.endDate,
+          totalPrice:
+            bookingData.dayCount *
+            bookingData.perRoomPrice *
+            bookingData.roomCount,
+          status: "booked",
+          paymentStatus: "success",
+          guestCount: bookingData.guestCount,
+          datesArray: bookingData.datesArray,
+          razorpay_payment_id: resp.razorpay_payment_id,
+          razorpay_order_id: resp.razorpay_order_id,
+        };
+      }
 
       // Send a request to your server to save data to the databases
       const response = await axios.post(API_22, formData);
