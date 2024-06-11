@@ -1,8 +1,8 @@
 // For production
-// const API = "https://www.stay.atstay.in";
+const API = "https://www.stay.atstay.in";
 
 // for local environment
-const API = "http://localhost:5001";
+// const API = "http://localhost:5001";
 const API_1 = `${API}/auth/login`;
 const API_2 = `${API}/auth/register`;
 const API_3 = `${API}/`;

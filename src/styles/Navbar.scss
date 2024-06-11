@@ -2,10 +2,8 @@
 @import "./breakpoints.scss";
 
 .navbar {
-  // padding: 0.625rem 1rem 0.625rem 1rem;
   margin: 0.625rem 1rem 0.625rem 1rem;
 
-  // width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -80,7 +78,7 @@
       position: absolute;
       top: 5.2rem;
       left: 16rem;
-      background-color: red;
+
       background: white;
       box-shadow: 0 0 10px gray;
       border-radius: 5px;
@@ -89,14 +87,6 @@
       .dropdown-section {
         padding: 8px;
         border-bottom: 1px solid #ccc;
-
-        .focused {
-          /* Add this to your CSS file */
-          .focused {
-            background-color: #e0e0e0; /* Change to desired highlight color */
-            cursor: pointer;
-          }
-        }
 
         h4 {
           margin: 0;
@@ -115,6 +105,11 @@
         }
       }
     }
+    .focused {
+      background-color: #f0f0f0;
+      color: #67c7b9;
+    }
+
     .border {
       border: 1px solid gray;
       padding: 4px 11px;

@@ -23,6 +23,9 @@ const Navbar = ({ dropdownMenu, setDropdownMenu }) => {
   const [filteredResults, setFilteredResults] = useState([]);
   const [searchTimeout, setSearchTimeout] = useState(null);
 
+  // Search Dropdown Arrow Control
+  const [focusedIndex, setFocusedIndex] = useState(-1);
+
   const user = useSelector((state) => state.user);
   const host = useSelector((state) => state.host);
   const dispatch = useDispatch();
@@ -30,6 +33,7 @@ const Navbar = ({ dropdownMenu, setDropdownMenu }) => {
   const location = useLocation();
 
   const dropdownRef = useRef(null);
+  const inputRef = useRef(null);
 
   const searchIsEmpty = search.trim().length === 0;
 
@@ -57,9 +61,51 @@ const Navbar = ({ dropdownMenu, setDropdownMenu }) => {
         } else {
           setFilteredResults([]);
         }
-      }, 500)
+      }, 100)
     );
   };
+
+  const keyDownHandler = (e) => {
+    if (filteredResults.length === 0) return;
+
+    switch (e.key) {
+      case "ArrowDown":
+        setFocusedIndex(
+          (prevIndex) => (prevIndex + 1) % filteredResults.length
+        );
+        break;
+      case "ArrowUp":
+        setFocusedIndex((prevIndex) =>
+          prevIndex === 0 ? filteredResults.length - 1 : prevIndex - 1
+        );
+        break;
+      case "Enter":
+        if (focusedIndex >= 0) {
+          const selectedItem = filteredResults[focusedIndex];
+          console.log(selectedItem);
+
+          navigate(
+            `/properties/search/${
+              selectedItem.category || selectedItem.city || selectedItem.title
+            }/undefined/undefined/${guest}`
+          );
+          inputRef.current.blur();
+        }
+        break;
+      default:
+        break;
+    }
+  };
+
+  console.log("IMP!", filteredResults[focusedIndex]);
+
+  useEffect(() => {
+    const searchInput = inputRef.current;
+    searchInput.addEventListener("keydown", keyDownHandler);
+    return () => {
+      searchInput.removeEventListener("keydown", keyDownHandler);
+    };
+  }, [filteredResults, focusedIndex]);
 
   const today = new Date().toISOString().split("T")[0];
 
@@ -80,7 +126,7 @@ const Navbar = ({ dropdownMenu, setDropdownMenu }) => {
           checkOut={checkOut}
           setCheckIn={setCheckIn}
           setCheckOut={setCheckOut}
-          guest={setGuest}
+          guest={guest}
           setGuest={setGuest}
         />
 
@@ -130,82 +176,60 @@ const Navbar = ({ dropdownMenu, setDropdownMenu }) => {
                       value={search}
                       onChange={searchChangeHandler}
                       className="border"
+                      id="search-input"
+                      autoComplete="off"
+                      ref={inputRef}
                     />
 
                     {/* Dropdown */}
                     {filteredResults.length > 0 && (
                       <div ref={dropdownRef} className="dropdown-container">
                         {(() => {
-                          const filteredCategories = getUniqueResults(
-                            filteredResults.filter((filteredItem) =>
-                              filteredItem.category
-                                .toLowerCase()
-                                .includes(search.toLowerCase())
-                            ),
-                            "category"
-                          );
-                          if (filteredCategories.length !== 0) {
+                          // Combine all the filtered results into one array
+                          const combinedResults = [
+                            ...getUniqueResults(
+                              filteredResults.filter((filteredItem) =>
+                                filteredItem.category
+                                  .toLowerCase()
+                                  .includes(search.toLowerCase())
+                              ),
+                              "category"
+                            ).map((item) => ({ ...item, type: "category" })),
+                            ...getUniqueResults(
+                              filteredResults.filter((filteredItem) =>
+                                filteredItem.city
+                                  .toLowerCase()
+                                  .includes(search.toLowerCase())
+                              ),
+                              "city"
+                            ).map((item) => ({ ...item, type: "city" })),
+                            ...getUniqueResults(
+                              filteredResults.filter((filteredItem) =>
+                                filteredItem.title
+                                  .toLowerCase()
+                                  .includes(search.toLowerCase())
+                              ),
+                              "title"
+                            ).map((item) => ({ ...item, type: "title" })),
+                          ];
+
+                          if (combinedResults.length !== 0) {
                             return (
-                              <div className="dropdown-section" key="category">
-                                <h4>Category</h4>
-                                {filteredCategories.map((filteredItem) => (
+                              <div className="dropdown-section" key="combined">
+                                {combinedResults.map((filteredItem, index) => (
                                   <Link
-                                    to={`/properties/search/${filteredItem.category}/undefined/undefined/${guest}`}
+                                    to={`/properties/search/${
+                                      filteredItem[filteredItem.type]
+                                    }/undefined/undefined/${guest}`}
                                     key={filteredItem._id}
                                   >
-                                    <div>{filteredItem.category}</div>
-                                  </Link>
-                                ))}
-                              </div>
-                            );
-                          }
-                          return null;
-                        })()}
-                        {(() => {
-                          const filteredCities = getUniqueResults(
-                            filteredResults.filter((filteredItem) =>
-                              filteredItem.city
-                                .toLowerCase()
-                                .includes(search.toLowerCase())
-                            ),
-                            "city"
-                          );
-                          if (filteredCities.length !== 0) {
-                            return (
-                              <div className="dropdown-section" key="city">
-                                <h4>City</h4>
-                                {filteredCities.map((filteredItem) => (
-                                  <Link
-                                    to={`/properties/search/${filteredItem.city}/undefined/undefined/${guest}`}
-                                    key={filteredItem._id}
-                                  >
-                                    <div>{filteredItem.city}</div>
-                                  </Link>
-                                ))}
-                              </div>
-                            );
-                          }
-                          return null;
-                        })()}
-                        {(() => {
-                          const filteredTitles = getUniqueResults(
-                            filteredResults.filter((filteredItem) =>
-                              filteredItem.title
-                                .toLowerCase()
-                                .includes(search.toLowerCase())
-                            ),
-                            "title"
-                          );
-                          if (filteredTitles.length !== 0) {
-                            return (
-                              <div className="dropdown-section" key="title">
-                                <h4>Title</h4>
-                                {filteredTitles.map((filteredItem) => (
-                                  <Link
-                                    to={`/properties/search/${filteredItem.title}/undefined/undefined/${guest}`}
-                                    key={filteredItem._id}
-                                  >
-                                    <div>{filteredItem.title}</div>
+                                    <div
+                                      className={
+                                        index === focusedIndex ? "focused" : ""
+                                      }
+                                    >
+                                      {filteredItem[filteredItem.type]}
+                                    </div>
                                   </Link>
                                 ))}
                               </div>
