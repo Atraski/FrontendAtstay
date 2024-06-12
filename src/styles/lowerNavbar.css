@@ -4,13 +4,16 @@
 
 .nav-carousel {
   position: unset;
+}
 
+.carousel {
+  display: flex;
+  width: 75rem;
+  margin-left: 10rem;
 }
 
 .react-multiple-carousel__arrow {
   margin: -0.3125rem 3rem 0 3rem;
-
-
   z-index: 1;
   background: none;
 }
@@ -23,20 +26,11 @@
   color: black;
 }
 
-.react-multiple-carousel__arrow--right {
-  margin-left: -5rem
-}
+
 
 .react-multiple-carousel__arrow:hover::before {
   color: white;
 }
-
-.carousel {
-  display: flex;
-  width: 71rem;
-  margin: auto;
-}
-
 
 .carousel-button-group {
   position: absolute
@@ -86,8 +80,6 @@
 
 @media (min-width: 350px) {
 
-
-
   /* Container for the next and previous buttons */
   .product-carousel-1 {
     display: flex;
@@ -121,12 +113,22 @@
 @media (max-width: 768px) {
   .carousel {
     width: 20rem;
+    /* margin: auto; */
+    margin-left: -1px;
   }
 }
 
 @media only screen and (min-width: 1117px) and (max-width: 1420px) {
   .carousel {
-    width: 50rem;
+    width: 53rem;
+    margin-right: -1rem;
   }
 
+  .react-multiple-carousel__arrow--right {
+    margin-right: 11rem;
+  }
+
+  .react-multiple-carousel__arrow--left {
+    margin-left: 4rem;
+  }
 }

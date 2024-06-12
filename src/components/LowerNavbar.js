@@ -38,6 +38,7 @@ const LowerNavbar = () => {
     mobile: {
       breakpoint: { max: 768, min: 0 },
       items: 3,
+      partialVisibilityGutter: 15,
     },
   };
 
