@@ -20,8 +20,6 @@ export default function CartDetailsPage() {
 
   const mm1 = bookingData;
 
-  console.log("LISTING!!", listing);
-
   const adult = localStorage.getItem("adult");
   const child = localStorage.getItem("child");
   const room = localStorage.getItem("room");
@@ -32,7 +30,7 @@ export default function CartDetailsPage() {
   const navigate = useNavigate();
 
   const amunt = room * diff;
-  console.log(amunt);
+
   const amunt2 =
     amunt *
     (bookingData.type === "Rooms"
@@ -94,7 +92,7 @@ export default function CartDetailsPage() {
 
   const checkout = async (amount) => {
     localStorage.setItem("amount", amount);
-    console.log(amount);
+
     // dispatch(
     //   setBookingData({
     //     bookingData: {
@@ -119,14 +117,13 @@ export default function CartDetailsPage() {
         });
         if (data1.success) {
           const responseData = await data1.json();
-          console.log("ResDATA!!!", responseData);
         }
 
         var keys = await fetch(API_16, {
           method: "GET",
         });
         keys = await keys.json();
-        console.log(keys, "yes");
+
         data1 = await data1.json();
       } else {
         alert("Please Enter Valid Number");
@@ -142,7 +139,7 @@ export default function CartDetailsPage() {
           callback_url: API_17,
           handler: function (response) {
             // Handle the payment success callback here
-            console.log("Payment successful: ", response);
+
             try {
               saveDataToDatabase(response);
               navigate("/invoice");
@@ -160,9 +157,7 @@ export default function CartDetailsPage() {
         };
         const rzp1 = new window.Razorpay(options);
 
-        rzp1.on("payment.success", function (response) {
-          console.log("Payment successful: ", response);
-        });
+        rzp1.on("payment.success", function (response) {});
 
         rzp1.open();
       } else {
@@ -174,8 +169,6 @@ export default function CartDetailsPage() {
       // Handle the error, e.g., show an error message to the user
     }
   };
-
-  console.log(bookingData);
 
   let formData;
   const saveDataToDatabase = async (resp) => {
@@ -234,10 +227,7 @@ export default function CartDetailsPage() {
       // Send a request to your server to save data to the databases
       const response = await axios.post(API_22, formData);
 
-      console.log(response);
-
       if (response.status === 200) {
-        console.log("Data saved successfully:", response.data);
         dispatch(
           setBookingData({
             bookingData: {

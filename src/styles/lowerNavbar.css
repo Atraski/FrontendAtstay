@@ -110,14 +110,6 @@
   }
 }
 
-@media (max-width: 768px) {
-  .carousel {
-    width: 20rem;
-    /* margin: auto; */
-    margin-left: -1px;
-  }
-}
-
 @media only screen and (min-width: 1117px) and (max-width: 1420px) {
   .carousel {
     width: 53rem;
@@ -130,5 +122,19 @@
 
   .react-multiple-carousel__arrow--left {
     margin-left: 4rem;
+  }
+}
+
+@media (max-width: 768px) {
+
+  .nav-carousel-wrapper {
+    margin: 2rem 0 -2rem 0;
+  }
+
+
+  .carousel {
+    width: 20rem;
+    /* margin: auto; */
+    margin-left: -1px;
   }
 }

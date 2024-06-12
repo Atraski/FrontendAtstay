@@ -12,8 +12,7 @@ import { setListings } from "../redux/state";
 const WishList = () => {
   const wishList = useSelector((state) => state.user.wishList);
   const listing = useSelector((state) => state.listings);
-  // console.log("listing", listing);
-  // console.log("wishlist", wishList);
+
   const dispatch = useDispatch();
 
   const getAllListings = async () => {

@@ -67,16 +67,14 @@ const ListingCard = ({
   /* ADD TO WISHLIST */
   const user = useSelector((state) => state.user);
   const host = useSelector((state) => state.host);
-  // console.log("user", user);
+
   const wishlist = user?.wishList || [];
 
-  // console.log("wishlist", wishlist);
   const isLiked = wishlist?.find((item) => item.toString() === listingId);
-  // console.log("isLiked for ", listingId, " ", isLiked);
+
   // let isLiked;
 
   const patchWishList = async () => {
-    // console.log("user", user);
     if (user == null) {
       return dispatch(setShowPopup({ popup: true }));
     }
@@ -94,7 +92,7 @@ const ListingCard = ({
         !isLiked ? "Added to Wishlist" : "Removed from Wishlist"
       );
       const data = await response.json();
-      // console.log("Response data", data);
+
       dispatch(setWishList(data.wishList));
     } else {
       return;

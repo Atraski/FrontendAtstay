@@ -15,8 +15,6 @@ const CategoryBuilder = ({ name, icon }) => {
     dispatch(setSelectedCategory(name));
   };
 
-  console.log(icon);
-
   return (
     <div
       className={`lower-navbar-carousel-item ${

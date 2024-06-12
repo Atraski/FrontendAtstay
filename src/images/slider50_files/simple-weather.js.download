@@ -266,7 +266,7 @@ Array.prototype.forEach.call( document.querySelectorAll('div.simple-weather--vue
             },
             successCallback: function(response){
                 var vm = this;
-                if( vm.filter_var( window.SimpleWeather.settings.console_log ) ) console.log(response);
+                if( vm.filter_var( window.SimpleWeather.settings.console_log ) )  (response);
                 if( vm.weather_station === 'openweather' ){
                     if( response.status >= 200 && response.status <= 202 ){
                         if( typeof response.body.current !== 'undefined' ){
@@ -292,7 +292,7 @@ Array.prototype.forEach.call( document.querySelectorAll('div.simple-weather--vue
             },
             errorCallback: function(response){
                 var vm = this;
-                if( vm.filter_var( window.SimpleWeather.settings.console_log ) ) console.log(response);
+                if( vm.filter_var( window.SimpleWeather.settings.console_log ) )  (response);
                 if( typeof response.body.code !== 'undefined' && [ 'could_not_get_location', 'no_api' ].indexOf( response.body.code ) >= 0 ){
                     vm.error = response.body.message;
                 }

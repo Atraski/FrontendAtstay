@@ -25,13 +25,13 @@ const ReservationList = () => {
   useEffect(() => {
     if (bookings && bookings.length > 0 && listings && listings.length > 0) {
       for (const elm of bookings) {
-        // console.log("inside first for loop");
+         
         for (const data of listings) {
           // console.log("inside second for loop");
           if (elm.listingId === data.hotelId) {
-            console.log("Inside if block ", elm._id, " ", data.hotelId);
+            
             if (!bookingData.some((item) => item.booking._id === elm._id)) {
-              console.log("inside if block on true : ", elm._id);
+              
               // setBookingData([...bookingData, { booking: elm, listing: data }]);
               setBookingData((prev) => [
                 ...prev,
@@ -46,36 +46,7 @@ const ReservationList = () => {
     }
   }, [bookings, listings, reservationList]);
 
-  // useEffect(() => {
-  //   console.log("tempData : ", tempData);
-  //   console.log("booking data :", bookings);
-  // }, [tempData]);
-
-  // const dispatch = useDispatch();
-  // const getReservationList1 = async () => {
-  //   try {
-  //     const response = await axios.post(`${API_3}`, {
-  //       id: userId,
-  //     });
-  //     console.log("response", response);
-  //   } catch (error) {}
-  // };
-
-  // const getReservationList = async () => {
-  //   console.log("userid", userId);
-  //   try {
-  //     const response = await fetch(`${API_3}users/${userId}/reservations`, {
-  //       method: "GET",
-  //     });
-
-  //     const data = await response.json();
-  //     console.log("response", data);
-  //     dispatch(setReservationList(data));
-  //     setLoading(false);
-  //   } catch (err) {
-  //     console.log("Fetch Reservation List failed!", err.message);
-  //   }
-  // };
+  
 
   const getReservationListData = async () => {
     try {
@@ -101,34 +72,7 @@ const ReservationList = () => {
       {/* <Navbar /> */}
       <h1 className="title-list">Your Reservation List</h1>
       <div className="list">
-        {/* {reservationList.length === 0 ? (
-          <h1 style={{ color: "red" }}>NO RESERVATIONS YET!</h1>
-        ) : (
-          reservationList.map(
-            ({
-              listingId,
-              hostId,
-              startDate,
-              endDate,
-              totalPrice,
-              booking = true,
-            }) => (
-              <ListingCard
-                listingId={listingId._id}
-                creator={hostId._id}
-                listingPhotoPaths={listingId.listingPhotoPaths}
-                city={listingId.city}
-                province={listingId.province}
-                country={listingId.country}
-                category={listingId.category}
-                startDate={startDate}
-                endDate={endDate}
-                totalPrice={totalPrice}
-                booking={booking}
-              />
-            )
-          )
-        )} */}
+        
         {bookingData.length === 0 ? (
           <h1 style={{ color: "red" }}>NO RESERVATIONS YET!</h1>
         ) : (

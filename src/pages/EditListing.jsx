@@ -56,7 +56,7 @@ const EditListing = () => {
   const getListing = async () => {
     try {
       const resp = await axios.get(`${API_9}${listingId}`);
-      console.log("specific listing : ", resp.data[0]);
+
       setListing(resp.data[0]);
     } catch (error) {
       console.log(error);

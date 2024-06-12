@@ -14,7 +14,6 @@ const PropertyList = () => {
   const user = useSelector((state) => state.user);
   const [propertyList, setPropertyList] = useState();
   const host = useSelector((state) => state.host);
-  console.log(user);
 
   const navigate = useNavigate();
 
@@ -23,7 +22,7 @@ const PropertyList = () => {
   const getPropertyList = async () => {
     try {
       const response = await axios.get(`${API_24}/${host._id}`);
-      console.log("response: ", response.data);
+
       setPropertyList(response.data);
       setLoading(false);
     } catch (error) {

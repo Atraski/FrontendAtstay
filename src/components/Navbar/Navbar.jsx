@@ -82,7 +82,6 @@ const Navbar = ({ dropdownMenu, setDropdownMenu }) => {
       case "Enter":
         if (focusedIndex >= 0) {
           const selectedItem = filteredResults[focusedIndex];
-          console.log(selectedItem);
 
           navigate(
             `/properties/search/${
@@ -96,8 +95,6 @@ const Navbar = ({ dropdownMenu, setDropdownMenu }) => {
         break;
     }
   };
-
-  console.log("IMP!", filteredResults[focusedIndex]);
 
   useEffect(() => {
     const searchInput = inputRef.current;

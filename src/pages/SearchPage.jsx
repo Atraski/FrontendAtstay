@@ -24,30 +24,13 @@ const SearchPage = () => {
       });
 
       const data = await response.json();
-      console.log(data);
+
       dispatch(setListings({ listings: data }));
       setLoading(false);
     } catch (err) {
       console.log("Fetch Search List failed!", err.message);
     }
   };
-
-  // const tempFunc = async () => {
-  //   try {
-  //     console.log(search, checkIn, checkOut, guest);
-  //     const response = await axios.post(`${API_3}api/searchPage`, {
-  //       search,
-  //       checkIn,
-  //       checkOut,
-  //       guest,
-  //     });
-  //     dispatch(setListings({ listings: response.data.result }));
-  //     console.log(response.data);
-  //     setLoading(false);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
 
   useEffect(() => {
     getSearchListings();

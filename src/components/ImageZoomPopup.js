@@ -29,7 +29,6 @@ const ImageCarousel = ({ imageArr, imageIndex }) => {
   }, [imageIndex]);
 
   const handleSwipe = (direction) => {
-    console.log(`Swiped ${direction}`);
     if (direction === "left") {
       goToNextSlide();
     } else if (direction === "right") {
@@ -86,7 +85,7 @@ const ImageCarousel = ({ imageArr, imageIndex }) => {
           </div>
         </div>
       }
-      <button
+      {/* <button
         className="buttonNext"
         onClick={(e) => {
           goToNextSlide();
@@ -95,6 +94,15 @@ const ImageCarousel = ({ imageArr, imageIndex }) => {
       >
         {">"}
       </button>
+      <button
+        className="buttonPrev"
+        onClick={(e) => {
+          goToPrevSlide();
+          e.stopPropagation();
+        }}
+      >
+        {"<"}
+      </button> */}
     </div>
   );
 };

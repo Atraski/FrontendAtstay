@@ -16,7 +16,6 @@ const Listings = () => {
 
   const listings = useSelector((state) => state.listings);
   const selectedCategory = useSelector((state) => state.selectedCategory);
-  // console.log(listings);
 
   const getFeedListings = async () => {
     setLoading(true);
@@ -35,7 +34,6 @@ const Listings = () => {
       }
 
       const data = await response.json();
-      console.log("Fetched data:", data); // Log fetched data
 
       dispatch(setListings({ listings: data }));
     } catch (err) {
@@ -48,7 +46,6 @@ const Listings = () => {
   useEffect(() => {
     getFeedListings();
   }, [selectedCategory]);
-  // console.log("stored listing", listings);
 
   return (
     <>

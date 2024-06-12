@@ -46,7 +46,6 @@ const ListingDetails = () => {
     try {
       const resp = await axios.post(API_11, { id: listing.hostId });
       dispatch(setTempHostData({ tempHost: resp.data }));
-      console.log(resp.data);
     } catch (error) {
       console.log(error);
     }

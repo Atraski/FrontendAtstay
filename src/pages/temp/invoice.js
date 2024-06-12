@@ -22,7 +22,6 @@ function Invoice() {
 
     const s = element.innerHTML; // Send invoice HTML to the server
     localStorage.setItem("html", s);
-    console.log(s, "PDF");
   };
 
   useEffect(() => {

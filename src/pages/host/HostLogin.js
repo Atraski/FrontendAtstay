@@ -52,7 +52,6 @@ const HostLogin = () => {
 
       /* Get data after fetching */
       const loggedIn = await response.json();
-      console.log("LoggedIn data", loggedIn);
 
       if (loggedIn) {
         dispatch(

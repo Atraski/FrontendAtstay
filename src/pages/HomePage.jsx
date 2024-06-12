@@ -20,7 +20,6 @@ const HomePage = () => {
     try {
       const resp = await axios.get(`${API_3}users/${user._id}/getAllWishlist`);
 
-      console.log("getting wishlist response", resp);
       dispatch(setWishList(resp.data.wishList));
     } catch (error) {
       console.log(error);

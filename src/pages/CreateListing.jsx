@@ -155,8 +155,7 @@ const CreateListing = () => {
       photos.forEach((photo) => {
         listingForm.append("listingPhotos", photo);
       });
-      console.log("formLocation", formLocation);
-      console.log("listingForm", listingForm);
+
       /* Send a POST request to server */
       const response = await fetch(API_4, {
         method: "POST",

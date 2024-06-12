@@ -31,8 +31,7 @@ const EditAvailability = () => {
   useEffect(() => {
     const startDateObj = new Date(startDate);
     const endDateObj = new Date(endDate);
-    // console.log("startDate", startDateObj);
-    // console.log("endDate", endDateObj);
+
     const dates = [];
     let currentDate = startDateObj;
 
@@ -118,15 +117,12 @@ const EditAvailability = () => {
         };
       }
       const resp = await axios.post(`${API_26}`, data);
-
-      console.log(resp.data);
     } catch (error) {
       console.log(error);
     }
   };
   const handleClick = () => {
     datesArray.forEach((element) => {
-      // console.log(element);
       CreateAvailabilityRooms(element);
     });
     navigate("/create-availability");

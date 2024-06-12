@@ -66,7 +66,6 @@ const ResetPasswordPage = () => {
         const resData = await response.json();
 
         if (response.ok) {
-          console.log("Reset successfully");
           window.alert("Password reset successfully");
           navigate("/login");
         } else {

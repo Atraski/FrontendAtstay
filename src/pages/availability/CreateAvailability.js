@@ -18,7 +18,7 @@ const CreateAvailability = () => {
     try {
       setLoading(true);
       const response = await axios.get(`${API_24}/${host._id}`);
-      console.log("response: ", response.data);
+
       setPropertyList(response.data);
       setLoading(false);
     } catch (error) {
@@ -30,7 +30,6 @@ const CreateAvailability = () => {
   }, []);
 
   useEffect(() => {
-    console.log("Host: ", host);
     if (!host) {
       navigate("/hostlogin");
     }

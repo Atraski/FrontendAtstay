@@ -59,7 +59,6 @@ const RegisterPage = () => {
     const register_form = new FormData();
 
     for (var key in formData) {
-      console.log("key", key);
       register_form.append(key, formData[key]);
     }
 

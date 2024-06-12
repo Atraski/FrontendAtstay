@@ -24,7 +24,7 @@ const CategoryPage = () => {
 
       const data = await response.json();
       dispatch(setListings({ listings: data }));
-      console.log("category listing", listings);
+
       setLoading(false);
     } catch (err) {
       console.log("Fetch Listings Failed", err.message);
