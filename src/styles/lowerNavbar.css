@@ -26,10 +26,22 @@
   color: black;
 }
 
-
-
+/* Carousel Arrow */
 .react-multiple-carousel__arrow:hover::before {
   color: white;
+}
+
+/* Style when disabled */
+.react-multiple-carousel__arrow[disabled] {
+  background-color: #b7b4b4;
+}
+
+.react-multiple-carousel__arrow[disabled]::before {
+  color: white;
+}
+
+.react-multiple-carousel__arrow[disabled]:hover {
+  background-color: #b7b4b4;
 }
 
 .carousel-button-group {
@@ -129,12 +141,12 @@
 
   .nav-carousel-wrapper {
     margin: 2rem 0 -2rem 0;
+
   }
 
 
   .carousel {
-    width: 20rem;
-    /* margin: auto; */
-    margin-left: -1px;
+    width: 25rem;
+    margin-left: -13px;
   }
 }
