@@ -355,7 +355,10 @@
 
 @media (max-width: 768px) {
   .navbar {
-    padding: 0;
+    position: sticky;
+    margin: 0;
+    padding-bottom: 1rem;
+    width: 100%;
   }
 
   .navbar img {
