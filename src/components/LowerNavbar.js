@@ -37,8 +37,8 @@ const LowerNavbar = () => {
     },
     mobile: {
       breakpoint: { max: 768, min: 0 },
-      items: 3,
-      partialVisibilityGutter: 15,
+      items: 4,
+      partialVisibilityGutter: 12,
     },
   };
 
@@ -90,6 +90,8 @@ const LowerNavbar = () => {
         customTransition={transition}
         removeArrowOnDeviceType={["mobile"]}
         partialVisible={true}
+        swipeable={true}
+        renderArrowsWhenDisabled={true}
         className="nav-carousel"
       >
         {categories.map((category, index) => (

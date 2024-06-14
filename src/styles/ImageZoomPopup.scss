@@ -52,9 +52,9 @@
 
 @media only screen and (max-width: 768px) {
   .carousel-container .img-container {
+    // position: relative;
+    margin-top: -10rem;
     width: 95vw;
-
-    top: 70%;
   }
 
   .buttonNext {
@@ -66,5 +66,30 @@
 
   .fa-xmark {
     display: none;
+  }
+
+  .close-btn {
+    position: absolute;
+    background: none;
+    padding: 2px 5px;
+    border-radius: 100%;
+    background-color: white;
+    top: 25%;
+    left: 1rem;
+    transition: all 100ms ease-in-out;
+  }
+
+  .close-btn:hover {
+    background-color: white;
+  }
+
+  .close-btn:active {
+    transform: scale(0.5);
+  }
+
+  .close-btn .fa-xmark {
+    display: block;
+    color: gray !important;
+    font-size: 1rem;
   }
 }

@@ -1,7 +1,7 @@
 .collage-container {
     padding: 0 5px;
-    margin: 1.5rem 0;
-    position: relative;
+    margin: 1rem 0;
+
 }
 
 .collage {
@@ -44,17 +44,21 @@
 }
 
 .collage-container .collage-close-button {
-
+    position: sticky;
+    top: 19%;
+    left: 2;
+    z-index: 1000;
     background-color: transparent;
     background: none;
     padding: 2px 5px;
     border-radius: 100%;
+    transition: all 300ms ease-in-out;
+    background-color: white;
 }
 
 .collage-container .collage-close-button:hover {
     background-color: transparent;
     background: none;
-
 }
 
 .collage-container .collage-close-button:active {
@@ -63,8 +67,7 @@
 }
 
 .collage-close-button .fa-xmark {
+    display: block;
     color: gray;
-    top: 30%;
-    transition: all 300ms ease-in-out;
-    font-size: 2rem;
+    font-size: 1.5rem;
 }

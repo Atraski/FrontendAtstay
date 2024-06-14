@@ -3,15 +3,18 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { IconButton } from "@mui/material";
 import { Search, Person, Menu } from "@mui/icons-material";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import { setHostLogout, setLogout } from "../../redux/state";
+import {
+  setHostLogout,
+  setLogout,
+  setSelectedCategory,
+} from "../../redux/state";
 import variables from "../../styles/variables.scss";
 import UpperNavbar from "../UpperNavbar";
 import { API_3, API_21 } from "../../api/api";
 import getUniqueResults from "../../utility/getUniqueResults";
 import "../../styles/Navbar.scss";
-import MobileNavbar from "./MobileNavbar";
+import MobileSearchModal from "./MobileSearchModal";
 
 const Navbar = ({ dropdownMenu, setDropdownMenu }) => {
   const [search, setSearch] = useState("");
@@ -111,7 +114,7 @@ const Navbar = ({ dropdownMenu, setDropdownMenu }) => {
       <UpperNavbar />
       <Fragment>
         {/* Mobile Navbar */}
-        <MobileNavbar
+        <MobileSearchModal
           showPopUp={showPopUp}
           setShowPopUp={setShowPopUp}
           search={search}
@@ -128,7 +131,12 @@ const Navbar = ({ dropdownMenu, setDropdownMenu }) => {
         />
 
         <div className="navbar">
-          <Link to="/">
+          <Link
+            to="/"
+            onClick={() => {
+              dispatch(setSelectedCategory("All"));
+            }}
+          >
             <img src="/assets/logo.webp" alt="logo" />
           </Link>
           <div
@@ -311,6 +319,8 @@ const Navbar = ({ dropdownMenu, setDropdownMenu }) => {
                 </form>
               </div>
             )}
+
+            {/* Mobile View */}
             {!isResetPage && (
               <div className="showOnMob" id="mob">
                 <div className="input" onClick={() => setShowPopUp(true)}>

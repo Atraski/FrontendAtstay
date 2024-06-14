@@ -43,6 +43,10 @@ const ListingDetails = () => {
     }
   }, [listing]);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [showCollage]);
+
   const { listingId } = useParams();
   const getHostInfo = async () => {
     try {

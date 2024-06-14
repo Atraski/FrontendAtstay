@@ -95,11 +95,11 @@ const ImageCarousel = ({ imageArr, imageIndex, closeButton }) => {
         {">"}
       </button>
 
-      {/* {closeButton && (
+      {closeButton && (
         <button className="close-btn">
           <FontAwesomeIcon icon={faXmark} style={{ color: "white" }} />
         </button>
-      )} */}
+      )}
     </div>
   );
 };

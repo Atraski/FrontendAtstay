@@ -9,7 +9,7 @@ import { faFacebookF, faInstagram } from "@fortawesome/free-brands-svg-icons";
 
 const Footer = () => {
   return (
-    <div>
+    <footer>
       <div className="footer">
         <div className="footer_left">
           <a href="/">
@@ -81,7 +81,7 @@ const Footer = () => {
         </div>
       </div>
       <FooterLower />
-    </div>
+    </footer>
   );
 };
 
