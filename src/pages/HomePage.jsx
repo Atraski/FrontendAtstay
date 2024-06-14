@@ -11,6 +11,7 @@ import { API_3 } from "../api/api";
 import { useDispatch } from "react-redux";
 import { setShowPopup, setWishList } from "../redux/state";
 import LoginPopup from "../components/LoginPopup";
+import { setSelectedCategory } from "../redux/state";
 
 const HomePage = () => {
   const user = useSelector((state) => state?.user);
@@ -28,6 +29,7 @@ const HomePage = () => {
 
   useEffect(() => {
     dispatch(setShowPopup({ popup: false }));
+    dispatch(setSelectedCategory("All"));
   }, []);
 
   useEffect(() => {
@@ -35,6 +37,7 @@ const HomePage = () => {
       gettingWishlist();
     }
   }, []);
+
   return (
     <>
       <LoginPopup />

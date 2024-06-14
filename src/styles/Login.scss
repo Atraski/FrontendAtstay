@@ -3,13 +3,14 @@
 
 .login {
   width: 100vw;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+
+  // justify-content: center;
+  // align-items: center;
+  // flex-direction: column;
   // background: url("../../public/assets/login.jpg") center;
   background-size: cover;
+  margin-top: 7rem;
+  overflow-y: hidden;
 
   &_content {
     display: flex;
@@ -19,6 +20,7 @@
     padding: 40px;
     background-color: rgba(0, 0, 0, 0.8);
     border-radius: 20px;
+    margin: auto;
 
     @include lg {
       width: 60%;
@@ -139,5 +141,11 @@
   &:hover {
     text-decoration: underline;
     cursor: pointer;
+  }
+}
+
+@media (max-width: 780px) {
+  .login {
+    margin-top: 2rem;
   }
 }

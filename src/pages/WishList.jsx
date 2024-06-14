@@ -1,13 +1,16 @@
 import "../styles/List.scss";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar/Navbar";
 import ListingCard from "../components/ListingCard";
 import Footer from "../components/Footer";
 import { useEffect } from "react";
 import axios from "axios";
 import { API_7 } from "../api/api";
-import { useDispatch } from "react-redux";
 import { setListings } from "../redux/state";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 
 const WishList = () => {
   const wishList = useSelector((state) => state.user.wishList);
@@ -76,7 +79,14 @@ const WishList = () => {
             )
           )
         ) : (
-          <h1 style={{ color: "red" }}>NO ITEMS YET!</h1>
+          <div className="no-items-container">
+            <h1 style={{ color: "red" }}>NO ITEMS YET!</h1>
+            <Link to="/">
+              {" "}
+              <FontAwesomeIcon icon={faArrowLeft} />
+              Go back to Home page
+            </Link>
+          </div>
         )}
       </div>
       <Footer />

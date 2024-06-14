@@ -262,7 +262,7 @@
 }
 
 .search-popup {
-  background: rgba(155, 155, 155, 0.74);
+  // background: rgba(155, 155, 155, 0.74);
   position: fixed;
   z-index: 2000;
   inset: 0;
@@ -276,10 +276,26 @@
   .container-1 {
     display: flex;
     flex-direction: column;
-    .close-btn {
-      display: flex;
-      justify-content: flex-end;
-      font-size: 1.4rem;
+    .search-close-btn {
+      position: absolute;
+      right: 2rem;
+      top: 27%;
+      box-shadow: none;
+      background-color: white;
+      width: fit-content;
+      padding: 5px 8px;
+      border-radius: 100%;
+      transition: all 500ms ease-in-out;
+
+      &:active {
+        transform: scale(0.5);
+      }
+
+      .fa-xmark {
+        display: block;
+        font-size: 1.3rem;
+        color: gray !important;
+      }
     }
     .main-content {
       display: flex;
@@ -361,8 +377,8 @@
     margin: 0;
   }
 
-  .navbar img {
-    margin-top: -1rem;
+  .navbar_right_account img {
+    display: block;
   }
 
   #pc {

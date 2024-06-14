@@ -15,6 +15,7 @@ import { API_3, API_21 } from "../../api/api";
 import getUniqueResults from "../../utility/getUniqueResults";
 import "../../styles/Navbar.scss";
 import MobileSearchModal from "./MobileSearchModal";
+import Backdrop from "../../utility/Backdrop";
 
 const Navbar = ({ dropdownMenu, setDropdownMenu }) => {
   const [search, setSearch] = useState("");
@@ -31,6 +32,7 @@ const Navbar = ({ dropdownMenu, setDropdownMenu }) => {
 
   const user = useSelector((state) => state.user);
   const host = useSelector((state) => state.host);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
@@ -108,6 +110,8 @@ const Navbar = ({ dropdownMenu, setDropdownMenu }) => {
   }, [filteredResults, focusedIndex]);
 
   const today = new Date().toISOString().split("T")[0];
+
+  console.log("POPUP", showPopUp);
 
   return (
     <>
@@ -322,28 +326,30 @@ const Navbar = ({ dropdownMenu, setDropdownMenu }) => {
 
             {/* Mobile View */}
             {!isResetPage && (
-              <div className="showOnMob" id="mob">
-                <div className="input" onClick={() => setShowPopUp(true)}>
-                  <div className="text">Anywhere</div>
-                  <div className="icon">
-                    <IconButton
-                      style={
-                        searchIsEmpty
-                          ? { background: "#d3d3d3", cursor: "not-allowed" }
-                          : {}
-                      }
-                    >
-                      <Search
-                        sx={
+              <Fragment>
+                <div className="showOnMob" id="mob">
+                  <div className="input" onClick={() => setShowPopUp(true)}>
+                    <div className="text">Anywhere</div>
+                    <div className="icon">
+                      <IconButton
+                        style={
                           searchIsEmpty
-                            ? { color: "#808080" }
-                            : { color: "#66cccc" }
+                            ? { background: "#d3d3d3", cursor: "not-allowed" }
+                            : {}
                         }
-                      />
-                    </IconButton>
+                      >
+                        <Search
+                          sx={
+                            searchIsEmpty
+                              ? { color: "#808080" }
+                              : { color: "#66cccc" }
+                          }
+                        />
+                      </IconButton>
+                    </div>
                   </div>
                 </div>
-              </div>
+              </Fragment>
             )}
             <div className="navbar_right00">
               {host ? (
@@ -388,7 +394,7 @@ const Navbar = ({ dropdownMenu, setDropdownMenu }) => {
               {dropdownMenu && user && (
                 <div className="navbar_right_accountmenu">
                   <div className="user-info">
-                    <h2>{`${user.firstName}`}</h2>
+                    <h2>{user.firstName}</h2>
                     <h2>{user.email}</h2>
                   </div>
                   <div className="navbar_right_accountmenu-links">

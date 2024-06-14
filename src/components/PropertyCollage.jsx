@@ -1,5 +1,6 @@
 import { Fragment, useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useSelector } from "react-redux";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
 import ImageZoomPopup from "./ImageZoomPopup";
@@ -13,6 +14,8 @@ const PropertyCollage = ({
   setShowCollage,
 }) => {
   const [footerIsVisible, setFooterIsVisible] = useState(false);
+
+  const imagePopup = useSelector((state) => state.imagePopup);
 
   const images = pathArray?.map((src, index) => {
     return <img onClick={() => zoomHandler(index)} key={index} src={src} />;
@@ -32,7 +35,7 @@ const PropertyCollage = ({
       },
       {
         root: null,
-        threshold: 0.7,
+        threshold: 0.5,
       }
     );
 
@@ -52,7 +55,7 @@ const PropertyCollage = ({
       />
 
       <div className="collage-container">
-        {!footerIsVisible && (
+        {!footerIsVisible && !imagePopup && (
           <button
             className="collage-close-button"
             onClick={() => setShowCollage(false)}
