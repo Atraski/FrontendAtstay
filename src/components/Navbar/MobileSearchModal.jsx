@@ -2,6 +2,8 @@ import { useRef, useEffect, Fragment } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { Link, useNavigate, useLocation } from "react-router-dom";
+
+import "../../styles/Navbar.scss";
 import Backdrop from "../../utility/Backdrop";
 
 const MobileNavbar = ({
@@ -55,103 +57,101 @@ const MobileNavbar = ({
         <div className="search-popup">
           <div className="container-1">
             <button className="search-close-btn" onClick={closeButtonHandler}>
-              <FontAwesomeIcon icon={faXmark} style={{ color: "white" }} />
+              <FontAwesomeIcon icon={faXmark} />
             </button>
             <div className="main-content">
               <div className="destination">
-                <div className="input">
-                  <input
-                    type="text"
-                    placeholder="Destination..."
-                    value={search}
-                    onChange={searchChangeHandler}
-                  />
-                  {filteredResults.length > 0 && (
-                    <div ref={dropdownRef} className="dropdown-container">
-                      {(() => {
-                        const filteredCategories = getUniqueResults(
-                          filteredResults.filter((filteredItem) =>
-                            filteredItem.category
-                              .toLowerCase()
-                              .includes(search.toLowerCase())
-                          ),
-                          "category"
+                <input
+                  type="text"
+                  placeholder="Destination..."
+                  value={search}
+                  onChange={searchChangeHandler}
+                />
+                {filteredResults.length > 0 && (
+                  <div ref={dropdownRef} className="dropdown-container">
+                    {(() => {
+                      const filteredCategories = getUniqueResults(
+                        filteredResults.filter((filteredItem) =>
+                          filteredItem.category
+                            .toLowerCase()
+                            .includes(search.toLowerCase())
+                        ),
+                        "category"
+                      );
+                      if (filteredCategories.length !== 0) {
+                        return (
+                          <div className="dropdown-section" key="category">
+                            <h4>Category</h4>
+                            {filteredCategories.map((filteredItem) => (
+                              <Link
+                                to={`/properties/search/${filteredItem.category}/undefined/undefined/${guest}`}
+                                key={filteredItem._id}
+                              >
+                                <div>{filteredItem.category}</div>
+                              </Link>
+                            ))}
+                          </div>
                         );
-                        if (filteredCategories.length !== 0) {
-                          return (
-                            <div className="dropdown-section" key="category">
-                              <h4>Category</h4>
-                              {filteredCategories.map((filteredItem) => (
-                                <Link
-                                  to={`/properties/search/${filteredItem.category}/undefined/undefined/${guest}`}
-                                  key={filteredItem._id}
-                                >
-                                  <div>{filteredItem.category}</div>
-                                </Link>
-                              ))}
-                            </div>
-                          );
-                        }
-                        return null;
-                      })()}
-                      {(() => {
-                        const filteredCities = getUniqueResults(
-                          filteredResults.filter((filteredItem) =>
-                            filteredItem.city
-                              .toLowerCase()
-                              .includes(search.toLowerCase())
-                          ),
-                          "city"
+                      }
+                      return null;
+                    })()}
+                    {(() => {
+                      const filteredCities = getUniqueResults(
+                        filteredResults.filter((filteredItem) =>
+                          filteredItem.city
+                            .toLowerCase()
+                            .includes(search.toLowerCase())
+                        ),
+                        "city"
+                      );
+                      if (filteredCities.length !== 0) {
+                        return (
+                          <div className="dropdown-section" key="city">
+                            <h4>City</h4>
+                            {filteredCities.map((filteredItem) => (
+                              <Link
+                                to={`/properties/search/${filteredItem.city}/undefined/undefined/${guest}`}
+                                key={filteredItem._id}
+                              >
+                                <div>{filteredItem.city}</div>
+                              </Link>
+                            ))}
+                          </div>
                         );
-                        if (filteredCities.length !== 0) {
-                          return (
-                            <div className="dropdown-section" key="city">
-                              <h4>City</h4>
-                              {filteredCities.map((filteredItem) => (
-                                <Link
-                                  to={`/properties/search/${filteredItem.city}/undefined/undefined/${guest}`}
-                                  key={filteredItem._id}
-                                >
-                                  <div>{filteredItem.city}</div>
-                                </Link>
-                              ))}
-                            </div>
-                          );
-                        }
-                        return null;
-                      })()}
-                      {(() => {
-                        const filteredTitles = getUniqueResults(
-                          filteredResults.filter((filteredItem) =>
-                            filteredItem.title
-                              .toLowerCase()
-                              .includes(search.toLowerCase())
-                          ),
-                          "title"
+                      }
+                      return null;
+                    })()}
+                    {(() => {
+                      const filteredTitles = getUniqueResults(
+                        filteredResults.filter((filteredItem) =>
+                          filteredItem.title
+                            .toLowerCase()
+                            .includes(search.toLowerCase())
+                        ),
+                        "title"
+                      );
+                      if (filteredTitles.length !== 0) {
+                        return (
+                          <div className="dropdown-section" key="title">
+                            <h4>Title</h4>
+                            {filteredTitles.map((filteredItem) => (
+                              <Link
+                                to={`/properties/search/${filteredItem.title}/undefined/undefined/${guest}`}
+                                key={filteredItem._id}
+                              >
+                                <div>{filteredItem.title}</div>
+                              </Link>
+                            ))}
+                          </div>
                         );
-                        if (filteredTitles.length !== 0) {
-                          return (
-                            <div className="dropdown-section" key="title">
-                              <h4>Title</h4>
-                              {filteredTitles.map((filteredItem) => (
-                                <Link
-                                  to={`/properties/search/${filteredItem.title}/undefined/undefined/${guest}`}
-                                  key={filteredItem._id}
-                                >
-                                  <div>{filteredItem.title}</div>
-                                </Link>
-                              ))}
-                            </div>
-                          );
-                        }
-                        return null;
-                      })()}
-                    </div>
-                  )}
-                </div>
-                <div className="search-btn">
+                      }
+                      return null;
+                    })()}
+                  </div>
+                )}
+                <div className="search-btn-container">
                   <button
-                    style={{ height: "2rem", padding: "1px 5px" }}
+                    className="search-btn"
                     onClick={() => {
                       if (
                         search.trim().length > 0 &&
@@ -207,7 +207,7 @@ const MobileNavbar = ({
                 <div className="label">Guests</div>
                 <div className="guest-value-container">
                   <button
-                    className="icons"
+                    className="guest-value-control"
                     onClick={() => {
                       if (guest > 1) {
                         setGuest((prev) => prev - 1);
@@ -216,11 +216,9 @@ const MobileNavbar = ({
                   >
                     -
                   </button>
-                  <p className="guest-value" style={{ margin: "auto 0" }}>
-                    {guest}
-                  </p>
+                  <p className="guest-value">{guest}</p>
                   <button
-                    className="icons"
+                    className="guest-value-control"
                     onClick={() => {
                       if (guest < 100) {
                         setGuest((prev) => prev + 1);
