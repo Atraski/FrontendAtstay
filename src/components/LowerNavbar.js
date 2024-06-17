@@ -33,7 +33,7 @@ const LowerNavbar = () => {
     },
     smallDesktop: {
       breakpoint: { max: 1420, min: 1117 },
-      items: 6,
+      items: 8,
     },
     mobile: {
       breakpoint: { max: 768, min: 0 },
@@ -91,6 +91,7 @@ const LowerNavbar = () => {
         removeArrowOnDeviceType={["mobile"]}
         partialVisible={true}
         swipeable={true}
+        draggable={true}
         renderArrowsWhenDisabled={true}
         className="nav-carousel"
       >

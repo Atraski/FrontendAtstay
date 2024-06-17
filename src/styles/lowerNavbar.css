@@ -124,12 +124,17 @@
 
 @media only screen and (min-width: 1117px) and (max-width: 1420px) {
   .carousel {
-    width: 53rem;
+    width: 61rem;
     margin-right: -1rem;
+    /* border: red 1px solid; */
   }
 
+  /* .nav-carousel {
+    border: red 1px solid;
+  } */
+
   .react-multiple-carousel__arrow--right {
-    margin-right: 11rem;
+    margin-right: 3rem;
   }
 
   .react-multiple-carousel__arrow--left {
@@ -141,9 +146,7 @@
 
   .nav-carousel-wrapper {
     margin: 2rem 0 -2rem 0;
-
   }
-
 
   .carousel {
     width: 25rem;
