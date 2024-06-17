@@ -126,12 +126,7 @@
   .carousel {
     width: 61rem;
     margin-right: -1rem;
-    /* border: red 1px solid; */
   }
-
-  /* .nav-carousel {
-    border: red 1px solid;
-  } */
 
   .react-multiple-carousel__arrow--right {
     margin-right: 3rem;
