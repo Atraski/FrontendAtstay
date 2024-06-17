@@ -7,11 +7,8 @@ const LoginPopup = () => {
   const popup = useSelector((state) => state.showPopup);
 
   return (
-    <div style={{ display: popup ? "flex" : "none" ,height:"100vh",width:"100vw",inset:"0" ,position:"fixed",background:"rgba(118, 122, 123, 0.86)",zIndex:"1000"}} >
-    
-    <LoginPage />
-    
-     
+    <div className="login-popup" style={{ display: popup ? "flex" : "none" }}>
+      <LoginPage />
     </div>
   );
 };
