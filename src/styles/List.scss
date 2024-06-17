@@ -13,6 +13,16 @@
     margin: 40px 50px;
   }
 }
+.search-title-list {
+  z-index: 1000;
+  color: $blue;
+  text-align: center;
+  background: white;
+
+  @include sm {
+    margin: 40px 50px;
+  }
+}
 
 .list {
   padding: 0 100px 120px;

@@ -18,13 +18,21 @@
 }
 
 .navtopleft a {
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   color: #ffffff;
   transition: all 100ms ease-in;
-
 }
 
-.navtopleft a:hover,
+.navtopleft a:first-child:hover {
+  color: #0866ff;
+  transition: all 100ms ease-in-out;
+}
+
+.navtopleft a:last-child:hover {
+  color: #c53480;
+  transition: all 100ms ease-in-out;
+}
+
 navtopright span a:hover {
   color: rgb(255, 255, 255, 0.6)
 }

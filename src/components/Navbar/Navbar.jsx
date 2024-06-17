@@ -143,6 +143,7 @@ const Navbar = ({ dropdownMenu, setDropdownMenu }) => {
           setCheckOut={setCheckOut}
           guest={guest}
           setGuest={setGuest}
+          showDropdown={showSearchDropdown}
         />
 
         <div className="navbar">

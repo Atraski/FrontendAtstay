@@ -42,7 +42,7 @@ const SearchPage = () => {
   ) : (
     <>
       {/* <Navbar /> */}
-      <h1 className="title-list">{search}</h1>
+      <h1 className="search-title-list">{search}</h1>
       <div className="list">
         {listings?.map(
           ({

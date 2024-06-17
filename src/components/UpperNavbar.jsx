@@ -28,7 +28,7 @@ export default function UpperNavbar() {
             >
               <FontAwesomeIcon
                 icon={faInstagram}
-                style={{ fontSize: "2rem", marginTop: "2.4px" }}
+                // style={{ fontSize: "2rem", marginTop: "2.4px" }}
               />
             </Link>
             {/* <span className="mx-3 emm" style={{color:"white"}}> <a style={{ color:"white"}} href="mailto:support@attravels.in">support@attravels.in</a></span> */}
