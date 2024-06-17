@@ -78,11 +78,12 @@
       position: absolute;
       top: 5.2rem;
       left: 16rem;
-
       background: white;
       box-shadow: 0 0 10px gray;
       border-radius: 5px;
       width: 14rem;
+      max-height: 15rem;
+      overflow-y: scroll;
 
       .dropdown-section {
         padding: 8px;
@@ -441,6 +442,17 @@
         margin: -1rem -3.3rem 0 0;
       }
     }
+  }
+
+  .dropdown-container {
+    position: absolute;
+    background-color: white;
+    top: 38%;
+    padding: 8px;
+    border-radius: 5px;
+    max-height: 4.5rem;
+    overflow-y: scroll;
+    width: 60%;
   }
 }
 

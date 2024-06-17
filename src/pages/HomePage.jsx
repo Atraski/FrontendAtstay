@@ -4,11 +4,11 @@ import Categories from "../components/Categories";
 import Listings from "../components/Listings";
 import Footer from "../components/Footer";
 import LowerNavbar from "../components/LowerNavbar";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { API_3 } from "../api/api";
-import { useDispatch } from "react-redux";
 import { setShowPopup, setWishList } from "../redux/state";
 import LoginPopup from "../components/LoginPopup";
 import { setSelectedCategory } from "../redux/state";

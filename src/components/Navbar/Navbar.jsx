@@ -15,6 +15,7 @@ import { API_3, API_21 } from "../../api/api";
 import getUniqueResults from "../../utility/getUniqueResults";
 import "../../styles/Navbar.scss";
 import MobileSearchModal from "./MobileSearchModal";
+import Loader from "../Loader";
 
 const Navbar = ({ dropdownMenu, setDropdownMenu }) => {
   const [search, setSearch] = useState("");
@@ -25,6 +26,8 @@ const Navbar = ({ dropdownMenu, setDropdownMenu }) => {
   const [isResetPage, setIsResetPage] = useState(false);
   const [filteredResults, setFilteredResults] = useState([]);
   const [searchTimeout, setSearchTimeout] = useState(null);
+  const [showSearchDropdown, setShowSearchDropdown] = useState(false);
+  const [searchIsLoading, setSearchIsLoading] = useState(false);
 
   // Search Dropdown Arrow Control
   const [focusedIndex, setFocusedIndex] = useState(-1);
@@ -51,6 +54,7 @@ const Navbar = ({ dropdownMenu, setDropdownMenu }) => {
 
   const searchChangeHandler = (e) => {
     setSearch(e.target.value);
+    setShowSearchDropdown(true);
 
     if (searchTimeout) {
       clearTimeout(searchTimeout);
@@ -58,20 +62,29 @@ const Navbar = ({ dropdownMenu, setDropdownMenu }) => {
 
     setSearchTimeout(
       setTimeout(async () => {
-        if (e.target.value.length > 1) {
-          const response = await fetch(`${API_21}${e.target.value}`);
-          const resData = await response.json();
-          setFilteredResults(resData);
-        } else {
-          setFilteredResults([]);
-        }
+        setSearchIsLoading(true);
+        const response = await fetch(`${API_21}${e.target.value}`);
+        const resData = await response.json();
+        setFilteredResults(resData);
+        setSearchIsLoading(false);
       }, 100)
     );
   };
 
-  const keyDownHandler = (e) => {
-    if (filteredResults.length === 0) return;
+  const formSubmitHandler = (e) => {
+    e.preventDefault();
+    setShowSearchDropdown(false);
+    setSearch("");
+    if (search.length > 0 && checkIn && checkOut && guest) {
+      navigate(`/properties/search/${search}/${checkIn}/${checkOut}/${guest}`);
+    } else if (search.length > 0 && (checkIn || checkOut)) {
+      window.alert("please alert proper date");
+    } else if (search.length > 0) {
+      navigate(`/properties/search/${search}/undefined/undefined/${guest}`);
+    }
+  };
 
+  const keyDownHandler = (e) => {
     switch (e.key) {
       case "ArrowDown":
         setFocusedIndex(
@@ -83,18 +96,7 @@ const Navbar = ({ dropdownMenu, setDropdownMenu }) => {
           prevIndex === 0 ? filteredResults.length - 1 : prevIndex - 1
         );
         break;
-      case "Enter":
-        if (focusedIndex >= 0) {
-          const selectedItem = filteredResults[focusedIndex];
 
-          navigate(
-            `/properties/search/${
-              selectedItem.category || selectedItem.city || selectedItem.title
-            }/undefined/undefined/${guest}`
-          );
-          inputRef.current.blur();
-        }
-        break;
       default:
         break;
     }
@@ -108,9 +110,19 @@ const Navbar = ({ dropdownMenu, setDropdownMenu }) => {
     };
   }, [filteredResults, focusedIndex]);
 
-  const today = new Date().toISOString().split("T")[0];
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      setShowSearchDropdown(false);
+    };
 
-  console.log("POPUP", showPopUp);
+    document.addEventListener("click", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
+
+  const today = new Date().toISOString().split("T")[0];
 
   return (
     <>
@@ -161,20 +173,7 @@ const Navbar = ({ dropdownMenu, setDropdownMenu }) => {
                     justifyContent: "center",
                   }}
                   className="navbar_search"
-                  onSubmit={(e) => {
-                    e.preventDefault();
-                    if (search.length > 0 && checkIn && checkOut && guest) {
-                      navigate(
-                        `/properties/search/${search}/${checkIn}/${checkOut}/${guest}`
-                      );
-                    } else if (search.length > 0 && (checkIn || checkOut)) {
-                      window.alert("please alert proper date");
-                    } else if (search.length > 0) {
-                      navigate(
-                        `/properties/search/${search}/undefined/undefined/${guest}`
-                      );
-                    }
-                  }}
+                  onSubmit={formSubmitHandler}
                 >
                   <div>
                     <div className="input-heading">Desired destination</div>
@@ -190,7 +189,7 @@ const Navbar = ({ dropdownMenu, setDropdownMenu }) => {
                     />
 
                     {/* Dropdown */}
-                    {filteredResults.length > 0 && (
+                    {showSearchDropdown && (
                       <div ref={dropdownRef} className="dropdown-container">
                         {(() => {
                           // Combine all the filtered results into one array
@@ -366,6 +365,14 @@ const Navbar = ({ dropdownMenu, setDropdownMenu }) => {
                   e.stopPropagation();
                   setDropdownMenu(!dropdownMenu);
                 }}
+                style={
+                  dropdownMenu
+                    ? {
+                        backgroundColor: "#67c7b9",
+                        boxShadow: "0 7px 5px rgb(0, 0, 0, 0.1)",
+                      }
+                    : {}
+                }
               >
                 <Menu sx={{ color: variables.darkgrey }} />
                 {!user ? (
@@ -382,7 +389,13 @@ const Navbar = ({ dropdownMenu, setDropdownMenu }) => {
                 )}
               </button>
               {dropdownMenu && !user && !host && (
-                <div className="navbar_right_accountmenu">
+                <div
+                  className="navbar_right_accountmenu"
+                  style={{
+                    right: "30px",
+                    width: "150px",
+                  }}
+                >
                   <div className="navbar_right_accountmenu-links">
                     <Link to="/login">Log In</Link>
                     {/* <Link to="/register">Sign Up</Link> */}

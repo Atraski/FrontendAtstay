@@ -7,13 +7,13 @@ import Loader from "../components/Loader";
 import Navbar from "../components/Navbar/Navbar";
 import ListingCard from "../components/ListingCard";
 import Footer from "../components/Footer";
-import { API_21, API_3 } from "../api/api";
-import axios from "axios";
+import { API_21 } from "../api/api";
 
 const SearchPage = () => {
   const [loading, setLoading] = useState(true);
   const { search, checkIn, checkOut, guest } = useParams();
-  const listings = useSelector((state) => state.listings);
+  const listings = useSelector((state) => state?.listings);
+  console.log("Listings", listings);
 
   const dispatch = useDispatch();
 
