@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import ListingCard from "../components/ListingCard";
 import { useEffect, useState } from "react";
 import Loader from "../components/Loader";
-import Footer from "../components/Footer";
 import { useNavigate } from "react-router-dom";
 
 import { API_24, API_3 } from "../api/api";
@@ -30,20 +29,6 @@ const PropertyList = () => {
     }
   };
 
-  // const getPropertyList = async () => {
-  //   try {
-  //     const response = await fetch(`${API_3}users/${user._id}/properties`, {
-  //       method: "GET",
-  //     });
-  //     const data = await response.json();
-  //     console.log(data);
-  //     dispatch(setPropertyList(data));
-  //     setLoading(false);
-  //   } catch (err) {
-  //     console.log("Fetch all properties failed", err.message);
-  //   }
-  // };
-
   useEffect(() => {
     getPropertyList();
   }, []);
@@ -53,7 +38,7 @@ const PropertyList = () => {
   ) : (
     <>
       {/* <Navbar /> */}
-      <h1 className="title-list">Your Property List</h1>
+      <h1 className="title-list">Your Properties</h1>
       <div className="list">
         {propertyList?.map(
           ({
@@ -95,8 +80,6 @@ const PropertyList = () => {
           )
         )}
       </div>
-
-      <Footer />
     </>
   );
 };

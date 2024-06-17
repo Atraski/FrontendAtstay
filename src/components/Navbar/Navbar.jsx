@@ -374,9 +374,21 @@ const Navbar = ({ dropdownMenu, setDropdownMenu }) => {
                     : {}
                 }
               >
-                <Menu sx={{ color: variables.darkgrey }} />
+                <Menu
+                  sx={
+                    dropdownMenu
+                      ? { color: "white" }
+                      : { color: variables.darkgrey }
+                  }
+                />
                 {!user ? (
-                  <Person sx={{ color: variables.darkgrey }} />
+                  <Person
+                    sx={
+                      dropdownMenu
+                        ? { color: "white" }
+                        : { color: variables.darkgrey }
+                    }
+                  />
                 ) : (
                   <img
                     src={`${API_3}${user.profileImagePath.replace(

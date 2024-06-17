@@ -26,6 +26,7 @@ import PrivacyPolicy from "./pages/PrivacyPolicies";
 import ResetPasswordPage from "./pages/ResetPasswordPage";
 import ScrollRestoration from "./utility/ScrollRestoration";
 import TermsConditions from "./pages/Terms&Condition";
+import Footer from "./components/Footer";
 
 function App() {
   const [dropdownMenu, setDropdownMenu] = useState(false);
@@ -53,7 +54,6 @@ function App() {
           />
           <Route path="/:userId/trips" element={<TripList />} />
           <Route path="/:userId/wishList" element={<WishList />} />
-          <Route path="/:userId/properties" element={<PropertyList />} />
           <Route path="/:userId/reservations" element={<ReservationList />} />
           <Route path="/bookingPage" element={<BookingPage />} />
           <Route path="/bookingForm" element={<BookingForm />} />
@@ -71,6 +71,7 @@ function App() {
           {/* Reset Password */}
           <Route path="/reset/:resetToken" element={<ResetPasswordPage />} />
         </Routes>
+        <Footer />
       </BrowserRouter>
     </div>
   );

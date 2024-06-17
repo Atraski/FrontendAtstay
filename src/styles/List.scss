@@ -2,8 +2,12 @@
 @import "./variables.scss";
 
 .title-list {
-  margin: 40px 100px;
+  position: sticky;
+  top: 13%;
+  z-index: 1000;
   color: $blue;
+  text-align: center;
+  background: white;
 
   @include sm {
     margin: 40px 50px;
@@ -16,6 +20,7 @@
   justify-content: center;
   flex-wrap: wrap;
   gap: 25px;
+  padding-top: 2rem;
 
   @include xl {
     padding: 0 20px 120px;
