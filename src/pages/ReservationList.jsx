@@ -25,13 +25,10 @@ const ReservationList = () => {
   useEffect(() => {
     if (bookings && bookings.length > 0 && listings && listings.length > 0) {
       for (const elm of bookings) {
-         
         for (const data of listings) {
           // console.log("inside second for loop");
           if (elm.listingId === data.hotelId) {
-            
             if (!bookingData.some((item) => item.booking._id === elm._id)) {
-              
               // setBookingData([...bookingData, { booking: elm, listing: data }]);
               setBookingData((prev) => [
                 ...prev,
@@ -45,8 +42,6 @@ const ReservationList = () => {
       console.log("Either bookings or listings is empty or undefined.");
     }
   }, [bookings, listings, reservationList]);
-
-  
 
   const getReservationListData = async () => {
     try {
@@ -72,7 +67,6 @@ const ReservationList = () => {
       {/* <Navbar /> */}
       <h1 className="title-list">Your Reservation List</h1>
       <div className="list">
-        
         {bookingData.length === 0 ? (
           <h1 style={{ color: "red" }}>NO RESERVATIONS YET!</h1>
         ) : (
@@ -125,8 +119,6 @@ const ReservationList = () => {
           ))
         )}
       </div>
-
-      <Footer />
     </>
   );
 };

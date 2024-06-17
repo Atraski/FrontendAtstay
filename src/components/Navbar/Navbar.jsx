@@ -445,7 +445,7 @@ const Navbar = ({ dropdownMenu, setDropdownMenu }) => {
                   </div>
                   <div className="navbar_right_accountmenu-links">
                     <Link to="/create-listing">Add Property</Link>
-                    <Link to={`/${host._id}/properties`}>Property List</Link>
+                    {/* <Link to={`/${host._id}/properties`}>Property List</Link> */}
                     <Link to="/create-availability">Create Availability</Link>
                     <Link
                       to="/"

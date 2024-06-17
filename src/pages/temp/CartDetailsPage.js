@@ -521,7 +521,6 @@ export default function CartDetailsPage() {
             </form>
           </div>
         )}
-        <Footer />
       </div>
     </>
   );

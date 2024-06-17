@@ -696,8 +696,6 @@ const ListingDetails = () => {
           )}
         </div>
       )}
-
-      <Footer />
     </>
   );
 };

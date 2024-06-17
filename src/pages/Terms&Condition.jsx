@@ -102,7 +102,6 @@ const TermsConditions = () => {
           choosing AtStay for your travel needs.
         </p>
       </div>
-      <Footer />
     </>
   );
 };

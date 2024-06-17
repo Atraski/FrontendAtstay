@@ -682,8 +682,6 @@ const CreateListing = () => {
           </button>
         </form>
       </div>
-
-      <Footer />
     </>
   );
 };

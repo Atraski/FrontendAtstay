@@ -792,7 +792,6 @@ const EditListing = () => {
           </button>
         </form>
       </div>
-      <Footer />
     </>
   );
 };
