@@ -1,15 +1,17 @@
 import "../styles/Footer.scss";
 import { LocationOn, LocalPhone, Email } from "@mui/icons-material";
-import { FaSquareFacebook } from "react-icons/fa6";
-import { FaInstagramSquare } from "react-icons/fa";
 import FooterLower from "./FooterLower";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFacebookF, faInstagram } from "@fortawesome/free-brands-svg-icons";
+import {
+  faSquareFacebook,
+  faSquareInstagram,
+  faLinkedin,
+} from "@fortawesome/free-brands-svg-icons";
 
 const Footer = () => {
   return (
-    <footer>
+    <footer className="footer-container">
       <div className="footer">
         <div className="footer_left">
           <a href="/">
@@ -35,14 +37,23 @@ const Footer = () => {
               <a
                 href="https://www.facebook.com/atstaybyatraski"
                 target="_blank"
+                className="facebook"
               >
-                <FontAwesomeIcon icon={faFacebookF} size="xl" />
+                <FontAwesomeIcon icon={faSquareFacebook} />
               </a>
               <a
                 href="https://www.instagram.com/atstaybyatraski?igsh=N2hodnQzdXkzd3E5"
                 target="_blank"
+                className="instagram"
               >
-                <FontAwesomeIcon icon={faInstagram} size="xl" />
+                <FontAwesomeIcon icon={faSquareInstagram} />
+              </a>
+              <a
+                href="https://www.linkedin.com/company/at-stay/"
+                target="_blank"
+                className="linkedIn"
+              >
+                <FontAwesomeIcon icon={faLinkedin} />
               </a>
             </div>
           </ul>

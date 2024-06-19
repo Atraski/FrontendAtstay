@@ -1,37 +1,41 @@
 import React from "react";
 import "../styles/upperNavbar.css";
 import { Link } from "react-router-dom";
-// import FacebookIcon from '@mui/icons-material/Facebook';
-import { Call, Facebook, Instagram } from "@mui/icons-material";
+import { Call } from "@mui/icons-material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFacebookF, faInstagram } from "@fortawesome/free-brands-svg-icons";
+import {
+  faSquareFacebook,
+  faSquareInstagram,
+  faLinkedin,
+} from "@fortawesome/free-brands-svg-icons";
 
 export default function UpperNavbar() {
   return (
     <div>
-      <div className="nav">
-        <div
-          className="container-fluid nav-top d-flex justify-content-between"
-          style={{ alignItems: "center" }}
-        >
+      <div className="upper-nav">
+        <div className="container-fluid nav-top">
           <div className="navtopleft">
-            <Link
-              to="https://www.facebook.com/atstaybyatraski"
+            <a
+              href="https://www.facebook.com/atstaybyatraski"
               target="_blank"
-              className="icon"
+              className="facebook"
             >
-              <FontAwesomeIcon icon={faFacebookF} />
-            </Link>
-            <Link
-              to="https://www.instagram.com/atstaybyatraski?igsh=N2hodnQzdXkzd3E5"
+              <FontAwesomeIcon icon={faSquareFacebook} />
+            </a>
+            <a
+              href="https://www.instagram.com/atstaybyatraski?igsh=N2hodnQzdXkzd3E5"
               target="_blank"
+              className="instagram"
             >
-              <FontAwesomeIcon
-                icon={faInstagram}
-                // style={{ fontSize: "2rem", marginTop: "2.4px" }}
-              />
-            </Link>
-            {/* <span className="mx-3 emm" style={{color:"white"}}> <a style={{ color:"white"}} href="mailto:support@attravels.in">support@attravels.in</a></span> */}
+              <FontAwesomeIcon icon={faSquareInstagram} />
+            </a>
+            <a
+              href="https://www.linkedin.com/company/at-stay/"
+              target="_blank"
+              className="linkedIn"
+            >
+              <FontAwesomeIcon icon={faLinkedin} />
+            </a>
           </div>
 
           <div className="navtopright">

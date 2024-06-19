@@ -42,6 +42,30 @@ const Navbar = ({ dropdownMenu, setDropdownMenu }) => {
   const dropdownRef = useRef(null);
   const inputRef = useRef(null);
 
+  // Combine all the filtered results into one array
+  const combinedResults = [
+    ...getUniqueResults(
+      filteredResults.filter((filteredItem) =>
+        filteredItem.category.toLowerCase().includes(search.toLowerCase())
+      ),
+      "category"
+    ).map((item) => ({ ...item, type: "category" })),
+    ...getUniqueResults(
+      filteredResults.filter((filteredItem) =>
+        filteredItem.city.toLowerCase().includes(search.toLowerCase())
+      ),
+      "city"
+    ).map((item) => ({ ...item, type: "city" })),
+    ...getUniqueResults(
+      filteredResults.filter((filteredItem) =>
+        filteredItem.title.toLowerCase().includes(search.toLowerCase())
+      ),
+      "title"
+    ).map((item) => ({ ...item, type: "title" })),
+  ];
+
+  // console.log("IMP!", combinedResults[focusedIndex].type);
+
   const searchIsEmpty = search.trim().length === 0;
 
   useEffect(() => {
@@ -193,34 +217,6 @@ const Navbar = ({ dropdownMenu, setDropdownMenu }) => {
                     {showSearchDropdown && (
                       <div ref={dropdownRef} className="dropdown-container">
                         {(() => {
-                          // Combine all the filtered results into one array
-                          const combinedResults = [
-                            ...getUniqueResults(
-                              filteredResults.filter((filteredItem) =>
-                                filteredItem.category
-                                  .toLowerCase()
-                                  .includes(search.toLowerCase())
-                              ),
-                              "category"
-                            ).map((item) => ({ ...item, type: "category" })),
-                            ...getUniqueResults(
-                              filteredResults.filter((filteredItem) =>
-                                filteredItem.city
-                                  .toLowerCase()
-                                  .includes(search.toLowerCase())
-                              ),
-                              "city"
-                            ).map((item) => ({ ...item, type: "city" })),
-                            ...getUniqueResults(
-                              filteredResults.filter((filteredItem) =>
-                                filteredItem.title
-                                  .toLowerCase()
-                                  .includes(search.toLowerCase())
-                              ),
-                              "title"
-                            ).map((item) => ({ ...item, type: "title" })),
-                          ];
-
                           if (combinedResults.length !== 0) {
                             return (
                               <div className="dropdown-section" key="combined">
@@ -230,6 +226,9 @@ const Navbar = ({ dropdownMenu, setDropdownMenu }) => {
                                       filteredItem[filteredItem.type]
                                     }/undefined/undefined/${guest}`}
                                     key={filteredItem._id}
+                                    onClick={() => {
+                                      setSearch("");
+                                    }}
                                   >
                                     <div
                                       className={

@@ -14,6 +14,7 @@ import Footer from "../components/Footer";
 import { API_25, API_4, API_9, API_3 } from "../api/api";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import Loader from "../components/Loader";
 
 const EditListing = () => {
   const [listing, setListing] = useState();
@@ -48,6 +49,8 @@ const EditListing = () => {
     highlightDesc: "",
     price: 0,
   });
+
+  const [isLoading, setIsLoading] = useState(false);
 
   const { hotelId } = useParams();
 
@@ -214,6 +217,7 @@ const EditListing = () => {
   // temporary function for testing frontend side
   const tempFunc = async (e) => {
     e.preventDefault();
+    window.scrollTo(0, 0);
     try {
       if (pincode.length === 6) {
         const listingForm = new FormData();
@@ -272,12 +276,14 @@ const EditListing = () => {
           doubleRoom,
           deluxeRoom,
         };
+        setIsLoading(true);
         const response = await axios.patch(`${API_25}`, data);
+        setIsLoading(false);
 
         console.log(response);
         if (response.status === 200) {
           // Handle success
-          navigate(`/${creatorId}/properties`);
+          navigate("/");
         }
       }
     } catch (error) {
@@ -294,7 +300,7 @@ const EditListing = () => {
       try {
         const response = await axios.delete(`${API_3}properties/${listingId}`);
         window.alert(response.data.msg);
-        navigate(`/${listing.hostId}/properties`);
+        navigate("/");
       } catch (error) {
         console.log("Error Occured", error);
       }
@@ -302,65 +308,68 @@ const EditListing = () => {
   };
   return (
     <>
-      <div className="create-listing">
-        <h1>Publish Your Place</h1>
-        <form
-          // onSubmit={handlePost}
-          onSubmit={tempFunc}
-        >
-          <div className="create-listing_step1">
-            <h2>Step 1: Tell us about your place</h2>
-            <hr />
-            <h3>Which of these categories best describes your place?</h3>
-            <div className="category-list">
-              {categories?.map((item, index) => (
-                <div
-                  className={`category ${
-                    category === item.label ? "selected" : ""
-                  }`}
-                  key={index}
-                  onClick={() => setCategory(item.label)}
-                >
-                  <div className="category_icon">{item.icon}</div>
-                  <p>{item.label}</p>
-                </div>
-              ))}
-            </div>
-
-            <h3>What type of place will guests have?</h3>
-            <div className="type-list">
-              {types?.map((item, index) => (
-                <div
-                  className={`type ${type === item.name ? "selected" : ""}`}
-                  key={index}
-                  onClick={() => setType(item.name)}
-                >
-                  <div className="type_text">
-                    <h4>{item.name}</h4>
-                    <p>{item.description}</p>
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <div className="create-listing">
+          <h1>Publish Your Place</h1>
+          <form
+            // onSubmit={handlePost}
+            onSubmit={tempFunc}
+          >
+            <div className="create-listing_step1">
+              <h2>Step 1: Tell us about your place</h2>
+              <hr />
+              <h3>Which of these categories best describes your place?</h3>
+              <div className="category-list">
+                {categories?.map((item, index) => (
+                  <div
+                    className={`category ${
+                      category === item.label ? "selected" : ""
+                    }`}
+                    key={index}
+                    onClick={() => setCategory(item.label)}
+                  >
+                    <div className="category_icon">{item.icon}</div>
+                    <p>{item.label}</p>
                   </div>
-                  <div className="type_icon">{item.icon}</div>
-                </div>
-              ))}
-            </div>
-
-            <h3>Where's your place located?</h3>
-            <div className="full">
-              <div className="location">
-                <p>Street Address</p>
-                <input
-                  type="text"
-                  placeholder="Street Address"
-                  name="streetAddress"
-                  value={formLocation.streetAddress}
-                  onChange={handleChangeLocation}
-                  required
-                />
+                ))}
               </div>
-            </div>
 
-            <div className="half">
-              {/* <div className="location">
+              <h3>What type of place will guests have?</h3>
+              <div className="type-list">
+                {types?.map((item, index) => (
+                  <div
+                    className={`type ${type === item.name ? "selected" : ""}`}
+                    key={index}
+                    onClick={() => setType(item.name)}
+                  >
+                    <div className="type_text">
+                      <h4>{item.name}</h4>
+                      <p>{item.description}</p>
+                    </div>
+                    <div className="type_icon">{item.icon}</div>
+                  </div>
+                ))}
+              </div>
+
+              <h3>Where's your place located?</h3>
+              <div className="full">
+                <div className="location">
+                  <p>Street Address</p>
+                  <input
+                    type="text"
+                    placeholder="Street Address"
+                    name="streetAddress"
+                    value={formLocation.streetAddress}
+                    onChange={handleChangeLocation}
+                    required
+                  />
+                </div>
+              </div>
+
+              <div className="half">
+                {/* <div className="location">
                 <p>Apartment, Suite, etc. (if applicable)</p>
                 <input
                   type="text"
@@ -371,201 +380,203 @@ const EditListing = () => {
                   required
                 />
               </div> */}
-              <div className="location">
-                <p>City</p>
-                <input
-                  type="text"
-                  placeholder="City"
-                  name="city"
-                  value={formLocation.city}
-                  onChange={handleChangeLocation}
-                  required
-                />
-              </div>
-            </div>
-
-            <div className="half">
-              <div className="location">
-                <p>Province</p>
-                <input
-                  type="text"
-                  placeholder="Province"
-                  name="province"
-                  value={formLocation.province}
-                  onChange={handleChangeLocation}
-                  required
-                />
-              </div>
-              <div className="location">
-                <p>Pincode</p>
-                <input
-                  type="number"
-                  placeholder="pincode"
-                  name="pincode"
-                  value={pincode}
-                  onChange={handleChange}
-                  required
-                />
-                {error && <p style={{ color: "red" }}>{error}</p>}
-              </div>
-              <div className="location">
-                <p>Country</p>
-                <input
-                  type="text"
-                  placeholder="Country"
-                  name="country"
-                  value={formLocation.country}
-                  onChange={handleChangeLocation}
-                  required
-                />
-              </div>
-            </div>
-
-            <h3 style={{ display: type === "Rooms" ? "none" : "" }}>
-              Share some basics about your place
-            </h3>
-            <div
-              className="basics"
-              style={{ display: type === "Rooms" ? "none" : "" }}
-            >
-              <div className="basic">
-                <p>Guests</p>
-                <div className="basic_count">
-                  <RemoveCircleOutline
-                    onClick={() => {
-                      guestCount > 1 && setGuestCount(parseInt(guestCount) - 1);
-                    }}
-                    sx={{
-                      fontSize: "25px",
-                      cursor: "pointer",
-                      "&:hover": { color: variables.pinkred },
-                    }}
+                <div className="location">
+                  <p>City</p>
+                  <input
+                    type="text"
+                    placeholder="City"
+                    name="city"
+                    value={formLocation.city}
+                    onChange={handleChangeLocation}
+                    required
                   />
+                </div>
+              </div>
 
+              <div className="half">
+                <div className="location">
+                  <p>Province</p>
+                  <input
+                    type="text"
+                    placeholder="Province"
+                    name="province"
+                    value={formLocation.province}
+                    onChange={handleChangeLocation}
+                    required
+                  />
+                </div>
+                <div className="location">
+                  <p>Pincode</p>
                   <input
                     type="number"
-                    value={guestCount}
-                    width={5}
-                    onChange={(e) => setGuestCount(e.target.value)}
+                    placeholder="pincode"
+                    name="pincode"
+                    value={pincode}
+                    onChange={handleChange}
+                    required
                   />
-                  {/* <p>{guestCount}</p> */}
-                  <AddCircleOutline
-                    onClick={() => {
-                      setGuestCount(parseInt(guestCount) + 1);
-                    }}
-                    sx={{
-                      fontSize: "25px",
-                      cursor: "pointer",
-                      "&:hover": { color: variables.pinkred },
-                    }}
+                  {error && <p style={{ color: "red" }}>{error}</p>}
+                </div>
+                <div className="location">
+                  <p>Country</p>
+                  <input
+                    type="text"
+                    placeholder="Country"
+                    name="country"
+                    value={formLocation.country}
+                    onChange={handleChangeLocation}
+                    required
                   />
                 </div>
               </div>
 
-              <div className="basic">
-                <p>Bedrooms</p>
-                <div className="basic_count">
-                  <RemoveCircleOutline
-                    onClick={() => {
-                      bedroomCount > 1 && setBedroomCount(bedroomCount - 1);
-                    }}
-                    sx={{
-                      fontSize: "25px",
-                      cursor: "pointer",
-                      "&:hover": { color: variables.pinkred },
-                    }}
-                  />
-                  <p>{bedroomCount}</p>
-                  <AddCircleOutline
-                    onClick={() => {
-                      setBedroomCount(bedroomCount + 1);
-                    }}
-                    sx={{
-                      fontSize: "25px",
-                      cursor: "pointer",
-                      "&:hover": { color: variables.pinkred },
-                    }}
-                  />
-                </div>
-              </div>
+              <h3 style={{ display: type === "Rooms" ? "none" : "" }}>
+                Share some basics about your place
+              </h3>
+              <div
+                className="basics"
+                style={{ display: type === "Rooms" ? "none" : "" }}
+              >
+                <div className="basic">
+                  <p>Guests</p>
+                  <div className="basic_count">
+                    <RemoveCircleOutline
+                      onClick={() => {
+                        guestCount > 1 &&
+                          setGuestCount(parseInt(guestCount) - 1);
+                      }}
+                      sx={{
+                        fontSize: "25px",
+                        cursor: "pointer",
+                        "&:hover": { color: variables.pinkred },
+                      }}
+                    />
 
-              <div className="basic">
-                <p>Beds</p>
-                <div className="basic_count">
-                  <RemoveCircleOutline
-                    onClick={() => {
-                      bedCount > 1 && setBedCount(bedCount - 1);
-                    }}
-                    sx={{
-                      fontSize: "25px",
-                      cursor: "pointer",
-                      "&:hover": { color: variables.pinkred },
-                    }}
-                  />
-                  <p>{bedCount}</p>
-                  <AddCircleOutline
-                    onClick={() => {
-                      setBedCount(bedCount + 1);
-                    }}
-                    sx={{
-                      fontSize: "25px",
-                      cursor: "pointer",
-                      "&:hover": { color: variables.pinkred },
-                    }}
-                  />
+                    <input
+                      type="number"
+                      value={guestCount}
+                      width={5}
+                      onChange={(e) => setGuestCount(e.target.value)}
+                    />
+                    {/* <p>{guestCount}</p> */}
+                    <AddCircleOutline
+                      onClick={() => {
+                        setGuestCount(parseInt(guestCount) + 1);
+                      }}
+                      sx={{
+                        fontSize: "25px",
+                        cursor: "pointer",
+                        "&:hover": { color: variables.pinkred },
+                      }}
+                    />
+                  </div>
                 </div>
-              </div>
 
-              <div className="basic">
-                <p>Bathrooms</p>
-                <div className="basic_count">
-                  <RemoveCircleOutline
-                    onClick={() => {
-                      bathroomCount > 1 && setBathroomCount(bathroomCount - 1);
-                    }}
-                    sx={{
-                      fontSize: "25px",
-                      cursor: "pointer",
-                      "&:hover": { color: variables.pinkred },
-                    }}
-                  />
-                  <p>{bathroomCount}</p>
-                  <AddCircleOutline
-                    onClick={() => {
-                      setBathroomCount(bathroomCount + 1);
-                    }}
-                    sx={{
-                      fontSize: "25px",
-                      cursor: "pointer",
-                      "&:hover": { color: variables.pinkred },
-                    }}
-                  />
+                <div className="basic">
+                  <p>Bedrooms</p>
+                  <div className="basic_count">
+                    <RemoveCircleOutline
+                      onClick={() => {
+                        bedroomCount > 1 && setBedroomCount(bedroomCount - 1);
+                      }}
+                      sx={{
+                        fontSize: "25px",
+                        cursor: "pointer",
+                        "&:hover": { color: variables.pinkred },
+                      }}
+                    />
+                    <p>{bedroomCount}</p>
+                    <AddCircleOutline
+                      onClick={() => {
+                        setBedroomCount(bedroomCount + 1);
+                      }}
+                      sx={{
+                        fontSize: "25px",
+                        cursor: "pointer",
+                        "&:hover": { color: variables.pinkred },
+                      }}
+                    />
+                  </div>
+                </div>
+
+                <div className="basic">
+                  <p>Beds</p>
+                  <div className="basic_count">
+                    <RemoveCircleOutline
+                      onClick={() => {
+                        bedCount > 1 && setBedCount(bedCount - 1);
+                      }}
+                      sx={{
+                        fontSize: "25px",
+                        cursor: "pointer",
+                        "&:hover": { color: variables.pinkred },
+                      }}
+                    />
+                    <p>{bedCount}</p>
+                    <AddCircleOutline
+                      onClick={() => {
+                        setBedCount(bedCount + 1);
+                      }}
+                      sx={{
+                        fontSize: "25px",
+                        cursor: "pointer",
+                        "&:hover": { color: variables.pinkred },
+                      }}
+                    />
+                  </div>
+                </div>
+
+                <div className="basic">
+                  <p>Bathrooms</p>
+                  <div className="basic_count">
+                    <RemoveCircleOutline
+                      onClick={() => {
+                        bathroomCount > 1 &&
+                          setBathroomCount(bathroomCount - 1);
+                      }}
+                      sx={{
+                        fontSize: "25px",
+                        cursor: "pointer",
+                        "&:hover": { color: variables.pinkred },
+                      }}
+                    />
+                    <p>{bathroomCount}</p>
+                    <AddCircleOutline
+                      onClick={() => {
+                        setBathroomCount(bathroomCount + 1);
+                      }}
+                      sx={{
+                        fontSize: "25px",
+                        cursor: "pointer",
+                        "&:hover": { color: variables.pinkred },
+                      }}
+                    />
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
 
-          <div className="create-listing_step2">
-            <h2>Step 2: Make your place stand out</h2>
-            <hr />
+            <div className="create-listing_step2">
+              <h2>Step 2: Make your place stand out</h2>
+              <hr />
 
-            <h3>Tell guests what your place has to offer</h3>
-            <div className="amenities">
-              {facilities?.map((item, index) => (
-                <div
-                  className={`facility ${
-                    amenities.includes(item.name) ? "selected" : ""
-                  }`}
-                  key={index}
-                  onClick={() => handleSelectAmenities(item.name)}
-                >
-                  <div className="facility_icon">{item.icon}</div>
-                  <p>{item.name}</p>
-                </div>
-              ))}
-            </div>
+              <h3>Tell guests what your place has to offer</h3>
+              <div className="amenities">
+                {facilities?.map((item, index) => (
+                  <div
+                    className={`facility ${
+                      amenities.includes(item.name) ? "selected" : ""
+                    }`}
+                    key={index}
+                    onClick={() => handleSelectAmenities(item.name)}
+                  >
+                    <div className="facility_icon">{item.icon}</div>
+                    <p>{item.name}</p>
+                  </div>
+                ))}
+              </div>
 
-            {/* <h3>Add some photos of your place</h3>
+              {/* <h3>Add some photos of your place</h3>
             <DragDropContext onDragEnd={handleDragPhoto}>
               <Droppable droppableId="photos" direction="horizontal">
                 {(provided) => (
@@ -645,94 +656,94 @@ const EditListing = () => {
               </Droppable>
             </DragDropContext> */}
 
-            <h3>What make your place attractive and exciting?</h3>
-            <div className="description">
-              <p>Property Name</p>
-              <input
-                type="text"
-                placeholder="Title"
-                name="title"
-                value={formDescription.title}
-                onChange={handleChangeDescription}
-                required
-              />
-              <p>Property Description</p>
-              <textarea
-                type="text"
-                placeholder="Description"
-                name="description"
-                value={formDescription.description}
-                onChange={handleChangeDescription}
-                required
-                style={{ resize: "none" }}
-              />
-              <p>What is Special about your Property?</p>
-              <input
-                type="text"
-                placeholder="Highlight"
-                name="highlight"
-                value={formDescription.highlight}
-                onChange={handleChangeDescription}
-                required
-              />
-              <p>Few details about your speciality</p>
-              <textarea
-                type="text"
-                placeholder="Highlight details"
-                name="highlightDesc"
-                value={formDescription.highlightDesc}
-                onChange={handleChangeDescription}
-                required
-                style={{ resize: "none" }}
-              />
+              <h3>What make your place attractive and exciting?</h3>
+              <div className="description">
+                <p>Property Name</p>
+                <input
+                  type="text"
+                  placeholder="Title"
+                  name="title"
+                  value={formDescription.title}
+                  onChange={handleChangeDescription}
+                  required
+                />
+                <p>Property Description</p>
+                <textarea
+                  type="text"
+                  placeholder="Description"
+                  name="description"
+                  value={formDescription.description}
+                  onChange={handleChangeDescription}
+                  required
+                  style={{ resize: "none" }}
+                />
+                <p>What is Special about your Property?</p>
+                <input
+                  type="text"
+                  placeholder="Highlight"
+                  name="highlight"
+                  value={formDescription.highlight}
+                  onChange={handleChangeDescription}
+                  required
+                />
+                <p>Few details about your speciality</p>
+                <textarea
+                  type="text"
+                  placeholder="Highlight details"
+                  name="highlightDesc"
+                  value={formDescription.highlightDesc}
+                  onChange={handleChangeDescription}
+                  required
+                  style={{ resize: "none" }}
+                />
 
-              <div>
-                <div
-                  className="roomPrices"
-                  style={{
-                    display: type === "An entire place" ? "none" : "flex",
-                  }}
-                >
-                  <p>Select Rooms with Price</p>
-                  <div className="room-price-container">
-                    <div className="rooms">
-                      <label htmlFor="standard">Standard</label>
-                      <input
-                        type="number"
-                        placeholder="Enter per night price"
-                        name="price"
-                        className="price"
-                        id="standard"
-                        value={standardRoom}
-                        onChange={(e) => setStandardRoom(e.target.value)}
-                      />
+                <div>
+                  <div
+                    className="roomPrices"
+                    style={{
+                      display: type === "An entire place" ? "none" : "flex",
+                    }}
+                  >
+                    <p>Select Rooms with Price</p>
+                    <div className="room-price-container">
+                      <div className="rooms">
+                        <label htmlFor="standard">Standard</label>
+                        <input
+                          type="number"
+                          placeholder="Enter per night price"
+                          name="price"
+                          className="price"
+                          id="standard"
+                          value={standardRoom}
+                          onChange={(e) => setStandardRoom(e.target.value)}
+                        />
+                      </div>
+                      <div className="rooms">
+                        <label htmlFor="double">Double</label>
+                        <input
+                          type="number"
+                          placeholder="Enter per night price"
+                          name="price"
+                          className="price"
+                          id="double"
+                          value={doubleRoom}
+                          onChange={(e) => setDoubleRoom(e.target.value)}
+                        />
+                      </div>
+                      <div className="rooms">
+                        <label htmlFor="deluxe">Deluxe</label>
+                        <input
+                          type="number"
+                          placeholder="Enter per night price"
+                          name="price"
+                          className="price"
+                          id="deluxe"
+                          value={deluxeRoom}
+                          onChange={(e) => setDeluxeRoom(e.target.value)}
+                        />
+                      </div>
                     </div>
-                    <div className="rooms">
-                      <label htmlFor="double">Double</label>
-                      <input
-                        type="number"
-                        placeholder="Enter per night price"
-                        name="price"
-                        className="price"
-                        id="double"
-                        value={doubleRoom}
-                        onChange={(e) => setDoubleRoom(e.target.value)}
-                      />
-                    </div>
-                    <div className="rooms">
-                      <label htmlFor="deluxe">Deluxe</label>
-                      <input
-                        type="number"
-                        placeholder="Enter per night price"
-                        name="price"
-                        className="price"
-                        id="deluxe"
-                        value={deluxeRoom}
-                        onChange={(e) => setDeluxeRoom(e.target.value)}
-                      />
-                    </div>
-                  </div>
-                  {/*  {roomTypes.map((room, index) => (
+                    {/*  {roomTypes.map((room, index) => (
                     <div className="rooms" key={index}>
                       <label htmlFor={room.roomType}>{room.roomType}</label>
                       <input
@@ -758,40 +769,45 @@ const EditListing = () => {
                       )}
                     </div>
                       ))} */}
-                </div>
-                <div
-                  className="entirePlace"
-                  style={{ display: type === "Rooms" ? "none" : "" }}
-                >
-                  <p>Enter Price</p>
-                  <span>Rs.</span>
-                  <input
-                    type="number"
-                    placeholder="100"
-                    name="price"
-                    value={formDescription.price}
-                    onChange={handleChangeDescription}
-                    className="price"
-                    required
-                    // width="125px"
-                  />
+                  </div>
+                  <div
+                    className="entirePlace"
+                    style={{ display: type === "Rooms" ? "none" : "" }}
+                  >
+                    <p>Enter Price</p>
+                    <span>Rs.</span>
+                    <input
+                      type="number"
+                      placeholder="100"
+                      name="price"
+                      value={formDescription.price}
+                      onChange={handleChangeDescription}
+                      className="price"
+                      required
+                      // width="125px"
+                    />
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-
-          <button
-            className="submit_btn"
-            style={{ background: "#66cccc" }}
-            type="submit"
-          >
-            UPDATE YOUR LISTING
-          </button>
-          <button className="submit_btn" onClick={() => handleDelete()}>
-            DELETE YOUR LISTING
-          </button>
-        </form>
-      </div>
+            <div
+              className="button-container"
+              style={{ display: "flex", gap: "10px" }}
+            >
+              <button
+                className="submit_btn"
+                style={{ background: "#66cccc" }}
+                type="submit"
+              >
+                UPDATE YOUR LISTING
+              </button>
+              <button className="submit_btn" onClick={() => handleDelete()}>
+                DELETE YOUR LISTING
+              </button>
+            </div>
+          </form>
+        </div>
+      )}
     </>
   );
 };

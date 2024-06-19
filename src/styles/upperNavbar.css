@@ -1,9 +1,13 @@
-.nav {
+.upper-nav {
   width: 100%;
+
 }
 
 .nav-top {
   background-color: #67c7b9;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .navtopleft {
@@ -13,24 +17,32 @@
 
 .navtopright {
   display: flex;
+  align-items: center;
   gap: 5px;
   color: white;
 }
 
 .navtopleft a {
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   color: #ffffff;
-  transition: all 100ms ease-in;
+  transition: all 300ms ease-in;
+  cursor: pointer;
 }
 
-.navtopleft a:first-child:hover {
+.navtopleft a:hover {
+  transform: scale(0.8);
+}
+
+.navtopleft .facebook:hover {
   color: #0866ff;
-  transition: all 100ms ease-in-out;
 }
 
-.navtopleft a:last-child:hover {
+.navtopleft .instagram:hover {
   color: #c53480;
-  transition: all 100ms ease-in-out;
+}
+
+.navtopleft .linkedIn:hover {
+  color: #0a66c2;
 }
 
 navtopright span a:hover {
