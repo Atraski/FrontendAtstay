@@ -64,7 +64,52 @@ const Navbar = ({ dropdownMenu, setDropdownMenu }) => {
     ).map((item) => ({ ...item, type: "title" })),
   ];
 
-  // console.log("IMP!", combinedResults[focusedIndex].type);
+  const formSubmitHandler = (e) => {
+    e.preventDefault();
+    setShowSearchDropdown(false);
+    setSearch("");
+    if (search.length > 0 && checkIn && checkOut && guest) {
+      navigate(`/properties/search/${search}/${checkIn}/${checkOut}/${guest}`);
+    } else if (search.length > 0 && (checkIn || checkOut)) {
+      window.alert("please alert proper date");
+    } else if (search.length > 0) {
+      navigate(`/properties/search/${search}/undefined/undefined/${guest}`);
+    }
+  };
+
+  const keyDownHandler = (e) => {
+    switch (e.key) {
+      case "ArrowDown":
+        e.preventDefault();
+        setFocusedIndex(
+          (prevIndex) => (prevIndex + 1) % filteredResults.length
+        );
+        break;
+      case "ArrowUp":
+        e.preventDefault();
+        setFocusedIndex((prevIndex) =>
+          prevIndex === 0 ? filteredResults.length - 1 : prevIndex - 1
+        );
+        break;
+      case "Enter":
+        setSearch("");
+        setShowSearchDropdown(false);
+        if (focusedIndex !== -1) {
+          e.preventDefault();
+          const selectedItem = combinedResults[focusedIndex];
+          navigate(
+            `/properties/search/${
+              selectedItem[selectedItem.type]
+            }/undefined/undefined/${guest}`
+          );
+        } else {
+          formSubmitHandler(e);
+        }
+
+      default:
+        break;
+    }
+  };
 
   const searchIsEmpty = search.trim().length === 0;
 
@@ -93,37 +138,6 @@ const Navbar = ({ dropdownMenu, setDropdownMenu }) => {
         setSearchIsLoading(false);
       }, 100)
     );
-  };
-
-  const formSubmitHandler = (e) => {
-    e.preventDefault();
-    setShowSearchDropdown(false);
-    setSearch("");
-    if (search.length > 0 && checkIn && checkOut && guest) {
-      navigate(`/properties/search/${search}/${checkIn}/${checkOut}/${guest}`);
-    } else if (search.length > 0 && (checkIn || checkOut)) {
-      window.alert("please alert proper date");
-    } else if (search.length > 0) {
-      navigate(`/properties/search/${search}/undefined/undefined/${guest}`);
-    }
-  };
-
-  const keyDownHandler = (e) => {
-    switch (e.key) {
-      case "ArrowDown":
-        setFocusedIndex(
-          (prevIndex) => (prevIndex + 1) % filteredResults.length
-        );
-        break;
-      case "ArrowUp":
-        setFocusedIndex((prevIndex) =>
-          prevIndex === 0 ? filteredResults.length - 1 : prevIndex - 1
-        );
-        break;
-
-      default:
-        break;
-    }
   };
 
   useEffect(() => {

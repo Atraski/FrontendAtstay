@@ -51,8 +51,6 @@ const MobileNavbar = ({
 
   const searchIsEmpty = search.trim().length === 0;
 
-  console.log("SHOWPUP2", showPopUp);
-
   return (
     <Fragment>
       <Backdrop show={showPopUp} backdropClose={closeButtonHandler} />
