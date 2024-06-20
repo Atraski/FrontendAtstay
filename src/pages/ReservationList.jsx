@@ -24,6 +24,7 @@ const ReservationList = () => {
   };
   useEffect(() => {
     if (bookings && bookings.length > 0 && listings && listings.length > 0) {
+      console.log("BOOKING", bookings, "LISTING", listings);
       for (const elm of bookings) {
         for (const data of listings) {
           // console.log("inside second for loop");
@@ -46,7 +47,7 @@ const ReservationList = () => {
   const getReservationListData = async () => {
     try {
       console.log("user", user);
-      const resp = await axios.post(API_23, { email: user.email });
+      const resp = await axios.post(API_23, { id: user._id, type: "user" });
       // console.log(resp.data);
       setBookings(resp.data.booking);
       setLoading(false);

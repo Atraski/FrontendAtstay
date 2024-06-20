@@ -16,11 +16,18 @@ const CreateAvailability = () => {
 
   const getPropertyList = async () => {
     try {
+      let verifiedProperties = [];
       setLoading(true);
       const response = await axios.get(`${API_24}/${host._id}`);
 
-      setPropertyList(response.data);
+      response.data.forEach((property) => {
+        if (property.verification) {
+          verifiedProperties.push(property);
+        }
+      });
+
       setLoading(false);
+      setPropertyList(verifiedProperties);
     } catch (error) {
       console.log(error);
     }
