@@ -38,6 +38,10 @@
 
 }
 
+.policies-container .policy {
+    margin-bottom: 1rem;
+}
+
 @media (max-width: 780px) {
     .policy-container {
         padding: 0 1rem 1rem 1rem;
