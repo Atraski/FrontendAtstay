@@ -8,7 +8,7 @@ import ListingDetails from "./pages/ListingDetails";
 import TripList from "./pages/TripList";
 import WishList from "./pages/WishList";
 import PropertyList from "./pages/PropertyList";
-import ReservationList from "./pages/ReservationList";
+import ReservationList from "./components/ReservationList";
 import CategoryPage from "./pages/CategoryPage";
 import SearchPage from "./pages/SearchPage";
 import HostLogin from "./pages/host/HostLogin";
@@ -27,6 +27,7 @@ import ResetPasswordPage from "./pages/ResetPasswordPage";
 import ScrollRestoration from "./utility/ScrollRestoration";
 import TermsConditions from "./pages/Terms&Condition";
 import Footer from "./components/Footer";
+import BookingsPage from "./pages/BookingsPage";
 
 function App() {
   const [dropdownMenu, setDropdownMenu] = useState(false);
@@ -38,9 +39,20 @@ function App() {
         <Navbar dropdownMenu={dropdownMenu} setDropdownMenu={setDropdownMenu} />
         <Routes>
           <Route path="/" element={<HomePage />} />
+
+          {/* Users */}
           <Route path="/register" element={<RegisterPage />} />
-          <Route path="/hostRegister" element={<HostRegister />} />
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/:userId/wishList" element={<WishList />} />
+          <Route path="/:userId/reservations" element={<BookingsPage />} />
+          <Route path="/:userId/trips" element={<TripList />} />
+          <Route path="/bookingPage" element={<BookingPage />} />
+          <Route path="/bookingForm" element={<BookingForm />} />
+          <Route path="/cartDetailsPage" element={<CartDetailsPage />} />
+          <Route path="/invoice" element={<Invoice />} />
+
+          {/* Host */}
+          <Route path="/hostRegister" element={<HostRegister />} />
           <Route path="/hostLogin" element={<HostLogin />} />
           <Route path="/create-listing" element={<CreateListing />} />
           <Route path="/properties/:listingId" element={<ListingDetails />} />
@@ -52,19 +64,14 @@ function App() {
             path="/properties/search/:search/:checkIn/:checkOut/:guest"
             element={<SearchPage />}
           />
-          <Route path="/:userId/trips" element={<TripList />} />
-          <Route path="/:userId/wishList" element={<WishList />} />
-          <Route path="/:userId/reservations" element={<ReservationList />} />
-          <Route path="/bookingPage" element={<BookingPage />} />
-          <Route path="/bookingForm" element={<BookingForm />} />
-          <Route path="/cartDetailsPage" element={<CartDetailsPage />} />
-          <Route path="/invoice" element={<Invoice />} />
           <Route path="/editListing/:hotelId" element={<EditListing />} />
           <Route
             path="/create-availability/:hotelId/:type"
             element={<EditAvailability />}
           />
           <Route path="/create-availability" element={<CreateAvailability />} />
+          <Route path="/bookings" element={<BookingsPage />} />
+
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms-&-conditions" element={<TermsConditions />} />
 

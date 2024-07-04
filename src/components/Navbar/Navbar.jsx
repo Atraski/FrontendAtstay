@@ -461,6 +461,7 @@ const Navbar = ({ dropdownMenu, setDropdownMenu }) => {
                     <Link to="/create-listing">Add Property</Link>
                     {/* <Link to={`/${host._id}/properties`}>Property List</Link> */}
                     <Link to="/create-availability">Create Availability</Link>
+                    <Link to="/bookings">Bookings</Link>
                     <Link
                       to="/"
                       onClick={() => {

@@ -1,7 +1,5 @@
 .policy-container {
     margin-top: 1rem;
-    padding: 0 6rem 2rem 6rem;
-    text-align: justify;
 }
 
 .policy-container .policy-main-heading {
@@ -19,9 +17,11 @@
     text-align: justify;
 }
 
-
 .policy-container .policy-content {
+    padding: 0 6rem;
     margin-bottom: 1rem;
+    text-align: justify;
+
 }
 
 .policy-container .policy-list {
@@ -35,6 +35,11 @@
 .policy-container .policy-list .list-heading {
     color: #1d6c60;
     font-weight: 800;
+}
+
+.policies-container {
+    padding: 0 6rem;
+    text-align: justify;
 
 }
 
