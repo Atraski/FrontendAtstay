@@ -48,9 +48,14 @@
 }
 
 @media (max-width: 780px) {
-    .policy-container {
-        padding: 0 1rem 1rem 1rem;
-        text-align: justify;
+    .policy-container .policy-content {
+        padding: 0 2rem;
+        text-align: start;
+    }
+
+    .policies-container {
+        padding: 0 2rem;
+        text-align: start;
     }
 
     .policy-container .policy-main-heading {

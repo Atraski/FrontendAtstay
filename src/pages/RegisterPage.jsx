@@ -51,10 +51,10 @@ const RegisterPage = () => {
       return;
     }
 
-    if (formData.profileImage === null) {
-      window.alert("Please enter profile image.");
-      return;
-    }
+    // if (formData.profileImage === null) {
+    //   window.alert("Please enter profile image.");
+    //   return;
+    // }
 
     const register_form = new FormData();
 
@@ -72,10 +72,10 @@ const RegisterPage = () => {
       return;
     }
 
-    if (response.status === 400) {
-      window.alert("Please enter profile image.");
-      return;
-    }
+    // if (response.status === 400) {
+    //   window.alert("Please enter profile image.");
+    //   return;
+    // }
 
     if (response.ok) {
       navigate("/login");

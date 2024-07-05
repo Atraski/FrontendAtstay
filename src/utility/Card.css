@@ -1,0 +1,12 @@
+.card {
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 0 10px #eeeeee;
+    width: 70%;
+    padding: 3rem;
+    margin-bottom: 2rem;
+}
+
+.card h2 {
+    margin-bottom: 1rem;
+}

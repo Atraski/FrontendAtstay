@@ -395,7 +395,7 @@ const Navbar = ({ dropdownMenu, setDropdownMenu }) => {
                       : { color: variables.darkgrey }
                   }
                 />
-                {!user ? (
+                {!user || user.profileImagePath.length === 0 ? (
                   <Person
                     sx={
                       dropdownMenu
