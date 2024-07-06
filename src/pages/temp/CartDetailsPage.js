@@ -261,8 +261,8 @@ export default function CartDetailsPage() {
                   <h1 className="page-heading">Checkout </h1>
                 </div>
 
-                <div style={{ display: "flex", gap: "1.5rem" }}>
-                  <Card style={{ width: "90%" }}>
+                <div className="details-container">
+                  <Card>
                     <div className="hotel-details">
                       <div>
                         <h1 className="hotel-title">{elm.listing.title}</h1>
@@ -274,14 +274,18 @@ export default function CartDetailsPage() {
                       ></img>
                     </div>
                     <div className="booking-details-container">
-                      <div>
-                        <h3>CHECK IN</h3>
-                        <p className="date">{elm.startDate}</p>
-                      </div>
-                      <h4 className="total-days">{elm.dayCount} Nights</h4>
-                      <div>
-                        <h3>CHECK OUT</h3>
-                        <p className="date">{elm.endDate}</p>
+                      <div className="checkin-details">
+                        <div className="check-in">
+                          <h3>CHECK IN</h3>
+                          <p className="date">{elm.startDate}</p>
+                        </div>
+                        <h4 className="total-days">
+                          <span>{elm.dayCount}</span> Nights
+                        </h4>
+                        <div className="check-out">
+                          <h3>CHECK OUT</h3>
+                          <p className="date">{elm.endDate}</p>
+                        </div>
                       </div>
                       <div className="booking-details">
                         <h4>{elm.dayCount} Nights</h4> |
@@ -291,7 +295,7 @@ export default function CartDetailsPage() {
                     </div>
                   </Card>
 
-                  <Card style={{ width: "35%" }}>
+                  <Card>
                     <h2>Price</h2>
                     <div className="price-details-container">
                       <div className="price-details">
@@ -357,7 +361,6 @@ export default function CartDetailsPage() {
                       onChange={(e) => {
                         setadd(e.target.value);
                       }}
-                      style={{ width: "100%" }}
                     />
 
                     <div className="input-container">
@@ -399,7 +402,6 @@ export default function CartDetailsPage() {
                       onChange={(e) => {
                         setcountry(e.target.value);
                       }}
-                      style={{ width: "25rem" }}
                     />
                   </form>
                 </Card>

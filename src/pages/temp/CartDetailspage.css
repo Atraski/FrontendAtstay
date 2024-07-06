@@ -3,6 +3,19 @@
   margin-bottom: 3rem;
 }
 
+.details-container {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.details-container .card:first-child {
+  width: 70%;
+}
+
+.details-container .card:last-child {
+  width: 30%;
+}
+
 .hotel-details {
   display: flex;
   align-items: center;
@@ -22,8 +35,14 @@
 
 .booking-details-container {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
+}
+
+.booking-details-container .checkin-details {
+  display: flex;
+  gap: 5rem;
+
 }
 
 .booking-details-container .total-days {
@@ -35,6 +54,10 @@
 .booking-details-container .booking-details {
   display: flex;
   gap: 5px;
+}
+
+.guest-details {
+  width: 69%;
 }
 
 .guest-details form {
@@ -80,4 +103,62 @@ textarea {
 
 .checkout-container .pay-btn button {
   width: 30%;
+}
+
+@media (max-width: 780px) {
+
+  .checkout-container {
+    padding: 0 1rem;
+    margin-bottom: 3rem;
+  }
+
+  .page-heading {
+    margin-left: 3rem;
+  }
+
+  .details-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .details-container .card:first-child {
+    margin-bottom: 0
+  }
+
+  .details-container .card:first-child,
+  .details-container .card:last-child {
+    width: 100%;
+  }
+
+  .guest-details {
+    width: 100%;
+  }
+
+  .booking-details-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .booking-details-container .checkin-details {
+    gap: 1rem;
+  }
+
+  .booking-details-container .total-days {
+    box-shadow: 0 0 5px #eeeeee;
+    font-size: 10px;
+    margin: auto;
+    display: flex;
+    gap: 5px;
+  }
+
+  .guest-details input {
+    width: 10rem;
+  }
+
+  .guest-details input:last-child {
+    width: 100%;
+  }
+
 }
