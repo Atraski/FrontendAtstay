@@ -1,5 +1,5 @@
 .nav-carousel-wrapper {
-  position: relative
+  position: relative;
 }
 
 .nav-carousel {
@@ -144,7 +144,7 @@
   }
 
   .carousel {
-    width: 25rem;
+    width: 23rem;
     margin-left: -13px;
   }
 }

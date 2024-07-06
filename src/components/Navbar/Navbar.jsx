@@ -15,7 +15,6 @@ import { API_3, API_21 } from "../../api/api";
 import getUniqueResults from "../../utility/getUniqueResults";
 import "../../styles/Navbar.scss";
 import MobileSearchModal from "./MobileSearchModal";
-import Loader from "../Loader";
 
 const Navbar = ({ dropdownMenu, setDropdownMenu }) => {
   const [search, setSearch] = useState("");
