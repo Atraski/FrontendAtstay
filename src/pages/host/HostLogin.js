@@ -7,6 +7,7 @@ import { API_6, API_27 } from "../../api/api";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-regular-svg-icons";
 import Loader from "../../components/Loader";
+import bcrypt from 'bcryptjs'
 
 const HostLogin = () => {
   const [email, setEmail] = useState("");
@@ -29,6 +30,8 @@ const HostLogin = () => {
 
   const navigate = useNavigate();
 
+  
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -38,7 +41,7 @@ const HostLogin = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ email, password :bcrypt.hashSync(password,'$2a$10$J09lSprn4s.Z27alS/wGP.') }),
       });
 
       if (response.status === 409) {
