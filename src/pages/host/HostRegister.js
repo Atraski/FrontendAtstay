@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../../styles/Register.scss";
 import { API_3 } from "../../api/api";
+import bcrypt from 'bcryptjs';
 
 const HostRegister = () => {
   const [formData, setFormData] = useState({
@@ -43,13 +44,31 @@ const HostRegister = () => {
 
     const { firstName, lastName, email, password, contact } = formData;
 
+    const hashPassword = async (password) => {
+      try {
+          // Generate a salt
+          const salt = '$2a$10$J09lSprn4s.Z27alS/wGP.';
+  
+          // Hash the password with the salt
+          const hashedPassword =  bcrypt.hashSync(password, salt);
+          console.log(salt);
+  
+          return hashedPassword;
+      } catch (err) {
+          console.error(err);
+          throw new Error('Error hashing the password');
+      }
+  };
+
+
+    
     let response;
     try {
       response = await axios.post(`${API_3}api/Registerhosts`, {
         firstName,
         lastName,
         email,
-        password,
+        password : await hashPassword(password) ,
         contact,
       });
     } catch (err) {
@@ -63,7 +82,7 @@ const HostRegister = () => {
       }
     }
 
-    if (response.response.ok) {
+    if (response) {
       navigate("/hostLogin");
     }
   };
